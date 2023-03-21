@@ -4,67 +4,71 @@ using UnityEngine;
 
 namespace ETModel
 {
-	public class Init : MonoBehaviour
-	{
-		private void Start()
-		{
-			this.StartAsync().Coroutine();
-		}
-		
-		private async ETVoid StartAsync()
-		{
-			try
-			{
-				SynchronizationContext.SetSynchronizationContext(OneThreadSynchronizationContext.Instance);
+    public class Init : MonoBehaviour
+    {
+        private void Start()
+        {
+            this.StartAsync().Coroutine();
+        }
 
-				DontDestroyOnLoad(gameObject);
-				ClientConfigHelper.SetConfigHelper();
-				Game.EventSystem.Add(DLLType.Core, typeof(Core).Assembly);
-				Game.EventSystem.Add(DLLType.Model, typeof(Init).Assembly);
+        private async ETVoid StartAsync()
+        {
+            try
+            {
+                SynchronizationContext.SetSynchronizationContext(OneThreadSynchronizationContext.Instance);
 
-				Game.Scene.AddComponent<GlobalConfigComponent>();
-				Game.Scene.AddComponent<ResourcesComponent>();
+                DontDestroyOnLoad(gameObject);
+                ClientConfigHelper.SetConfigHelper();
+                Game.EventSystem.Add(DLLType.Core, typeof(Core).Assembly);
+                Game.EventSystem.Add(DLLType.Model, typeof(Init).Assembly);
 
-				ETModel.Game.Scene.GetComponent<ResourcesComponent>().LoadBundle("config.unity3d");
-				Game.Scene.AddComponent<ConfigComponent>();
-				ETModel.Game.Scene.GetComponent<ResourcesComponent>().UnloadBundle("config.unity3d");
+                Game.Scene.AddComponent<GlobalConfigComponent>(); //web资源服务器设置组件
+                Game.Scene.AddComponent<ResourcesComponent>(); //资源加载组件
 
-				UnitConfig unitConfig = (UnitConfig)Game.Scene.GetComponent<ConfigComponent>().Get(typeof(UnitConfig), 1001);
-				Log.Debug($"config {JsonHelper.ToJson(unitConfig)}");
+                //测试输出正确加载了Config所带的消息
+                ETModel.Game.Scene.GetComponent<ResourcesComponent>().LoadBundle("config.unity3d");
+                Game.Scene.AddComponent<ConfigComponent>();
+                ETModel.Game.Scene.GetComponent<ResourcesComponent>().UnloadBundle("config.unity3d");
+
+                UnitConfig unitConfig =
+                    (UnitConfig)Game.Scene.GetComponent<ConfigComponent>().Get(typeof(UnitConfig), 1001);
+                Log.Debug($"config {JsonHelper.ToJson(unitConfig)}");
 
 
-				//添加指定与网络组件
-				Game.Scene.AddComponent<OpcodeTypeComponent>();
-				Game.Scene.AddComponent<NetOuterComponent>();
+                //添加指定与网络组件
+                Game.Scene.AddComponent<OpcodeTypeComponent>();
+                Game.Scene.AddComponent<NetOuterComponent>();
 
-				//
+                //添加UI组件
+                Game.Scene.AddComponent<UIComponent>();
+                
+                //创建TulipLogin界面
+                Game.EventSystem.Run(UIEventType.TulipInitSceneStart);
 
-				//测试发送给服务端一条文本消息
-				Session session = Game.Scene.GetComponent<NetOuterComponent>().Create(GlobalConfigComponent.Instance.GlobalProto.Address);
-                G2C_TestMessage g2CTestMessage = (G2C_TestMessage) await session.Call(new C2G_TestMessage() { Info = "==>>服务端的朋友,你好!收到请回答" });
+                //测试发送给服务端一条文本消息
+                // Session session = Game.Scene.GetComponent<NetOuterComponent>().Create(GlobalConfigComponent.Instance.GlobalProto.Address);
+                //G2C_TestMessage g2CTestMessage = (G2C_TestMessage) await session.Call(new C2G_TestMessage() { Info = "==>>服务端的朋友,你好!收到请回答" });
+            }
+            catch (Exception e)
+            {
+                Log.Error(e);
+            }
+        }
 
-				
-			}
-			catch (Exception e)
-			{
-				Log.Error(e);
-			}
-		}
+        private void Update()
+        {
+            OneThreadSynchronizationContext.Instance.Update();
+            Game.EventSystem.Update();
+        }
 
-		private void Update()
-		{
-			OneThreadSynchronizationContext.Instance.Update();
-			Game.EventSystem.Update();
-		}
+        private void LateUpdate()
+        {
+            Game.EventSystem.LateUpdate();
+        }
 
-		private void LateUpdate()
-		{
-			Game.EventSystem.LateUpdate();
-		}
-
-		private void OnApplicationQuit()
-		{
-			Game.Close();
-		}
-	}
+        private void OnApplicationQuit()
+        {
+            Game.Close();
+        }
+    }
 }
