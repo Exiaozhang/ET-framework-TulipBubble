@@ -48,8 +48,8 @@ namespace ETModel
             {
                 return;
             }
-
             this.isLogining = true;
+            TulipHelper.Login(account.text,password.text);
         }
 
         private void RegisterBtnOnClik()
@@ -58,8 +58,8 @@ namespace ETModel
             {
                 return;
             }
-
             this.isRegistering = true;
+            TulipHelper.Register(account.text, password.text);
         }
     }
 }

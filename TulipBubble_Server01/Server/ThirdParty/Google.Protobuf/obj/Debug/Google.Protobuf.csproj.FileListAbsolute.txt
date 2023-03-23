@@ -89,3 +89,14 @@ D:\Users\taikr008\Desktop\Landlords_Server01\Server\ThirdParty\Google.Protobuf\o
 D:\Users\taikr008\Desktop\Landlords_Server01\Server\ThirdParty\Google.Protobuf\obj\Debug\Google.Protobuf.dll
 D:\Users\taikr008\Desktop\Landlords_Server01\Server\ThirdParty\Google.Protobuf\obj\Debug\Google.Protobuf.pdb
 D:\Users\taikr008\Desktop\Landlords_Server01\Server\ThirdParty\Google.Protobuf\obj\Debug\Google.Protobuf.csproj.CoreCompileInputs.cache
+D:\Backup\CsProject\ET-framwork-TulipBubble\TulipBubble_Server01\Bin\Google.Protobuf.deps.json
+D:\Backup\CsProject\ET-framwork-TulipBubble\TulipBubble_Server01\Bin\Google.Protobuf.dll
+D:\Backup\CsProject\ET-framwork-TulipBubble\TulipBubble_Server01\Bin\Google.Protobuf.pdb
+D:\Backup\CsProject\ET-framwork-TulipBubble\TulipBubble_Server01\Server\ThirdParty\Google.Protobuf\obj\Debug\Google.Protobuf.csproj.AssemblyReference.cache
+D:\Backup\CsProject\ET-framwork-TulipBubble\TulipBubble_Server01\Server\ThirdParty\Google.Protobuf\obj\Debug\Google.Protobuf.GeneratedMSBuildEditorConfig.editorconfig
+D:\Backup\CsProject\ET-framwork-TulipBubble\TulipBubble_Server01\Server\ThirdParty\Google.Protobuf\obj\Debug\Google.Protobuf.AssemblyInfoInputs.cache
+D:\Backup\CsProject\ET-framwork-TulipBubble\TulipBubble_Server01\Server\ThirdParty\Google.Protobuf\obj\Debug\Google.Protobuf.AssemblyInfo.cs
+D:\Backup\CsProject\ET-framwork-TulipBubble\TulipBubble_Server01\Server\ThirdParty\Google.Protobuf\obj\Debug\Google.Protobuf.csproj.CoreCompileInputs.cache
+D:\Backup\CsProject\ET-framwork-TulipBubble\TulipBubble_Server01\Server\ThirdParty\Google.Protobuf\obj\Debug\Google.Protobuf.csproj.CopyComplete
+D:\Backup\CsProject\ET-framwork-TulipBubble\TulipBubble_Server01\Server\ThirdParty\Google.Protobuf\obj\Debug\Google.Protobuf.dll
+D:\Backup\CsProject\ET-framwork-TulipBubble\TulipBubble_Server01\Server\ThirdParty\Google.Protobuf\obj\Debug\Google.Protobuf.pdb

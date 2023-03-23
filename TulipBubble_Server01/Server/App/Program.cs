@@ -81,6 +81,10 @@ namespace App
 				Game.Scene.AddComponent<ConfigComponent>();
 				Game.Scene.AddComponent<ConsoleComponent>();
 				
+				Game.Scene.AddComponent<UserComponent>();
+				Game.Scene.AddComponent<SessionKeyComponent>();
+				Game.Scene.AddComponent<SessionUserComponent>();
+				
 				while (true)
 				{
 					try
