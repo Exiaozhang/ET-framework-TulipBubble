@@ -4,13 +4,34 @@ using Microsoft.CodeAnalysis;
 
 namespace ETModel
 {
+    
+    /// <summary>
+    /// 房间配置
+    /// </summary>
+    public struct RoomConfig
+    {
+        /// <summary>
+        /// 倍率
+        /// </summary>
+        public int Multiples { get; set; }
+
+        /// <summary>
+        /// 基础分
+        /// </summary>
+        public long BasePointPerMatch { get; set; }
+
+        /// <summary>
+        /// 房间最低门槛
+        /// </summary>
+        public long MinThreshold { get; set; }
+    }
     /// <summary>
     /// 房间对象
     /// </summary>
-    public class TulipBubbleRoom : Entity
+    public class Room : Entity
     {
         /// <summary>
-        /// 当前房间的3个座位 UserID/seatIndex
+        /// 当前房间的5个座位 UserID/seatIndex
         /// </summary>
         public readonly Dictionary<long, int> seats = new Dictionary<long, int>();
 
@@ -23,10 +44,7 @@ namespace ETModel
         /// <summary>
         /// 房间中玩家的数量
         /// </summary>
-        public int Count
-        {
-            get { return seats.Values.Count; }
-        }
+        public int Count => seats.Values.Count;
 
         public override void Dispose()
         {
@@ -53,5 +71,6 @@ namespace ETModel
             }
 
         }
+        
     }
 }

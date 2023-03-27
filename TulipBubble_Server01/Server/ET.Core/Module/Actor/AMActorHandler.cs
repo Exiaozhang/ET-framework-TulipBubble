@@ -4,7 +4,7 @@ namespace ETModel
 {
 	public abstract class AMActorHandler<E, Message>: IMActorHandler where E: Entity where Message : class, IActorMessage
 	{
-		protected abstract ETTask Run(E entity, Message message);
+		protected abstract ETTask Run(E gamer, Message message);
 
 		public async ETTask Handle(Session session, Entity entity, object actorMessage)
 		{

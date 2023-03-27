@@ -26,6 +26,8 @@ namespace ETHotfix
 
                 AccountInfo account = (AccountInfo)result[0];
 
+                await RealmHelper.KickOutPlayer(account.Id);
+                
                 int GateAppId;
                 StartConfig config;
                 //获取账号所在区服的AppId 索取登陆Key

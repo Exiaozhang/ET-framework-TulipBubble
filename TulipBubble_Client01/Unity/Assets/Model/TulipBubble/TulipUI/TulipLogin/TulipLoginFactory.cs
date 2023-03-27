@@ -22,7 +22,7 @@ namespace ETModel
                 tulipLogin.layer = LayerMask.NameToLayer(LayerNames.UI);
                 UI ui = ComponentFactory.Create<UI, GameObject>(tulipLogin);
 
-                ui.AddComponent<TulipComponent>();
+                ui.AddComponent<TulipLoginComponent>();
 
                 //Log.Debug("Hello");
                 return ui;

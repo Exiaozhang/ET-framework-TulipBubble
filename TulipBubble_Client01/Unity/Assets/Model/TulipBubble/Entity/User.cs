@@ -20,10 +20,11 @@ namespace ETModel
     {
         //用户ID(唯一)
         public long UserID { get; private set; }
+        
 
         public void Awake(long id)
         {
-            this.UserID = UserID;
+            this.UserID = id;
         }
 
         public override void Dispose()

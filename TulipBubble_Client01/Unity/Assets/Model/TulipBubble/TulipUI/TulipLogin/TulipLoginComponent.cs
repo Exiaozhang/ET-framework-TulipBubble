@@ -5,16 +5,16 @@ using UnityEngine.UI;
 namespace ETModel
 {
     [ObjectSystem]
-    public class TulipLoginComponentAwakeSystem : AwakeSystem<TulipComponent>
+    public class TulipLoginComponentAwakeSystem : AwakeSystem<TulipLoginComponent>
     {
-        public override void Awake(TulipComponent self)
+        public override void Awake(TulipLoginComponent self)
         {
             self.Awake();
         }
     }
 
 
-    public class TulipComponent : Component
+    public class TulipLoginComponent : Component
     {
         //提示文本
         public Text prompt;

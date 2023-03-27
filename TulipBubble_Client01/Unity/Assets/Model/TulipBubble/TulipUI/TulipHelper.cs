@@ -5,8 +5,8 @@
         //A0 01注册 02登录realm 03登录gate
         public static async ETVoid Login(string account, string password)
         {
-            TulipComponent login = Game.Scene.GetComponent<UIComponent>().Get(TulipUIType.TulipLogin)
-                .GetComponent<TulipComponent>();
+            TulipLoginComponent login = Game.Scene.GetComponent<UIComponent>().Get(TulipUIType.TulipLogin)
+                .GetComponent<TulipLoginComponent>();
 
             //创建Realm session
             Session sessionRealm = Game.Scene.GetComponent<NetOuterComponent>()
@@ -57,6 +57,9 @@
             login.prompt.text = "";
             User user = ComponentFactory.Create<User, long>(messageGate.UserID);
             GamerComponent.Instance.MyUser = user;
+            
+            Log.Debug($"{messageGate.UserID}|{user.UserID}");
+            
             Log.Debug("Login Success");
             
             //加载透明界面 退出当前界面
@@ -74,7 +77,7 @@
                 Account = account,Password = password
             });
             session.Dispose();
-            TulipComponent login = Game.Scene.GetComponent<UIComponent>().Get(TulipUIType.TulipLogin).GetComponent<TulipComponent>();
+            TulipLoginComponent login = Game.Scene.GetComponent<UIComponent>().Get(TulipUIType.TulipLogin).GetComponent<TulipLoginComponent>();
             login.isRegistering = false;
 
             if (message.Error == ErrorCode.ERR_AccountAlreadyRegisted)

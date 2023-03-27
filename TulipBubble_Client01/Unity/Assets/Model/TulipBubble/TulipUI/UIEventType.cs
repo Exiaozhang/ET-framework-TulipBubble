@@ -7,6 +7,8 @@ namespace ETModel
     {
         public const string TulipLogin = "TulipLogin";
         public const string TulipLobby = "TulipLobby";
+        public const string SetUserInfo = "SetUserInfo";
+        public const string TulipRoom = "TulipRoom";
     }
 
     public static partial class UIEventType

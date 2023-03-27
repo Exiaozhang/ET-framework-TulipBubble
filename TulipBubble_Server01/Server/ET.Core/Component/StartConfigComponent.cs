@@ -47,6 +47,8 @@ namespace ETModel
 			foreach (string s in ss)
 			{
 				string s2 = s.Trim();
+				
+
 				if (s2 == "")
 				{
 					continue;
@@ -55,8 +57,9 @@ namespace ETModel
 				{
 					StartConfig startConfig = MongoHelper.FromJson<StartConfig>(s2);
 					this.configDict.Add(startConfig.AppId, startConfig);
-
+			
 					InnerConfig innerConfig = startConfig.GetComponent<InnerConfig>();
+					Log.Info($@"{startConfig.AppType}");
 					if (innerConfig != null)
 					{
 						this.innerAddressDict.Add(startConfig.AppId, innerConfig.IPEndPoint);

@@ -85,6 +85,14 @@ namespace App
 				Game.Scene.AddComponent<SessionKeyComponent>();
 				Game.Scene.AddComponent<SessionUserComponent>();
 				
+				//郁金香泡沫在线组件
+				Game.Scene.AddComponent<OnlineComponent>();
+				
+				//郁金香泡沫匹配组件
+				Game.Scene.AddComponent<TulipMatchComponent>();
+				
+				
+				
 				while (true)
 				{
 					try

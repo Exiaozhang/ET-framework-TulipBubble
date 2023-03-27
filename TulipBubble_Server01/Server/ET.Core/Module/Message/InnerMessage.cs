@@ -5,6 +5,84 @@ namespace ETModel
 /// <summary>
 /// 郁金香泡沫内网消息
 /// </summary>
+//Gate通知Map玩家离开房间
+	[Message(InnerOpcode.Actor_PlayerExitRoom_G2M)]
+	public partial class Actor_PlayerExitRoom_G2M: IActorMessage
+	{
+		public int RpcId { get; set; }
+
+		public long ActorId { get; set; }
+
+	}
+
+//==>匹配玩家并进入斗地主游戏房间 4月18
+//Map通知Gate匹配成功
+	[Message(InnerOpcode.Actor_MatchSucess_M2G)]
+	public partial class Actor_MatchSucess_M2G: IActorMessage
+	{
+		public long ActorId { get; set; }
+
+		public long GamerID { get; set; }
+
+	}
+
+//Gate通知Map 玩家请求匹配
+	[Message(InnerOpcode.EnterMatchs_G2M)]
+	public partial class EnterMatchs_G2M: IMessage
+	{
+		public int RpcId { get; set; }
+
+		public long UserID { get; set; }
+
+		public long GActorID { get; set; }
+
+		public long CActorID { get; set; }
+
+	}
+
+//匹配玩家并进入斗地主游戏房间 <==
+//向realm用户发送上线消息
+	[Message(InnerOpcode.A0004_PlayerOnline_G2R)]
+	public partial class A0004_PlayerOnline_G2R: IMessage
+	{
+		public int RpcId { get; set; }
+
+		public long UserID { get; set; }
+
+		public int GateAppID { get; set; }
+
+	}
+
+//向realm用户发送下线消息
+	[Message(InnerOpcode.A0005_PlayerOffline_G2R)]
+	public partial class A0005_PlayerOffline_G2R: IMessage
+	{
+		public int RpcId { get; set; }
+
+		public long UserID { get; set; }
+
+	}
+
+	[Message(InnerOpcode.A0007_KickOutPlayer_R2G)]
+	public partial class A0007_KickOutPlayer_R2G: IRequest
+	{
+		public int RpcId { get; set; }
+
+		public long UserID { get; set; }
+
+	}
+
+	[Message(InnerOpcode.A0007_KickOutPlayer_G2R)]
+	public partial class A0007_KickOutPlayer_G2R: IResponse
+	{
+		public int RpcId { get; set; }
+
+		public int Error { get; set; }
+
+		public string Message { get; set; }
+
+	}
+
 	[Message(InnerOpcode.A0006_GetLoginKey_R2G)]
 	public partial class A0006_GetLoginKey_R2G: IRequest
 	{

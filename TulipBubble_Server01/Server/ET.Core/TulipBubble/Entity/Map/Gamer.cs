@@ -23,7 +23,13 @@
         /// <summary>
         /// 玩家GateActorID
         /// </summary
-        public long GactorID { get; set; }
+        public long GActorID { get; set; }
+        
+        /// <summary>
+        /// 玩家ClientActorID
+        /// </summary>
+        public long CActorID { get; set; }
+
 
         /// <summary>
         /// 默认为假 Session断开/离开房间时触发离线
@@ -44,7 +50,8 @@
             base.Dispose();
 
             this.UserID = 0;
-            this.GactorID = 0;
+            this.GActorID = 0;
+            this.CActorID = 0;
             this.isOffline = false;
 
         }
