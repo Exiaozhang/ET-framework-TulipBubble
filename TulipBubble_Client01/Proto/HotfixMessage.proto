@@ -2,7 +2,7 @@ syntax = "proto3";
 package ETModel;
 
 //准备游戏消息
-message Actor_GamerReady_Landlords // IActorMessage
+message Actor_GamerReady_TulipBubble // IActorMessage
 {
 	int32 RpcId = 90;
 	int64 ActorId = 93;
@@ -14,6 +14,7 @@ message GamerInfo
 {
 	int64 UserID = 1; //玩家ID
 	int32 PlayerColor =2;
+	int32 IsHoster = 3;
 }
 //返回大厅
 message C2G_ReturnLobby_Ntt // IMessage

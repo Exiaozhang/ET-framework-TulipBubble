@@ -24,7 +24,10 @@ namespace ETModel
 
                 Game.Scene.AddComponent<GlobalConfigComponent>(); //web资源服务器设置组件
                 Game.Scene.AddComponent<ResourcesComponent>(); //资源加载组件
-
+                
+                //下载Ab包
+                await BundleHelper.DownloadBundle();
+                
                 //测试输出正确加载了Config所带的消息
                 ETModel.Game.Scene.GetComponent<ResourcesComponent>().LoadBundle("config.unity3d");
                 Game.Scene.AddComponent<ConfigComponent>();
@@ -45,12 +48,12 @@ namespace ETModel
                 
                 //消息分发组件
                 Game.Scene.AddComponent<MessageDispatcherComponent>();
-                Game.Scene.AddComponent<TulipRoomGamerOrderPanelComponent>();
-                
+                Game.Scene.AddComponent<GameGlobalComponent>();
                 //创建TulipLogin界面
                 Game.EventSystem.Run(UIEventType.TulipInitSceneStart);
-
-                await BundleHelper.DownloadBundle();
+                
+       
+        
             }
             catch (Exception e)
             {

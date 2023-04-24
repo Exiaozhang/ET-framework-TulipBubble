@@ -24,6 +24,7 @@ namespace ETModel
                 UI ui = ComponentFactory.Create<UI, GameObject>(tulipRoom);
 
                 ui.AddComponent<TulipRoomComponent>();
+                ui.AddComponent<RoomCardsComponent>();
                 return ui;
             }
             catch (Exception e)

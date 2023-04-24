@@ -19,17 +19,50 @@ namespace ETModel
     /// </summary>
     public class TulipRoomComponent : Component
     {
-        public readonly Dictionary<long, int> seats = new Dictionary<long, int>();
+        private readonly Dictionary<long, int> seats = new Dictionary<long, int>();
         public bool Matching { get; set; }
-        public readonly Gamer[] gamers = new Gamer[5];
+        private readonly Gamer[] gamers = new Gamer[5];
         public static Gamer LocalGamer { get; private set; }
 
-        public GameObject LocalGamerPanel;
+        private GameObject LocalGamerPanel;
+        private GameObject AllGamer;
+        private GameObject StartButton;
 
-        public GameObject AllGamer;
+        private Text promt;
 
+        private TulipInteractionComponent _interaction;
 
-        public Text promt;
+        public TulipInteractionComponent Interaction
+        {
+            get
+            {
+                if (_interaction == null)
+                {
+                    UI uiRoom = this.GetParent<UI>();
+                    UI uiInteraction = TulipInteractionFactory.Create(TulipUIType.TulipInteraction, uiRoom);
+                    _interaction = uiInteraction.GetComponent<TulipInteractionComponent>();
+                }
+
+                return _interaction;
+            }
+        }
+
+        private TulipMarketEconomicsComponent _marketEconomicsComponent;
+
+        public TulipMarketEconomicsComponent MarketEconomicsComponent
+        {
+            get
+            {
+                if (_marketEconomicsComponent == null)
+                {
+                    UI uiRoom = this.GetParent<UI>();
+                    UI uiMarketEconomics = TulipMarketEconomicsFactory.Create(TulipUIType.TulipMarketEconomics, uiRoom);
+                    _marketEconomicsComponent = uiMarketEconomics.GetComponent<TulipMarketEconomicsComponent>();
+                }
+
+                return _marketEconomicsComponent;
+            }
+        }
 
         public void Awake()
         {
@@ -37,6 +70,9 @@ namespace ETModel
 
             GameObject quitButton = referenceCollector.Get<GameObject>("Quit");
             GameObject readyButton = referenceCollector.Get<GameObject>("Ready");
+            StartButton = referenceCollector.Get<GameObject>("StartGame");
+            StartButton.SetActive(false);
+
             promt = referenceCollector.Get<GameObject>("MatchPrompt").GetComponent<Text>();
             //添加玩家面板
             LocalGamerPanel = referenceCollector.Get<GameObject>("LocalGamer");
@@ -73,6 +109,14 @@ namespace ETModel
             promt.text = $"One player join room,total {seats.Count} players";
         }
 
+        public void ShowStartButton()
+        {
+            StartButton.SetActive(true);
+            StartButton.GetComponent<Button>().onClick.AddListener(() =>
+            {
+                SessionComponent.Instance.Session.Send(new Actor_GameStartMention() { });
+            });
+        }
 
         public void RemoveGamer(long id)
         {
@@ -100,8 +144,7 @@ namespace ETModel
 
         private int GetGamerSeat(long id)
         {
-            int seatIndex;
-            if (seats.TryGetValue(id, out seatIndex))
+            if (seats.TryGetValue(id, out var seatIndex))
             {
                 return seatIndex;
             }
@@ -145,7 +188,5 @@ namespace ETModel
                 }
             }
         }
-
-
     }
 }

@@ -124,6 +124,14 @@ namespace ETModel {
       }
     }
 
+    private int isHoster_;
+    public int IsHoster {
+      get { return isHoster_; }
+      set {
+        isHoster_ = value;
+      }
+    }
+
     public void WriteTo(pb::CodedOutputStream output) {
       if (UserID != 0L) {
         output.WriteRawTag(8);
@@ -132,6 +140,10 @@ namespace ETModel {
       if (PlayerColor != 0) {
         output.WriteRawTag(16);
         output.WriteInt32(PlayerColor);
+      }
+      if (IsHoster != 0) {
+        output.WriteRawTag(24);
+        output.WriteInt32(IsHoster);
       }
     }
 
@@ -143,12 +155,16 @@ namespace ETModel {
       if (PlayerColor != 0) {
         size += 1 + pb::CodedOutputStream.ComputeInt32Size(PlayerColor);
       }
+      if (IsHoster != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeInt32Size(IsHoster);
+      }
       return size;
     }
 
     public void MergeFrom(pb::CodedInputStream input) {
       userID_ = 0;
       playerColor_ = 0;
+      isHoster_ = 0;
       uint tag;
       while ((tag = input.ReadTag()) != 0) {
         switch(tag) {
@@ -161,6 +177,10 @@ namespace ETModel {
           }
           case 16: {
             PlayerColor = input.ReadInt32();
+            break;
+          }
+          case 24: {
+            IsHoster = input.ReadInt32();
             break;
           }
         }

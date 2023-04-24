@@ -14,6 +14,9 @@
         //最低入场门槛
         public long MinThreshold { get; set; }
 
+        //郁金香数量=amerCount+2
+        public int TulipMount { get; set; }
+  
         public override void Dispose()
         {
             if (this.IsDisposed)
@@ -27,5 +30,7 @@
             this.Multiples = 0;
             this.MinThreshold = 0;
         }
+
+     
     }
 }

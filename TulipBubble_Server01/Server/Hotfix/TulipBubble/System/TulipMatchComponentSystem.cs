@@ -15,6 +15,7 @@ namespace ETHotfix
             {
                 Log.Error("玩家不在已经开始游戏");
             }
+
             return room;
         }
 
@@ -28,17 +29,18 @@ namespace ETHotfix
             {
                 Log.Error("玩家不在待机房间中");
             }
+
             return room;
         }
-        
+
         /// <summary>
         /// 获取一个可以添加座位的房间 没有则返回null
         /// </summary>
         public static Room GetFreeTulipBubbleRoom(this TulipMatchComponent self)
         {
-            return self.FreeTulipBubbleRooms.FirstOrDefault(p => p.Value.Count < 5).Value;
+            return self.FreeTulipBubbleRooms.FirstOrDefault(p => p.Value.GamerCount < 5).Value;
         }
-        
+
         /// <summary>
         /// 斗地主匹配队列人数加一
         /// 队列模式 所以没有插队/离队操作
@@ -55,7 +57,7 @@ namespace ETHotfix
             //检查匹配状态
             self.MatchingCheck();
         }
-        
+
         /// <summary>
         /// 检查匹配状态 每当有新排队玩家加入时执行一次
         /// </summary>
@@ -66,7 +68,7 @@ namespace ETHotfix
             Room room = self.GetFreeTulipBubbleRoom();
             if (room != null)
             {
-                while (self.MatchingQueue.Count > 0 && room.Count < 5)
+                while (self.MatchingQueue.Count > 0 && room.GamerCount < 5)
                 {
                     self.JoinRoom(room, self.MatchingQueue.Dequeue());
                 }
@@ -77,21 +79,21 @@ namespace ETHotfix
                 room = ComponentFactory.Create<Room>();
                 await room.AddComponent<MailBoxComponent>().AddLocation();
                 self.FreeTulipBubbleRooms.Add(room.Id, room);
-                
-                while (self.MatchingQueue.Count > 0 && room.Count < 5)
+
+                while (self.MatchingQueue.Count > 0 && room.GamerCount < 5)
                 {
                     self.JoinRoom(room, self.MatchingQueue.Dequeue());
                 }
             }
         }
-        
+
         /// <summary>
         /// 加入房间
         /// </summary>
         public static void JoinRoom(this TulipMatchComponent self, Room room, Gamer gamer)
         {
             //玩家可能掉线
-            if(gamer == null)
+            if (gamer == null)
             {
                 return;
             }
@@ -103,6 +105,12 @@ namespace ETHotfix
             room.Add(gamer);
             //房间广播
             Log.Info($"玩家{gamer.UserID}进入房间");
+            //判断房间有无房主
+            if (room.hoster == null)
+            {
+                room.hoster = gamer;
+            }
+
             Actor_GamerEnterRoom_Ntt broadcastMessage = new Actor_GamerEnterRoom_Ntt();
             foreach (Gamer _gamer in room.gamers)
             {
@@ -115,13 +123,17 @@ namespace ETHotfix
 
                 //添加玩家信息
                 //GamerInfo info = new GamerInfo() { UserID = _gamer.UserID, IsReady = room.IsGamerReady(gamer) };
+                int isHoster = room.hoster.Equals(_gamer) ? 1 : 0;
+
                 GamerInfo info = new GamerInfo()
                 {
-                    UserID = _gamer.UserID, 
-                    PlayerColor = room.GetGamerSeat(_gamer.UserID)
+                    UserID = _gamer.UserID,
+                    PlayerColor = room.GetGamerSeat(_gamer.UserID),
+                    IsHoster = isHoster
                 };
                 broadcastMessage.Gamers.Add(info);
             }
+
             //广播房间内玩家消息 每次有人进入房间都会收到一次广播
             room.Broadcast(broadcastMessage);
 
@@ -138,13 +150,13 @@ namespace ETHotfix
             foreach (Gamer gamer in self.MatchingQueue)
             {
                 //向客户端User发送Actor消息
-                ActorMessageSenderComponent actorProxyComponent = Game.Scene.GetComponent<ActorMessageSenderComponent>();
+                ActorMessageSenderComponent actorProxyComponent =
+                    Game.Scene.GetComponent<ActorMessageSenderComponent>();
                 ActorMessageSender actorProxy = actorProxyComponent.Get(gamer.CActorID);
- 
-                Log.Debug("转发给了客户端一条消息，客户端Session：" + gamer.CActorID.ToString());
+
+                Log.Debug("A message is forwarded to the client. The client Session:" + gamer.CActorID.ToString());
                 actorProxy.Send(message);
             }
         }
-        
     }
 }

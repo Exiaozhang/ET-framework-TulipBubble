@@ -1,6 +1,54 @@
 syntax = "proto3";
 package ETModel;
 
+message Actor_GetTulipPriceLevel_Ntt // IActorMessage
+{
+	int32 RpcId = 90;
+	int64 ActorId = 93;
+	int32 redPriceLevel=1;
+	int32 whitePriceLevel=2;
+	int32 yellowPriceLevel=3;
+}
+
+//郁金香牌类消息
+message TulipCard
+{
+	int32 TulipCardLevel = 1;
+	int32 TulipCardColor = 2;
+	int32 TulipCardWeight = 3;
+}
+//郁金香牌类消息
+message CollectorTulipCard
+{
+	int32 TulipCardLevel = 1;
+	int32 TulipCardWeight = 2;
+}
+//收藏家牌类消息
+message CollectorCard
+{
+	int32 RequestColor = 1;
+	repeated CollectorTulipCard CollectorTulipCard = 2;
+}
+//牌长度消息
+message GamerCardNum
+{
+    int64 UserID = 1;
+    int32 Num = 2;
+}
+//初始时房间牌
+message Actor_GameStartRoomCards_Ntt // IActorMessage
+{
+	int32 RpcId = 90;
+	int64 ActorId = 93;
+	repeated TulipCard FutureTulipCards = 1;
+	repeated TulipCard CashTulipCards = 2;
+}
+
+message Actor_GameStartMention // IActorMessage
+{
+	int32 RpcId = 90;
+	int64 ActorId = 9;
+}
 //获取房间内玩家信息请求
 message C2G_GetUserInfoInRoom_Req // IRequest
 {

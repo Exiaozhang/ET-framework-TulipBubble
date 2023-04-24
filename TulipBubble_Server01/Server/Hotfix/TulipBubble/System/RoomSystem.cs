@@ -36,21 +36,34 @@ namespace ETHotfix
             //更改房间状态 从空闲房间移除 添加到游戏中房间列表
             TulipMatchComponent Match = Game.Scene.GetComponent<TulipMatchComponent>();
             Match.FreeTulipBubbleRooms.Remove(self.Id);
-            Match.GamingTulipBubbleRooms.Add(self.Id,self);
-            
+            Match.GamingTulipBubbleRooms.Add(self.Id, self);
+
             //更改玩家状态
             for (int i = 0; i < self.gamers.Length; i++)
             {
+                if (self.gamers[i] == null)
+                {
+                    continue;
+                }
                 Gamer gamer = self.gamers[i];
                 Match.Waiting.Remove(gamer.UserID);
-                Match.Playing.Add(gamer.UserID,self);
+                Match.Playing.Add(gamer.UserID, self);
             }
-            
-            //添加开始郁金香泡沫需要的组件
-            self.AddComponent<GameControllerComponent,RoomConfig>(GateHelper.GetTulipBubbleRoomConfig(RoomLevel.Lv100));
 
+            //添加开始郁金香泡沫需要的组件
+            //牌库组件
+            self.AddComponent<DeckComponent>();
+            //房间手牌组件
+            self.AddComponent<RoomCardsComponent>();
+            //房间市场经济组件
+            self.AddComponent<TulipMarketEconomicsComponent>();
+            //游戏控制组件
+            GameControllerComponent gameControllerComponent =
+                self.AddComponent<GameControllerComponent, RoomConfig>(
+                    GateHelper.GetTulipBubbleRoomConfig(RoomLevel.Lv100));
+            gameControllerComponent.TulipMount = self.GamerCount + 2;
             //开始游戏
-            //self.GetComponent<GameControllerComponent>().StartGame();
+            gameControllerComponent.StartGame();
         }
 
         public static void Add(this Room self, Gamer gamer)
@@ -68,6 +81,7 @@ namespace ETHotfix
                 Log.Error("房间已满无法加入");
             }
         }
+
         /// <summary>
         /// 获取房间中的玩家
         /// </summary>
@@ -94,7 +108,7 @@ namespace ETHotfix
 
             return -1;
         }
-        
+
         /// <summary>
         /// 返回玩家是否已准备 玩家不在房间时返回false
         /// </summary>
@@ -105,9 +119,28 @@ namespace ETHotfix
             {
                 return self.isReadys[seatIndex];
             }
+
             return false;
         }
 
+        /// <summary>
+        /// 得到有几个准备的玩家
+        /// </summary>
+        /// <param name="self"></param>
+        /// <returns></returns>
+        public static int GetReadyGamerCount(this Room self)
+        {
+            int Count = 0;
+            foreach (var t in self.isReadys)
+            {
+                if (t)
+                {
+                    Count += 1;
+                }
+            }
+
+            return Count;
+        }
 
         /// <summary>
         /// 移除玩家并返回 玩家离开房间
@@ -120,8 +153,14 @@ namespace ETHotfix
                 Gamer gamer = self.gamers[seatIndex];
                 self.gamers[seatIndex] = null;
                 self.seats.Remove(id);
+                if (gamer.Equals(self.hoster))
+                {
+                    self.hoster = null;
+                }
+
                 return gamer;
             }
+
             return null;
         }
 
@@ -139,6 +178,7 @@ namespace ETHotfix
                     return i;
                 }
             }
+
             return -1;
         }
 
@@ -151,12 +191,11 @@ namespace ETHotfix
                     continue;
                 }
 
-                ActorMessageSenderComponent actorProxyComponent= Game.Scene.GetComponent<ActorMessageSenderComponent>();
+                ActorMessageSenderComponent actorProxyComponent =
+                    Game.Scene.GetComponent<ActorMessageSenderComponent>();
                 ActorMessageSender actorProxy = actorProxyComponent.Get(gamer.CActorID);
                 actorProxy.Send(message);
             }
         }
-        
-        
     }
 }

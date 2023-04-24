@@ -41,10 +41,12 @@ namespace ETModel
         public readonly Gamer[] gamers = new Gamer[5];
         public readonly bool[] isReadys = new bool[5];
 
+        public Gamer hoster;
+
         /// <summary>
         /// 房间中玩家的数量
         /// </summary>
-        public int Count => seats.Values.Count;
+        public int GamerCount => seats.Values.Count;
 
         public override void Dispose()
         {

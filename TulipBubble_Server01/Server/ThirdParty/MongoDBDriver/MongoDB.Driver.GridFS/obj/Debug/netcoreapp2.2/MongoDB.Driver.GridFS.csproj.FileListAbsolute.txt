@@ -32,3 +32,16 @@ D:\Users\taikr008\Desktop\Landlords_Server01\Server\ThirdParty\MongoDBDriver\Mon
 D:\Users\taikr008\Desktop\Landlords_Server01\Server\ThirdParty\MongoDBDriver\MongoDB.Driver.GridFS\obj\Debug\netcoreapp2.2\MongoDB.Driver.GridFS.dll
 D:\Users\taikr008\Desktop\Landlords_Server01\Server\ThirdParty\MongoDBDriver\MongoDB.Driver.GridFS\obj\Debug\netcoreapp2.2\MongoDB.Driver.GridFS.xml
 D:\Users\taikr008\Desktop\Landlords_Server01\Server\ThirdParty\MongoDBDriver\MongoDB.Driver.GridFS\obj\Debug\netcoreapp2.2\MongoDB.Driver.GridFS.pdb
+D:\Backup\CsProject\ET-framwork-TulipBubble\TulipBubble_Server01\Bin\netcoreapp2.2\MongoDB.Driver.GridFS.deps.json
+D:\Backup\CsProject\ET-framwork-TulipBubble\TulipBubble_Server01\Bin\netcoreapp2.2\MongoDB.Driver.GridFS.dll
+D:\Backup\CsProject\ET-framwork-TulipBubble\TulipBubble_Server01\Bin\netcoreapp2.2\MongoDB.Driver.GridFS.pdb
+D:\Backup\CsProject\ET-framwork-TulipBubble\TulipBubble_Server01\Bin\netcoreapp2.2\MongoDB.Driver.GridFS.xml
+D:\Backup\CsProject\ET-framwork-TulipBubble\TulipBubble_Server01\Server\ThirdParty\MongoDBDriver\MongoDB.Driver.GridFS\obj\Debug\netcoreapp2.2\MongoDB.Driver.GridFS.csproj.AssemblyReference.cache
+D:\Backup\CsProject\ET-framwork-TulipBubble\TulipBubble_Server01\Server\ThirdParty\MongoDBDriver\MongoDB.Driver.GridFS\obj\Debug\netcoreapp2.2\MongoDB.Driver.GridFS.GeneratedMSBuildEditorConfig.editorconfig
+D:\Backup\CsProject\ET-framwork-TulipBubble\TulipBubble_Server01\Server\ThirdParty\MongoDBDriver\MongoDB.Driver.GridFS\obj\Debug\netcoreapp2.2\MongoDB.Driver.GridFS.AssemblyInfoInputs.cache
+D:\Backup\CsProject\ET-framwork-TulipBubble\TulipBubble_Server01\Server\ThirdParty\MongoDBDriver\MongoDB.Driver.GridFS\obj\Debug\netcoreapp2.2\MongoDB.Driver.GridFS.AssemblyInfo.cs
+D:\Backup\CsProject\ET-framwork-TulipBubble\TulipBubble_Server01\Server\ThirdParty\MongoDBDriver\MongoDB.Driver.GridFS\obj\Debug\netcoreapp2.2\MongoDB.Driver.GridFS.csproj.CoreCompileInputs.cache
+D:\Backup\CsProject\ET-framwork-TulipBubble\TulipBubble_Server01\Server\ThirdParty\MongoDBDriver\MongoDB.Driver.GridFS\obj\Debug\netcoreapp2.2\MongoDB.Driver.GridFS.csproj.CopyComplete
+D:\Backup\CsProject\ET-framwork-TulipBubble\TulipBubble_Server01\Server\ThirdParty\MongoDBDriver\MongoDB.Driver.GridFS\obj\Debug\netcoreapp2.2\MongoDB.Driver.GridFS.dll
+D:\Backup\CsProject\ET-framwork-TulipBubble\TulipBubble_Server01\Server\ThirdParty\MongoDBDriver\MongoDB.Driver.GridFS\obj\Debug\netcoreapp2.2\MongoDB.Driver.GridFS.xml
+D:\Backup\CsProject\ET-framwork-TulipBubble\TulipBubble_Server01\Server\ThirdParty\MongoDBDriver\MongoDB.Driver.GridFS\obj\Debug\netcoreapp2.2\MongoDB.Driver.GridFS.pdb

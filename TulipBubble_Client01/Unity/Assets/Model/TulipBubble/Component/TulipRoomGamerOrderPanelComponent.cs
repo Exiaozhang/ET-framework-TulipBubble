@@ -20,7 +20,10 @@ namespace ETModel
         private string color;
         private Sprite spriteColor;
         public static string[] userColor = new[] { "blue", "green", "purple", "red", "yellow" };
-        public GameObject ready;
+        private GameObject orderPlayer;
+        private GameObject ready;
+        private GameObject hoster;
+
 
         public void Awake(GameObject AllGamers, int i)
         {
@@ -30,7 +33,7 @@ namespace ETModel
 
             //加载玩家顺序界面
             GameObject boundGameObject = (GameObject)resourcesComponent.GetAsset($"OrderPlayer.unity3d", "OrderPlayer");
-            GameObject orderPlayer = UnityEngine.Object.Instantiate(boundGameObject);
+            orderPlayer = UnityEngine.Object.Instantiate(boundGameObject);
 
             //放置界面
             orderPlayer.layer = LayerMask.NameToLayer(LayerNames.UI);
@@ -44,19 +47,26 @@ namespace ETModel
 
 
             color = userColor[i];
-            Log.Debug($"Player_{color}");
             spriteColor = Resources.Load<Sprite>($"Player_{color}");
 
             userInfo.GetComponent<Image>().sprite = spriteColor;
-            AllGamers.GetComponent<ReferenceCollector>().Add($"OrderPlayer_{color}", orderPlayer);
+            //AllGamers.GetComponent<ReferenceCollector>().Add($"OrderPlayer_{color}", orderPlayer);
 
             ready = referenceCollector.Get<GameObject>("Ready");
+            hoster = referenceCollector.Get<GameObject>("Hoster");
+            //Game.Scene.GetComponent<ResourcesComponent>().UnloadBundle("OrderPlayer.unity3d");
         }
 
         public void SetGamerReady()
         {
             ready.SetActive(true);
         }
+
+        public void SetGamerHoster()
+        {
+            hoster.SetActive(true);
+        }
+
 
         public override void Dispose()
         {
@@ -65,8 +75,9 @@ namespace ETModel
                 return;
             }
 
+            UnityEngine.Object.Destroy(orderPlayer);
+
             base.Dispose();
-            Game.Scene.GetComponent<ResourcesComponent>().UnloadBundle("OrderPlayer.unity3d");
             Resources.UnloadAsset(spriteColor);
         }
     }

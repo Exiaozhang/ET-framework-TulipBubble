@@ -1,5 +1,4 @@
-﻿using PlasticGui.Configuration.CloudEdition.Welcome;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
 
 namespace ETModel

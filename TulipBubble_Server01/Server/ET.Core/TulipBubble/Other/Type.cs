@@ -27,11 +27,23 @@
     /// <summary>
     /// 郁金香等级
     /// </summary>
-    public enum Weight
+    public enum Level
     {
       A,
       B,
-      C
+      C,
+      None
+    }
+
+    /// <summary>
+    /// 郁金香品种
+    /// </summary>
+    public enum Weight
+    {
+        one,
+        two,
+        three,
+        None
     }
     
     /// <summary>

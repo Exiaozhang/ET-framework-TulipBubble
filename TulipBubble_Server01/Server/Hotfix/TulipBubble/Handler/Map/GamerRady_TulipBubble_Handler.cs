@@ -21,8 +21,13 @@ namespace ETHotfix
                     room.isReadys[seatIndex] = true;
                     //广播通知全房间玩家此gamer已经准备好
                     room.Broadcast(new Actor_GamerReady_TulipBubble(){UserID = gamer.UserID});
-                    
-                    //room.CheckGameStart();
+
+                    if (room.GetReadyGamerCount() >= 3)
+                    {
+                        ActorMessageSenderComponent actorProxyComponent = Game.Scene.GetComponent<ActorMessageSenderComponent>();
+                        ActorMessageSender actorProxy = actorProxyComponent.Get(room.hoster.CActorID);
+                        actorProxy.Send(new Actor_GameStartMention(){});
+                    }
                 }
                 else
                 {
