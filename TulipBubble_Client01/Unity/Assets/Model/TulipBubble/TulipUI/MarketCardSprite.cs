@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
@@ -21,7 +22,9 @@ namespace ETModel
             clickEntry.callback = new EventTrigger.TriggerEvent();
             clickEntry.callback.AddListener(new UnityAction<BaseEventData>(OnClick));
             eventTrigger.triggers.Add(clickEntry);
+         
         }
+        
         
         private void OnClick(BaseEventData data)
         {

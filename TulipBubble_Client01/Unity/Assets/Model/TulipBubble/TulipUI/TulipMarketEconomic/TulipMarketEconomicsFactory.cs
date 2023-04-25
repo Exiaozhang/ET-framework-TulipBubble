@@ -4,6 +4,7 @@ namespace ETModel
 {
     public class TulipMarketEconomicsFactory
     {
+       
         public static UI Create(string type, UI parent)
         {
             ResourcesComponent resourcesComponent = ETModel.Game.Scene.GetComponent<ResourcesComponent>();

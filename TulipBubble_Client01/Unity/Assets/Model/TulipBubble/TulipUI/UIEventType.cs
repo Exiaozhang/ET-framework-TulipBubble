@@ -28,7 +28,7 @@ namespace ETModel
             Game.Scene.GetComponent<UIComponent>().Create(TulipUIType.TulipLogin);
         }
     }
-    
+
     [Event(UIEventType.TulipLoginFinish)]
     public class TulipLoginFinish : AEvent
     {
