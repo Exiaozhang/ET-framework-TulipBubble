@@ -501,6 +501,50 @@ MonoBehaviour:
     m_VerticalOverflow: 0
     m_LineSpacing: 1
   m_Text: Start
+--- !u!1 &2312223510025983376
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 458157813308778002}
+  - component: {fileID: 328008349551742863}
+  m_Layer: 5
+  m_Name: EventDeck
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &458157813308778002
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2312223510025983376}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 3460223544763195192}
+  m_RootOrder: 6
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0, y: 0.5}
+  m_AnchorMax: {x: 0, y: 0.5}
+  m_AnchoredPosition: {x: 363.3, y: -171.5}
+  m_SizeDelta: {x: 188.34357, y: 254.87494}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!222 &328008349551742863
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2312223510025983376}
+  m_CullTransparentMesh: 0
 --- !u!1 &2868713779602853672
 GameObject:
   m_ObjectHideFlags: 0
@@ -2212,6 +2256,50 @@ MonoBehaviour:
     m_VerticalOverflow: 0
     m_LineSpacing: 1
   m_Text: 
+--- !u!1 &7110508269018664282
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2868033871354101725}
+  - component: {fileID: 5131374757301482630}
+  m_Layer: 5
+  m_Name: EventDiscardPile
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &2868033871354101725
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7110508269018664282}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 3460223544763195192}
+  m_RootOrder: 7
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0, y: 0.5}
+  m_AnchorMax: {x: 0, y: 0.5}
+  m_AnchoredPosition: {x: 597.2, y: -171.51}
+  m_SizeDelta: {x: 191.63284, y: 254.85547}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!222 &5131374757301482630
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7110508269018664282}
+  m_CullTransparentMesh: 0
 --- !u!1 &7166676217085935685
 GameObject:
   m_ObjectHideFlags: 0
@@ -2472,6 +2560,8 @@ RectTransform:
   - {fileID: 5079196088487204808}
   - {fileID: 5079196090497479664}
   - {fileID: 5079196089004870707}
+  - {fileID: 458157813308778002}
+  - {fileID: 2868033871354101725}
   m_Father: {fileID: 5079196089578053931}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -2493,11 +2583,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   data:
-  - key: Collocetr_20
+  - key: Collector_20
     gameObject: {fileID: 5079196088689376471}
-  - key: Collocetr_15
+  - key: Collector_15
     gameObject: {fileID: 5079196088891532959}
-  - key: Collocetr_10
+  - key: Collector_10
     gameObject: {fileID: 5079196090229746284}
   - key: Future
     gameObject: {fileID: 5079196088487204811}
@@ -2505,3 +2595,7 @@ MonoBehaviour:
     gameObject: {fileID: 5079196090497479667}
   - key: Sell
     gameObject: {fileID: 5079196089004870706}
+  - key: EventDeck
+    gameObject: {fileID: 2312223510025983376}
+  - key: EventDiscardPile
+    gameObject: {fileID: 7110508269018664282}

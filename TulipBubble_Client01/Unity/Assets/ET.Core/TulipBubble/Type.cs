@@ -19,10 +19,21 @@
     /// <summary>
     /// 牌类型
     /// </summary>
-    public enum CardsType
+    public enum CardType
     {
         TulipCard,
-        CollectorCard
+        CollectorCard,
+        EventCard
+    }
+
+    /// <summary>
+    /// 卡牌拥有者类型
+    /// </summary>
+    public enum CardBelongType
+    {
+        Market,
+        Player,
+        Error
     }
 
     /// <summary>
@@ -66,5 +77,28 @@
         Yellow,
         Red,
         Black
+    }
+
+    /// <summary>
+    /// 游戏进行的阶段
+    /// </summary>
+    public enum GameStage
+    {
+        EventStage,
+        SellStage,
+        AuctionStage,
+        FinishStage
+    }
+    
+    /// <summary>
+    /// 市场事件
+    /// </summary>
+    public enum MarketEvent
+    {
+        TulipRise,
+        TulipDrop,
+        RiseSuddenly,
+        DropSuddenly,
+        BubbleBurst
     }
 }

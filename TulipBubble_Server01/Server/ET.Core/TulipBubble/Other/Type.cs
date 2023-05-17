@@ -32,7 +32,9 @@
       A,
       B,
       C,
-      None
+      None,
+      Anyone,
+      X
     }
 
     /// <summary>
@@ -43,7 +45,9 @@
         one,
         two,
         three,
-        None
+        None,
+        Anyone,
+        Y
     }
     
     /// <summary>
@@ -55,5 +59,37 @@
       Yellow,
       Red,
       Black
+    }
+
+    /// <summary>
+    /// 市场事件
+    /// </summary>
+    public enum MarketEvent
+    {
+        TulipRise,
+        TulipDrop,
+        RiseSuddenly,
+        DropSuddenly,
+        BubbleBurst
+    }
+
+    /// <summary>
+    /// 收藏家要求颜色类型
+    /// </summary>
+    public enum RequestColor
+    {
+        PureColor,
+        DiverseColor
+    }
+    
+    /// <summary>
+    /// 游戏进行的阶段
+    /// </summary>
+    public enum GameStage
+    {
+        EventStage,
+        SellStage,
+        AuctionStage,
+        FinishStage
     }
 }

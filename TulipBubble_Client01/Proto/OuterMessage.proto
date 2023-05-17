@@ -1,6 +1,69 @@
 syntax = "proto3";
 package ETModel;
 
+//同步客户端的用户预定郁金香的情况
+message Actor_GetTulipReserve_Ntt // IActorMessage
+{
+	int32 RpcId = 90;
+	int64 ActorId = 93;
+	repeated GamerReserveTulip ReserveTulipCards = 94;
+}
+
+message GamerReserveTulip
+{
+	repeated int64 UserId = 1;
+	TulipCard ReserveTulipCard = 2;
+}
+
+//发送给服务器预定的郁金香
+message Actor_ReserveTulipCard_Ntt // IActorMessage
+{
+	int32 RpcId = 90;
+	int64 ActorId = 93;
+	TulipCard ReserveTulipCard =1;
+}
+
+//发送给服务器要出售的郁金香
+message Actor_SellTulipCard_Ntt // IActorMessage
+{
+	int32 RpcId = 90;
+	int64 ActorId = 93;
+	repeated TulipCard SellTulipCard = 1;
+	CollectorCard SellCollectorCard = 2;
+}
+
+//发送给客户端起始玩家
+message Actor_AuthorityPlayCard_Ntt // IActorMessage
+{
+	int32 RpcId = 90;
+	int64 ActorId = 93;
+	int64 UserID = 1;
+	int32 Stage = 2;
+}
+
+//发送给客户端当前可用的收藏家
+message Actor_GetCollector_Ntt // IActorMessage
+{
+	int32 RpcId = 90;
+	int64 ActorId = 93;
+	CollectorCard  HighPriceCollector = 1;
+	int32 HighPriceCollectorCount = 2;
+	CollectorCard MiddlePriceCollector = 3;
+	int32 MiddlePriceCollectorCount = 4;
+	CollectorCard LowPriceCollector = 5;
+	int32 LowPriceCollectorCount= 6;
+}
+
+//发送给客户端本回合的事件卡
+message Actor_GetEvent_Ntt // IActorMessage
+{
+	int32 RpcId = 90;
+	int64 ActorId = 93;
+	EventCard EventCard = 1;
+	int32 RemindEventCount =2;
+}
+
+//发送给客户端当前市场郁金香价格
 message Actor_GetTulipPriceLevel_Ntt // IActorMessage
 {
 	int32 RpcId = 90;
@@ -10,12 +73,20 @@ message Actor_GetTulipPriceLevel_Ntt // IActorMessage
 	int32 yellowPriceLevel=3;
 }
 
+//事件牌类消息
+message EventCard
+{
+	int32 EventType = 1;
+	int32 TulipColor = 2;
+	int64 Id = 3;
+}
 //郁金香牌类消息
 message TulipCard
 {
 	int32 TulipCardLevel = 1;
 	int32 TulipCardColor = 2;
 	int32 TulipCardWeight = 3;
+	int64 Id = 4;
 }
 //郁金香牌类消息
 message CollectorTulipCard
@@ -26,8 +97,11 @@ message CollectorTulipCard
 //收藏家牌类消息
 message CollectorCard
 {
-	int32 RequestColor = 1;
-	repeated CollectorTulipCard CollectorTulipCard = 2;
+	int32 Price = 1;
+	int32 RequestColor = 2;
+	string Name = 3;
+	repeated CollectorTulipCard CollectorTulipCard = 4;
+	int64 Id = 5;
 }
 //牌长度消息
 message GamerCardNum

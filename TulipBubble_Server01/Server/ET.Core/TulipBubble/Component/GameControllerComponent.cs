@@ -1,4 +1,6 @@
-﻿namespace ETModel
+﻿using System;
+
+namespace ETModel
 {
     public class GameControllerComponent : Component
     {
@@ -16,7 +18,10 @@
 
         //郁金香数量=amerCount+2
         public int TulipMount { get; set; }
-  
+        
+        //当前回合玩家
+        public Int64 CurrentGamerUserId { get; set; }
+
         public override void Dispose()
         {
             if (this.IsDisposed)

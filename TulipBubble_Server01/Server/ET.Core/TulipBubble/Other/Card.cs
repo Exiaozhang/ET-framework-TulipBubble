@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
 namespace ETModel
 {
@@ -13,9 +14,10 @@ namespace ETModel
             tulipCard.TulipCardColor = color;
             tulipCard.TulipCardLevel = level;
             tulipCard.TulipCardWeight = weight;
-
+            tulipCard.Id =  DateTime.Now.Ticks;
             return tulipCard;
         }
+
 
         public bool Equals(TulipCard other)
         {
@@ -37,12 +39,50 @@ namespace ETModel
 
     public partial class CollectorCard
     {
-        public static CollectorCard Create(int reqColor, List<CollectorTulipCard> reqType)
+        /// <summary>
+        /// 创建一个收藏家牌
+        /// </summary>
+        /// <param name="reqColor">要求的颜色类型</param>
+        /// <param name="reqFirstType"></param>
+        /// <param name="reqSecondType"></param>
+        /// <param name="reqThirdType"></param>
+        /// <param name="price">收购价格</param>
+        /// <returns></returns>
+        public static CollectorCard Create(int reqColor, CollectorTulipCard reqFirstType,
+            CollectorTulipCard reqSecondType, CollectorTulipCard reqThirdType, int price, string name)
         {
             CollectorCard collectorCard = new CollectorCard();
             collectorCard.RequestColor = reqColor;
-            collectorCard.CollectorTulipCard.Add(reqType);
+            collectorCard.Name = name;
+            collectorCard.CollectorTulipCard.Add(reqFirstType);
+            collectorCard.CollectorTulipCard.Add(reqSecondType);
+            collectorCard.CollectorTulipCard.Add(reqThirdType);
+            collectorCard.Price = price;
+            collectorCard.Id = DateTime.Now.Ticks;
             return collectorCard;
+        }
+    }
+
+
+    public partial class EventCard
+    {
+        public static EventCard Create(int type, int color)
+        {
+            //type 0,1 郁金香 涨/跌 2,3 暴涨/跌 4泡沫破裂
+
+            EventCard eventCard = new EventCard();
+            eventCard.EventType = type;
+            eventCard.TulipColor = color;
+            eventCard.Id = DateTime.Now.Ticks;
+            return eventCard;
+        }
+
+        public static EventCard Create(int type)
+        {
+            EventCard eventCard = new EventCard();
+            eventCard.EventType = type;
+            eventCard.Id = DateTime.Now.Ticks;
+            return eventCard;
         }
     }
 }

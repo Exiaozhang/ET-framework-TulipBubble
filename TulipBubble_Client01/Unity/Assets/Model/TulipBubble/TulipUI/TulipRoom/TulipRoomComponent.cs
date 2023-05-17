@@ -13,7 +13,6 @@ namespace ETModel
         }
     }
 
-
     /// <summary>
     /// 房间组件界面
     /// </summary>
@@ -86,11 +85,9 @@ namespace ETModel
             quitButton.GetComponent<Button>().onClick.Add(OnQuit);
             readyButton.GetComponent<Button>().onClick.Add(OnReady);
 
-
             //添加本地玩家
             Gamer gamer = ComponentFactory.Create<Gamer, long>(GamerComponent.Instance.MyUser.UserID);
 
-            // AddGamer(gamer, 1);
             LocalGamer = gamer;
             gamer.AddComponent<TulipRoomGamerPanelComponent>().SetPanel(LocalGamerPanel);
         }
@@ -100,10 +97,13 @@ namespace ETModel
             seats.Add(gamer.UserID, index);
             gamers[index] = gamer;
             gamer.AddComponent<TulipRoomGamerOrderPanelComponent, GameObject, int>(AllGamer, index);
+            TulipRoomGameComponent tulipRoomGameComponent = this.GetParent<UI>().GetComponent<TulipRoomGameComponent>();
+            tulipRoomGameComponent.AddColorToGamer(gamer.UserID, index);
             if (gamer.UserID == LocalGamer.UserID)
             {
                 LocalGamerPanel.GetComponent<ReferenceCollector>()
                     .Get<GameObject>(TulipRoomGamerOrderPanelComponent.userColor[index]).SetActive(true);
+                tulipRoomGameComponent.SetLocalPlayerColor(gamer.UserID);
             }
 
             promt.text = $"One player join room,total {seats.Count} players";
@@ -131,6 +131,18 @@ namespace ETModel
             }
         }
 
+        /// <summary>
+        /// 判断是否为本地玩家
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns>是/true,不是/false</returns>
+        public bool IsLocalGame(long id)
+        {
+            if (id == LocalGamer.UserID)
+                return true;
+            return false;
+        }
+
         public Gamer GetGamer(long id)
         {
             int seatIndex = GetGamerSeat(id);
@@ -151,7 +163,6 @@ namespace ETModel
 
             return -1;
         }
-
 
         private void OnReady()
         {

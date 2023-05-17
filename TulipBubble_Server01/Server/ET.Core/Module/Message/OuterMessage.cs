@@ -9,6 +9,623 @@ using scg = global::System.Collections.Generic;
 namespace ETModel {
 
   #region Messages
+  /// <summary>
+  ///发送给服务器预定的郁金香
+  /// </summary>
+  public partial class Actor_ReserveTulipCard_Ntt : pb::IMessage {
+    private static readonly pb::MessageParser<Actor_ReserveTulipCard_Ntt> _parser = new pb::MessageParser<Actor_ReserveTulipCard_Ntt>(() => (Actor_ReserveTulipCard_Ntt)MessagePool.Instance.Fetch(typeof(Actor_ReserveTulipCard_Ntt)));
+    public static pb::MessageParser<Actor_ReserveTulipCard_Ntt> Parser { get { return _parser; } }
+
+    private int rpcId_;
+    public int RpcId {
+      get { return rpcId_; }
+      set {
+        rpcId_ = value;
+      }
+    }
+
+    private long actorId_;
+    public long ActorId {
+      get { return actorId_; }
+      set {
+        actorId_ = value;
+      }
+    }
+
+    private global::ETModel.TulipCard reserveTulipCard_;
+    public global::ETModel.TulipCard ReserveTulipCard {
+      get { return reserveTulipCard_; }
+      set {
+        reserveTulipCard_ = value;
+      }
+    }
+
+    public void WriteTo(pb::CodedOutputStream output) {
+      if (reserveTulipCard_ != null) {
+        output.WriteRawTag(10);
+        output.WriteMessage(ReserveTulipCard);
+      }
+      if (RpcId != 0) {
+        output.WriteRawTag(208, 5);
+        output.WriteInt32(RpcId);
+      }
+      if (ActorId != 0L) {
+        output.WriteRawTag(232, 5);
+        output.WriteInt64(ActorId);
+      }
+    }
+
+    public int CalculateSize() {
+      int size = 0;
+      if (RpcId != 0) {
+        size += 2 + pb::CodedOutputStream.ComputeInt32Size(RpcId);
+      }
+      if (ActorId != 0L) {
+        size += 2 + pb::CodedOutputStream.ComputeInt64Size(ActorId);
+      }
+      if (reserveTulipCard_ != null) {
+        size += 1 + pb::CodedOutputStream.ComputeMessageSize(ReserveTulipCard);
+      }
+      return size;
+    }
+
+    public void MergeFrom(pb::CodedInputStream input) {
+      if (reserveTulipCard_ != null) MessagePool.Instance.Recycle(reserveTulipCard_); reserveTulipCard_ = null;
+      rpcId_ = 0;
+      actorId_ = 0;
+      uint tag;
+      while ((tag = input.ReadTag()) != 0) {
+        switch(tag) {
+          default:
+            input.SkipLastField();
+            break;
+          case 10: {
+            if (reserveTulipCard_ == null) {
+              reserveTulipCard_ = new global::ETModel.TulipCard();
+            }
+            input.ReadMessage(reserveTulipCard_);
+            break;
+          }
+          case 720: {
+            RpcId = input.ReadInt32();
+            break;
+          }
+          case 744: {
+            ActorId = input.ReadInt64();
+            break;
+          }
+        }
+      }
+    }
+
+  }
+
+  /// <summary>
+  ///发送给服务器要出售的郁金香
+  /// </summary>
+  public partial class Actor_SellTulipCard_Ntt : pb::IMessage {
+    private static readonly pb::MessageParser<Actor_SellTulipCard_Ntt> _parser = new pb::MessageParser<Actor_SellTulipCard_Ntt>(() => (Actor_SellTulipCard_Ntt)MessagePool.Instance.Fetch(typeof(Actor_SellTulipCard_Ntt)));
+    public static pb::MessageParser<Actor_SellTulipCard_Ntt> Parser { get { return _parser; } }
+
+    private int rpcId_;
+    public int RpcId {
+      get { return rpcId_; }
+      set {
+        rpcId_ = value;
+      }
+    }
+
+    private long actorId_;
+    public long ActorId {
+      get { return actorId_; }
+      set {
+        actorId_ = value;
+      }
+    }
+
+    private static readonly pb::FieldCodec<global::ETModel.TulipCard> _repeated_sellTulipCard_codec
+        = pb::FieldCodec.ForMessage(10, global::ETModel.TulipCard.Parser);
+    private pbc::RepeatedField<global::ETModel.TulipCard> sellTulipCard_ = new pbc::RepeatedField<global::ETModel.TulipCard>();
+    public pbc::RepeatedField<global::ETModel.TulipCard> SellTulipCard {
+      get { return sellTulipCard_; }
+      set { sellTulipCard_ = value; }
+    }
+
+    private global::ETModel.CollectorCard sellCollectorCard_;
+    public global::ETModel.CollectorCard SellCollectorCard {
+      get { return sellCollectorCard_; }
+      set {
+        sellCollectorCard_ = value;
+      }
+    }
+
+    public void WriteTo(pb::CodedOutputStream output) {
+      sellTulipCard_.WriteTo(output, _repeated_sellTulipCard_codec);
+      if (sellCollectorCard_ != null) {
+        output.WriteRawTag(18);
+        output.WriteMessage(SellCollectorCard);
+      }
+      if (RpcId != 0) {
+        output.WriteRawTag(208, 5);
+        output.WriteInt32(RpcId);
+      }
+      if (ActorId != 0L) {
+        output.WriteRawTag(232, 5);
+        output.WriteInt64(ActorId);
+      }
+    }
+
+    public int CalculateSize() {
+      int size = 0;
+      if (RpcId != 0) {
+        size += 2 + pb::CodedOutputStream.ComputeInt32Size(RpcId);
+      }
+      if (ActorId != 0L) {
+        size += 2 + pb::CodedOutputStream.ComputeInt64Size(ActorId);
+      }
+      size += sellTulipCard_.CalculateSize(_repeated_sellTulipCard_codec);
+      if (sellCollectorCard_ != null) {
+        size += 1 + pb::CodedOutputStream.ComputeMessageSize(SellCollectorCard);
+      }
+      return size;
+    }
+
+    public void MergeFrom(pb::CodedInputStream input) {
+      for (int i = 0; i < sellTulipCard_.Count; i++) { MessagePool.Instance.Recycle(sellTulipCard_[i]); }
+      sellTulipCard_.Clear();
+      if (sellCollectorCard_ != null) MessagePool.Instance.Recycle(sellCollectorCard_); sellCollectorCard_ = null;
+      rpcId_ = 0;
+      actorId_ = 0;
+      uint tag;
+      while ((tag = input.ReadTag()) != 0) {
+        switch(tag) {
+          default:
+            input.SkipLastField();
+            break;
+          case 10: {
+            sellTulipCard_.AddEntriesFrom(input, _repeated_sellTulipCard_codec);
+            break;
+          }
+          case 18: {
+            if (sellCollectorCard_ == null) {
+              sellCollectorCard_ = new global::ETModel.CollectorCard();
+            }
+            input.ReadMessage(sellCollectorCard_);
+            break;
+          }
+          case 720: {
+            RpcId = input.ReadInt32();
+            break;
+          }
+          case 744: {
+            ActorId = input.ReadInt64();
+            break;
+          }
+        }
+      }
+    }
+
+  }
+
+  /// <summary>
+  ///发送给客户端起始玩家
+  /// </summary>
+  public partial class Actor_AuthorityPlayCard_Ntt : pb::IMessage {
+    private static readonly pb::MessageParser<Actor_AuthorityPlayCard_Ntt> _parser = new pb::MessageParser<Actor_AuthorityPlayCard_Ntt>(() => (Actor_AuthorityPlayCard_Ntt)MessagePool.Instance.Fetch(typeof(Actor_AuthorityPlayCard_Ntt)));
+    public static pb::MessageParser<Actor_AuthorityPlayCard_Ntt> Parser { get { return _parser; } }
+
+    private int rpcId_;
+    public int RpcId {
+      get { return rpcId_; }
+      set {
+        rpcId_ = value;
+      }
+    }
+
+    private long actorId_;
+    public long ActorId {
+      get { return actorId_; }
+      set {
+        actorId_ = value;
+      }
+    }
+
+    private long userID_;
+    public long UserID {
+      get { return userID_; }
+      set {
+        userID_ = value;
+      }
+    }
+
+    private int stage_;
+    public int Stage {
+      get { return stage_; }
+      set {
+        stage_ = value;
+      }
+    }
+
+    public void WriteTo(pb::CodedOutputStream output) {
+      if (UserID != 0L) {
+        output.WriteRawTag(8);
+        output.WriteInt64(UserID);
+      }
+      if (Stage != 0) {
+        output.WriteRawTag(16);
+        output.WriteInt32(Stage);
+      }
+      if (RpcId != 0) {
+        output.WriteRawTag(208, 5);
+        output.WriteInt32(RpcId);
+      }
+      if (ActorId != 0L) {
+        output.WriteRawTag(232, 5);
+        output.WriteInt64(ActorId);
+      }
+    }
+
+    public int CalculateSize() {
+      int size = 0;
+      if (RpcId != 0) {
+        size += 2 + pb::CodedOutputStream.ComputeInt32Size(RpcId);
+      }
+      if (ActorId != 0L) {
+        size += 2 + pb::CodedOutputStream.ComputeInt64Size(ActorId);
+      }
+      if (UserID != 0L) {
+        size += 1 + pb::CodedOutputStream.ComputeInt64Size(UserID);
+      }
+      if (Stage != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeInt32Size(Stage);
+      }
+      return size;
+    }
+
+    public void MergeFrom(pb::CodedInputStream input) {
+      userID_ = 0;
+      stage_ = 0;
+      rpcId_ = 0;
+      actorId_ = 0;
+      uint tag;
+      while ((tag = input.ReadTag()) != 0) {
+        switch(tag) {
+          default:
+            input.SkipLastField();
+            break;
+          case 8: {
+            UserID = input.ReadInt64();
+            break;
+          }
+          case 16: {
+            Stage = input.ReadInt32();
+            break;
+          }
+          case 720: {
+            RpcId = input.ReadInt32();
+            break;
+          }
+          case 744: {
+            ActorId = input.ReadInt64();
+            break;
+          }
+        }
+      }
+    }
+
+  }
+
+  /// <summary>
+  ///发送给客户端当前可用的收藏家
+  /// </summary>
+  public partial class Actor_GetCollector_Ntt : pb::IMessage {
+    private static readonly pb::MessageParser<Actor_GetCollector_Ntt> _parser = new pb::MessageParser<Actor_GetCollector_Ntt>(() => (Actor_GetCollector_Ntt)MessagePool.Instance.Fetch(typeof(Actor_GetCollector_Ntt)));
+    public static pb::MessageParser<Actor_GetCollector_Ntt> Parser { get { return _parser; } }
+
+    private int rpcId_;
+    public int RpcId {
+      get { return rpcId_; }
+      set {
+        rpcId_ = value;
+      }
+    }
+
+    private long actorId_;
+    public long ActorId {
+      get { return actorId_; }
+      set {
+        actorId_ = value;
+      }
+    }
+
+    private global::ETModel.CollectorCard highPriceCollector_;
+    public global::ETModel.CollectorCard HighPriceCollector {
+      get { return highPriceCollector_; }
+      set {
+        highPriceCollector_ = value;
+      }
+    }
+
+    private int highPriceCollectorCount_;
+    public int HighPriceCollectorCount {
+      get { return highPriceCollectorCount_; }
+      set {
+        highPriceCollectorCount_ = value;
+      }
+    }
+
+    private global::ETModel.CollectorCard middlePriceCollector_;
+    public global::ETModel.CollectorCard MiddlePriceCollector {
+      get { return middlePriceCollector_; }
+      set {
+        middlePriceCollector_ = value;
+      }
+    }
+
+    private int middlePriceCollectorCount_;
+    public int MiddlePriceCollectorCount {
+      get { return middlePriceCollectorCount_; }
+      set {
+        middlePriceCollectorCount_ = value;
+      }
+    }
+
+    private global::ETModel.CollectorCard lowPriceCollector_;
+    public global::ETModel.CollectorCard LowPriceCollector {
+      get { return lowPriceCollector_; }
+      set {
+        lowPriceCollector_ = value;
+      }
+    }
+
+    private int lowPriceCollectorCount_;
+    public int LowPriceCollectorCount {
+      get { return lowPriceCollectorCount_; }
+      set {
+        lowPriceCollectorCount_ = value;
+      }
+    }
+
+    public void WriteTo(pb::CodedOutputStream output) {
+      if (highPriceCollector_ != null) {
+        output.WriteRawTag(10);
+        output.WriteMessage(HighPriceCollector);
+      }
+      if (HighPriceCollectorCount != 0) {
+        output.WriteRawTag(16);
+        output.WriteInt32(HighPriceCollectorCount);
+      }
+      if (middlePriceCollector_ != null) {
+        output.WriteRawTag(26);
+        output.WriteMessage(MiddlePriceCollector);
+      }
+      if (MiddlePriceCollectorCount != 0) {
+        output.WriteRawTag(32);
+        output.WriteInt32(MiddlePriceCollectorCount);
+      }
+      if (lowPriceCollector_ != null) {
+        output.WriteRawTag(42);
+        output.WriteMessage(LowPriceCollector);
+      }
+      if (LowPriceCollectorCount != 0) {
+        output.WriteRawTag(48);
+        output.WriteInt32(LowPriceCollectorCount);
+      }
+      if (RpcId != 0) {
+        output.WriteRawTag(208, 5);
+        output.WriteInt32(RpcId);
+      }
+      if (ActorId != 0L) {
+        output.WriteRawTag(232, 5);
+        output.WriteInt64(ActorId);
+      }
+    }
+
+    public int CalculateSize() {
+      int size = 0;
+      if (RpcId != 0) {
+        size += 2 + pb::CodedOutputStream.ComputeInt32Size(RpcId);
+      }
+      if (ActorId != 0L) {
+        size += 2 + pb::CodedOutputStream.ComputeInt64Size(ActorId);
+      }
+      if (highPriceCollector_ != null) {
+        size += 1 + pb::CodedOutputStream.ComputeMessageSize(HighPriceCollector);
+      }
+      if (HighPriceCollectorCount != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeInt32Size(HighPriceCollectorCount);
+      }
+      if (middlePriceCollector_ != null) {
+        size += 1 + pb::CodedOutputStream.ComputeMessageSize(MiddlePriceCollector);
+      }
+      if (MiddlePriceCollectorCount != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeInt32Size(MiddlePriceCollectorCount);
+      }
+      if (lowPriceCollector_ != null) {
+        size += 1 + pb::CodedOutputStream.ComputeMessageSize(LowPriceCollector);
+      }
+      if (LowPriceCollectorCount != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeInt32Size(LowPriceCollectorCount);
+      }
+      return size;
+    }
+
+    public void MergeFrom(pb::CodedInputStream input) {
+      if (highPriceCollector_ != null) MessagePool.Instance.Recycle(highPriceCollector_); highPriceCollector_ = null;
+      highPriceCollectorCount_ = 0;
+      if (middlePriceCollector_ != null) MessagePool.Instance.Recycle(middlePriceCollector_); middlePriceCollector_ = null;
+      middlePriceCollectorCount_ = 0;
+      if (lowPriceCollector_ != null) MessagePool.Instance.Recycle(lowPriceCollector_); lowPriceCollector_ = null;
+      lowPriceCollectorCount_ = 0;
+      rpcId_ = 0;
+      actorId_ = 0;
+      uint tag;
+      while ((tag = input.ReadTag()) != 0) {
+        switch(tag) {
+          default:
+            input.SkipLastField();
+            break;
+          case 10: {
+            if (highPriceCollector_ == null) {
+              highPriceCollector_ = new global::ETModel.CollectorCard();
+            }
+            input.ReadMessage(highPriceCollector_);
+            break;
+          }
+          case 16: {
+            HighPriceCollectorCount = input.ReadInt32();
+            break;
+          }
+          case 26: {
+            if (middlePriceCollector_ == null) {
+              middlePriceCollector_ = new global::ETModel.CollectorCard();
+            }
+            input.ReadMessage(middlePriceCollector_);
+            break;
+          }
+          case 32: {
+            MiddlePriceCollectorCount = input.ReadInt32();
+            break;
+          }
+          case 42: {
+            if (lowPriceCollector_ == null) {
+              lowPriceCollector_ = new global::ETModel.CollectorCard();
+            }
+            input.ReadMessage(lowPriceCollector_);
+            break;
+          }
+          case 48: {
+            LowPriceCollectorCount = input.ReadInt32();
+            break;
+          }
+          case 720: {
+            RpcId = input.ReadInt32();
+            break;
+          }
+          case 744: {
+            ActorId = input.ReadInt64();
+            break;
+          }
+        }
+      }
+    }
+
+  }
+
+  /// <summary>
+  ///发送给客户端本回合的事件卡
+  /// </summary>
+  public partial class Actor_GetEvent_Ntt : pb::IMessage {
+    private static readonly pb::MessageParser<Actor_GetEvent_Ntt> _parser = new pb::MessageParser<Actor_GetEvent_Ntt>(() => (Actor_GetEvent_Ntt)MessagePool.Instance.Fetch(typeof(Actor_GetEvent_Ntt)));
+    public static pb::MessageParser<Actor_GetEvent_Ntt> Parser { get { return _parser; } }
+
+    private int rpcId_;
+    public int RpcId {
+      get { return rpcId_; }
+      set {
+        rpcId_ = value;
+      }
+    }
+
+    private long actorId_;
+    public long ActorId {
+      get { return actorId_; }
+      set {
+        actorId_ = value;
+      }
+    }
+
+    private global::ETModel.EventCard eventCard_;
+    public global::ETModel.EventCard EventCard {
+      get { return eventCard_; }
+      set {
+        eventCard_ = value;
+      }
+    }
+
+    private int remindEventCount_;
+    public int RemindEventCount {
+      get { return remindEventCount_; }
+      set {
+        remindEventCount_ = value;
+      }
+    }
+
+    public void WriteTo(pb::CodedOutputStream output) {
+      if (eventCard_ != null) {
+        output.WriteRawTag(10);
+        output.WriteMessage(EventCard);
+      }
+      if (RemindEventCount != 0) {
+        output.WriteRawTag(16);
+        output.WriteInt32(RemindEventCount);
+      }
+      if (RpcId != 0) {
+        output.WriteRawTag(208, 5);
+        output.WriteInt32(RpcId);
+      }
+      if (ActorId != 0L) {
+        output.WriteRawTag(232, 5);
+        output.WriteInt64(ActorId);
+      }
+    }
+
+    public int CalculateSize() {
+      int size = 0;
+      if (RpcId != 0) {
+        size += 2 + pb::CodedOutputStream.ComputeInt32Size(RpcId);
+      }
+      if (ActorId != 0L) {
+        size += 2 + pb::CodedOutputStream.ComputeInt64Size(ActorId);
+      }
+      if (eventCard_ != null) {
+        size += 1 + pb::CodedOutputStream.ComputeMessageSize(EventCard);
+      }
+      if (RemindEventCount != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeInt32Size(RemindEventCount);
+      }
+      return size;
+    }
+
+    public void MergeFrom(pb::CodedInputStream input) {
+      if (eventCard_ != null) MessagePool.Instance.Recycle(eventCard_); eventCard_ = null;
+      remindEventCount_ = 0;
+      rpcId_ = 0;
+      actorId_ = 0;
+      uint tag;
+      while ((tag = input.ReadTag()) != 0) {
+        switch(tag) {
+          default:
+            input.SkipLastField();
+            break;
+          case 10: {
+            if (eventCard_ == null) {
+              eventCard_ = new global::ETModel.EventCard();
+            }
+            input.ReadMessage(eventCard_);
+            break;
+          }
+          case 16: {
+            RemindEventCount = input.ReadInt32();
+            break;
+          }
+          case 720: {
+            RpcId = input.ReadInt32();
+            break;
+          }
+          case 744: {
+            ActorId = input.ReadInt64();
+            break;
+          }
+        }
+      }
+    }
+
+  }
+
+  /// <summary>
+  ///发送给客户端当前市场郁金香价格
+  /// </summary>
   public partial class Actor_GetTulipPriceLevel_Ntt : pb::IMessage {
     private static readonly pb::MessageParser<Actor_GetTulipPriceLevel_Ntt> _parser = new pb::MessageParser<Actor_GetTulipPriceLevel_Ntt>(() => (Actor_GetTulipPriceLevel_Ntt)MessagePool.Instance.Fetch(typeof(Actor_GetTulipPriceLevel_Ntt)));
     public static pb::MessageParser<Actor_GetTulipPriceLevel_Ntt> Parser { get { return _parser; } }
@@ -135,6 +752,94 @@ namespace ETModel {
   }
 
   /// <summary>
+  ///事件牌类消息
+  /// </summary>
+  public partial class EventCard : pb::IMessage {
+    private static readonly pb::MessageParser<EventCard> _parser = new pb::MessageParser<EventCard>(() => (EventCard)MessagePool.Instance.Fetch(typeof(EventCard)));
+    public static pb::MessageParser<EventCard> Parser { get { return _parser; } }
+
+    private int eventType_;
+    public int EventType {
+      get { return eventType_; }
+      set {
+        eventType_ = value;
+      }
+    }
+
+    private int tulipColor_;
+    public int TulipColor {
+      get { return tulipColor_; }
+      set {
+        tulipColor_ = value;
+      }
+    }
+
+    private long id_;
+    public long Id {
+      get { return id_; }
+      set {
+        id_ = value;
+      }
+    }
+
+    public void WriteTo(pb::CodedOutputStream output) {
+      if (EventType != 0) {
+        output.WriteRawTag(8);
+        output.WriteInt32(EventType);
+      }
+      if (TulipColor != 0) {
+        output.WriteRawTag(16);
+        output.WriteInt32(TulipColor);
+      }
+      if (Id != 0L) {
+        output.WriteRawTag(24);
+        output.WriteInt64(Id);
+      }
+    }
+
+    public int CalculateSize() {
+      int size = 0;
+      if (EventType != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeInt32Size(EventType);
+      }
+      if (TulipColor != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeInt32Size(TulipColor);
+      }
+      if (Id != 0L) {
+        size += 1 + pb::CodedOutputStream.ComputeInt64Size(Id);
+      }
+      return size;
+    }
+
+    public void MergeFrom(pb::CodedInputStream input) {
+      eventType_ = 0;
+      tulipColor_ = 0;
+      id_ = 0;
+      uint tag;
+      while ((tag = input.ReadTag()) != 0) {
+        switch(tag) {
+          default:
+            input.SkipLastField();
+            break;
+          case 8: {
+            EventType = input.ReadInt32();
+            break;
+          }
+          case 16: {
+            TulipColor = input.ReadInt32();
+            break;
+          }
+          case 24: {
+            Id = input.ReadInt64();
+            break;
+          }
+        }
+      }
+    }
+
+  }
+
+  /// <summary>
   ///郁金香牌类消息
   /// </summary>
   public partial class TulipCard : pb::IMessage {
@@ -165,6 +870,14 @@ namespace ETModel {
       }
     }
 
+    private long id_;
+    public long Id {
+      get { return id_; }
+      set {
+        id_ = value;
+      }
+    }
+
     public void WriteTo(pb::CodedOutputStream output) {
       if (TulipCardLevel != 0) {
         output.WriteRawTag(8);
@@ -177,6 +890,10 @@ namespace ETModel {
       if (TulipCardWeight != 0) {
         output.WriteRawTag(24);
         output.WriteInt32(TulipCardWeight);
+      }
+      if (Id != 0L) {
+        output.WriteRawTag(32);
+        output.WriteInt64(Id);
       }
     }
 
@@ -191,6 +908,9 @@ namespace ETModel {
       if (TulipCardWeight != 0) {
         size += 1 + pb::CodedOutputStream.ComputeInt32Size(TulipCardWeight);
       }
+      if (Id != 0L) {
+        size += 1 + pb::CodedOutputStream.ComputeInt64Size(Id);
+      }
       return size;
     }
 
@@ -198,6 +918,7 @@ namespace ETModel {
       tulipCardLevel_ = 0;
       tulipCardColor_ = 0;
       tulipCardWeight_ = 0;
+      id_ = 0;
       uint tag;
       while ((tag = input.ReadTag()) != 0) {
         switch(tag) {
@@ -214,6 +935,10 @@ namespace ETModel {
           }
           case 24: {
             TulipCardWeight = input.ReadInt32();
+            break;
+          }
+          case 32: {
+            Id = input.ReadInt64();
             break;
           }
         }
@@ -297,6 +1022,14 @@ namespace ETModel {
     private static readonly pb::MessageParser<CollectorCard> _parser = new pb::MessageParser<CollectorCard>(() => (CollectorCard)MessagePool.Instance.Fetch(typeof(CollectorCard)));
     public static pb::MessageParser<CollectorCard> Parser { get { return _parser; } }
 
+    private int price_;
+    public int Price {
+      get { return price_; }
+      set {
+        price_ = value;
+      }
+    }
+
     private int requestColor_;
     public int RequestColor {
       get { return requestColor_; }
@@ -305,35 +1038,75 @@ namespace ETModel {
       }
     }
 
+    private string name_ = "";
+    public string Name {
+      get { return name_; }
+      set {
+        name_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
+      }
+    }
+
     private static readonly pb::FieldCodec<global::ETModel.CollectorTulipCard> _repeated_collectorTulipCard_codec
-        = pb::FieldCodec.ForMessage(18, global::ETModel.CollectorTulipCard.Parser);
+        = pb::FieldCodec.ForMessage(34, global::ETModel.CollectorTulipCard.Parser);
     private pbc::RepeatedField<global::ETModel.CollectorTulipCard> collectorTulipCard_ = new pbc::RepeatedField<global::ETModel.CollectorTulipCard>();
     public pbc::RepeatedField<global::ETModel.CollectorTulipCard> CollectorTulipCard {
       get { return collectorTulipCard_; }
       set { collectorTulipCard_ = value; }
     }
 
+    private long id_;
+    public long Id {
+      get { return id_; }
+      set {
+        id_ = value;
+      }
+    }
+
     public void WriteTo(pb::CodedOutputStream output) {
-      if (RequestColor != 0) {
+      if (Price != 0) {
         output.WriteRawTag(8);
+        output.WriteInt32(Price);
+      }
+      if (RequestColor != 0) {
+        output.WriteRawTag(16);
         output.WriteInt32(RequestColor);
       }
+      if (Name.Length != 0) {
+        output.WriteRawTag(26);
+        output.WriteString(Name);
+      }
       collectorTulipCard_.WriteTo(output, _repeated_collectorTulipCard_codec);
+      if (Id != 0L) {
+        output.WriteRawTag(40);
+        output.WriteInt64(Id);
+      }
     }
 
     public int CalculateSize() {
       int size = 0;
+      if (Price != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeInt32Size(Price);
+      }
       if (RequestColor != 0) {
         size += 1 + pb::CodedOutputStream.ComputeInt32Size(RequestColor);
       }
+      if (Name.Length != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeStringSize(Name);
+      }
       size += collectorTulipCard_.CalculateSize(_repeated_collectorTulipCard_codec);
+      if (Id != 0L) {
+        size += 1 + pb::CodedOutputStream.ComputeInt64Size(Id);
+      }
       return size;
     }
 
     public void MergeFrom(pb::CodedInputStream input) {
+      price_ = 0;
       requestColor_ = 0;
+      name_ = "";
       for (int i = 0; i < collectorTulipCard_.Count; i++) { MessagePool.Instance.Recycle(collectorTulipCard_[i]); }
       collectorTulipCard_.Clear();
+      id_ = 0;
       uint tag;
       while ((tag = input.ReadTag()) != 0) {
         switch(tag) {
@@ -341,11 +1114,23 @@ namespace ETModel {
             input.SkipLastField();
             break;
           case 8: {
+            Price = input.ReadInt32();
+            break;
+          }
+          case 16: {
             RequestColor = input.ReadInt32();
             break;
           }
-          case 18: {
+          case 26: {
+            Name = input.ReadString();
+            break;
+          }
+          case 34: {
             collectorTulipCard_.AddEntriesFrom(input, _repeated_collectorTulipCard_codec);
+            break;
+          }
+          case 40: {
+            Id = input.ReadInt64();
             break;
           }
         }

@@ -53,10 +53,18 @@ namespace ETHotfix
             //添加开始郁金香泡沫需要的组件
             //牌库组件
             self.AddComponent<DeckComponent>();
-            //房间手牌组件
-            self.AddComponent<RoomCardsComponent>();
+            //房间郁金香牌组件
+            self.AddComponent<RoomTulipCardsComponent>();
+            //房间事件牌组件
+            self.AddComponent<RoomEventCardsComponent>();
+            //房间回合组件
+            self.AddComponent<OrderControllerComponent>();
+            //房间收藏家牌组件
+            self.AddComponent<RoomCollectorCardsComponent>();
             //房间市场经济组件
             self.AddComponent<TulipMarketEconomicsComponent>();
+;
+   
             //游戏控制组件
             GameControllerComponent gameControllerComponent =
                 self.AddComponent<GameControllerComponent, RoomConfig>(
