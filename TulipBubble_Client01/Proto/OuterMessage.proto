@@ -1,6 +1,58 @@
 syntax = "proto3";
 package ETModel;
 
+//通知房间付款方式
+message Actor_NotifyRoomPayWay_Ntt // IActorMessage
+{
+	int32 RpcId = 90;
+	int64 ActorId = 93;
+	int64 UserId = 1;
+	int32 PayWay = 2;
+}
+
+//通知玩家付款
+message Actor_NotifyPlayerPayWay_Ntt // IActorMessage
+{
+	int32 RpcId = 90;
+	int64 ActorId = 93;
+	int64 UserId = 1;
+}
+
+//通知玩家出价
+message Actor_NotifyPlayerBid // IActorMessage
+{
+	int32 RpcId = 90;
+	int64 ActorId = 93;
+	int64 UserId = 1;
+	int32 LowestPrice = 2;
+}
+
+//返回给房间金钱
+message Actor_NotifyRoomBid // IActorMessage
+{
+	int32 RpcId = 90;
+	int64 ActorId = 93;
+	int32  Price = 1;
+}
+
+//同步金钱
+message Actor_GetMoney_Ntt // IActorMessage
+{
+	int32 RpcId = 90;
+	int64 ActorId = 93;
+	int32 Money = 1;
+}
+
+//同步市场郁金香卡牌
+message Actor_GetTulip_Ntt // IActorMessage
+{
+	int32 RpcId = 90;
+	int64 ActorId = 93;
+	repeated TulipCard FutureTulipCards = 1;
+	repeated TulipCard CashTulipCards = 2;
+	repeated TulipCard SelledTulipCards = 3;
+}
+
 //同步客户端的用户预定郁金香的情况
 message Actor_GetTulipReserve_Ntt // IActorMessage
 {

@@ -1,6 +1,7 @@
 syntax = "proto3";
 package ETModel;
 
+
 //准备游戏消息
 message Actor_GamerReady_TulipBubble // IActorMessage
 {
