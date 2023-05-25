@@ -37,6 +37,7 @@ namespace ETModel
             };
             notHoverEntry.callback.AddListener(OnPinterLeave);
             eventTrigger.triggers.Add(notHoverEntry);
+
         }
 
         private void OnClick(BaseEventData data)

@@ -7,9 +7,10 @@
             "type": "process",
             "args": [
                 "build",
-                "${workspaceFolder}/Server/App/Server.App.csproj",
+                "${workspaceFolder}/Server/Server.sln",
                 "/property:GenerateFullPaths=true",
-                "/consoleloggerparameters:NoSummary"
+                "-o",
+                "${workspaceFolder}/Bin"
             ],
             "problemMatcher": "$msCompile"
         },
@@ -37,6 +38,11 @@
                 "/consoleloggerparameters:NoSummary"
             ],
             "problemMatcher": "$msCompile"
+        },
+        {
+            "label": "echo",
+            "type": "shell",
+            "command":"echo ${workspaceFolder}"
         }
     ]
 }

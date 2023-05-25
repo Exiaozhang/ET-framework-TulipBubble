@@ -10,6 +10,976 @@ namespace ETModel {
 
   #region Messages
   /// <summary>
+  /// </summary>
+  public partial class Actor_GetHandCard_Ntt : pb::IMessage {
+    private static readonly pb::MessageParser<Actor_GetHandCard_Ntt> _parser = new pb::MessageParser<Actor_GetHandCard_Ntt>(() => (Actor_GetHandCard_Ntt)MessagePool.Instance.Fetch(typeof(Actor_GetHandCard_Ntt)));
+    public static pb::MessageParser<Actor_GetHandCard_Ntt> Parser { get { return _parser; } }
+
+    private int rpcId_;
+    public int RpcId {
+      get { return rpcId_; }
+      set {
+        rpcId_ = value;
+      }
+    }
+
+    private long actorId_;
+    public long ActorId {
+      get { return actorId_; }
+      set {
+        actorId_ = value;
+      }
+    }
+
+    private static readonly pb::FieldCodec<global::ETModel.TulipCard> _repeated_handCard_codec
+        = pb::FieldCodec.ForMessage(10, global::ETModel.TulipCard.Parser);
+    private pbc::RepeatedField<global::ETModel.TulipCard> handCard_ = new pbc::RepeatedField<global::ETModel.TulipCard>();
+    public pbc::RepeatedField<global::ETModel.TulipCard> HandCard {
+      get { return handCard_; }
+      set { handCard_ = value; }
+    }
+
+    private static readonly pb::FieldCodec<global::ETModel.TulipCard> _repeated_loanCard_codec
+        = pb::FieldCodec.ForMessage(18, global::ETModel.TulipCard.Parser);
+    private pbc::RepeatedField<global::ETModel.TulipCard> loanCard_ = new pbc::RepeatedField<global::ETModel.TulipCard>();
+    public pbc::RepeatedField<global::ETModel.TulipCard> LoanCard {
+      get { return loanCard_; }
+      set { loanCard_ = value; }
+    }
+
+    private static readonly pb::FieldCodec<int> _repeated_cardPrice_codec
+        = pb::FieldCodec.ForInt32(26);
+    private pbc::RepeatedField<int> cardPrice_ = new pbc::RepeatedField<int>();
+    public pbc::RepeatedField<int> CardPrice {
+      get { return cardPrice_; }
+      set { cardPrice_ = value; }
+    }
+
+    public void WriteTo(pb::CodedOutputStream output) {
+      handCard_.WriteTo(output, _repeated_handCard_codec);
+      loanCard_.WriteTo(output, _repeated_loanCard_codec);
+      cardPrice_.WriteTo(output, _repeated_cardPrice_codec);
+      if (RpcId != 0) {
+        output.WriteRawTag(208, 5);
+        output.WriteInt32(RpcId);
+      }
+      if (ActorId != 0L) {
+        output.WriteRawTag(232, 5);
+        output.WriteInt64(ActorId);
+      }
+    }
+
+    public int CalculateSize() {
+      int size = 0;
+      if (RpcId != 0) {
+        size += 2 + pb::CodedOutputStream.ComputeInt32Size(RpcId);
+      }
+      if (ActorId != 0L) {
+        size += 2 + pb::CodedOutputStream.ComputeInt64Size(ActorId);
+      }
+      size += handCard_.CalculateSize(_repeated_handCard_codec);
+      size += loanCard_.CalculateSize(_repeated_loanCard_codec);
+      size += cardPrice_.CalculateSize(_repeated_cardPrice_codec);
+      return size;
+    }
+
+    public void MergeFrom(pb::CodedInputStream input) {
+      for (int i = 0; i < handCard_.Count; i++) { MessagePool.Instance.Recycle(handCard_[i]); }
+      handCard_.Clear();
+      for (int i = 0; i < loanCard_.Count; i++) { MessagePool.Instance.Recycle(loanCard_[i]); }
+      loanCard_.Clear();
+      cardPrice_.Clear();
+      rpcId_ = 0;
+      actorId_ = 0;
+      uint tag;
+      while ((tag = input.ReadTag()) != 0) {
+        switch(tag) {
+          default:
+            input.SkipLastField();
+            break;
+          case 10: {
+            handCard_.AddEntriesFrom(input, _repeated_handCard_codec);
+            break;
+          }
+          case 18: {
+            loanCard_.AddEntriesFrom(input, _repeated_loanCard_codec);
+            break;
+          }
+          case 26:
+          case 24: {
+            cardPrice_.AddEntriesFrom(input, _repeated_cardPrice_codec);
+            break;
+          }
+          case 720: {
+            RpcId = input.ReadInt32();
+            break;
+          }
+          case 744: {
+            ActorId = input.ReadInt64();
+            break;
+          }
+        }
+      }
+    }
+
+  }
+
+  /// <summary>
+  ///通知玩家标志物数量
+  /// </summary>
+  public partial class Actor_GetSignCount_Ntt : pb::IMessage {
+    private static readonly pb::MessageParser<Actor_GetSignCount_Ntt> _parser = new pb::MessageParser<Actor_GetSignCount_Ntt>(() => (Actor_GetSignCount_Ntt)MessagePool.Instance.Fetch(typeof(Actor_GetSignCount_Ntt)));
+    public static pb::MessageParser<Actor_GetSignCount_Ntt> Parser { get { return _parser; } }
+
+    private int rpcId_;
+    public int RpcId {
+      get { return rpcId_; }
+      set {
+        rpcId_ = value;
+      }
+    }
+
+    private long actorId_;
+    public long ActorId {
+      get { return actorId_; }
+      set {
+        actorId_ = value;
+      }
+    }
+
+    private int signCount_;
+    public int SignCount {
+      get { return signCount_; }
+      set {
+        signCount_ = value;
+      }
+    }
+
+    public void WriteTo(pb::CodedOutputStream output) {
+      if (SignCount != 0) {
+        output.WriteRawTag(8);
+        output.WriteInt32(SignCount);
+      }
+      if (RpcId != 0) {
+        output.WriteRawTag(208, 5);
+        output.WriteInt32(RpcId);
+      }
+      if (ActorId != 0L) {
+        output.WriteRawTag(232, 5);
+        output.WriteInt64(ActorId);
+      }
+    }
+
+    public int CalculateSize() {
+      int size = 0;
+      if (RpcId != 0) {
+        size += 2 + pb::CodedOutputStream.ComputeInt32Size(RpcId);
+      }
+      if (ActorId != 0L) {
+        size += 2 + pb::CodedOutputStream.ComputeInt64Size(ActorId);
+      }
+      if (SignCount != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeInt32Size(SignCount);
+      }
+      return size;
+    }
+
+    public void MergeFrom(pb::CodedInputStream input) {
+      signCount_ = 0;
+      rpcId_ = 0;
+      actorId_ = 0;
+      uint tag;
+      while ((tag = input.ReadTag()) != 0) {
+        switch(tag) {
+          default:
+            input.SkipLastField();
+            break;
+          case 8: {
+            SignCount = input.ReadInt32();
+            break;
+          }
+          case 720: {
+            RpcId = input.ReadInt32();
+            break;
+          }
+          case 744: {
+            ActorId = input.ReadInt64();
+            break;
+          }
+        }
+      }
+    }
+
+  }
+
+  /// <summary>
+  ///通知房间付款方式
+  /// </summary>
+  public partial class Actor_NotifyRoomPayWay_Ntt : pb::IMessage {
+    private static readonly pb::MessageParser<Actor_NotifyRoomPayWay_Ntt> _parser = new pb::MessageParser<Actor_NotifyRoomPayWay_Ntt>(() => (Actor_NotifyRoomPayWay_Ntt)MessagePool.Instance.Fetch(typeof(Actor_NotifyRoomPayWay_Ntt)));
+    public static pb::MessageParser<Actor_NotifyRoomPayWay_Ntt> Parser { get { return _parser; } }
+
+    private int rpcId_;
+    public int RpcId {
+      get { return rpcId_; }
+      set {
+        rpcId_ = value;
+      }
+    }
+
+    private long actorId_;
+    public long ActorId {
+      get { return actorId_; }
+      set {
+        actorId_ = value;
+      }
+    }
+
+    private long userId_;
+    public long UserId {
+      get { return userId_; }
+      set {
+        userId_ = value;
+      }
+    }
+
+    private int payWay_;
+    public int PayWay {
+      get { return payWay_; }
+      set {
+        payWay_ = value;
+      }
+    }
+
+    public void WriteTo(pb::CodedOutputStream output) {
+      if (UserId != 0L) {
+        output.WriteRawTag(8);
+        output.WriteInt64(UserId);
+      }
+      if (PayWay != 0) {
+        output.WriteRawTag(16);
+        output.WriteInt32(PayWay);
+      }
+      if (RpcId != 0) {
+        output.WriteRawTag(208, 5);
+        output.WriteInt32(RpcId);
+      }
+      if (ActorId != 0L) {
+        output.WriteRawTag(232, 5);
+        output.WriteInt64(ActorId);
+      }
+    }
+
+    public int CalculateSize() {
+      int size = 0;
+      if (RpcId != 0) {
+        size += 2 + pb::CodedOutputStream.ComputeInt32Size(RpcId);
+      }
+      if (ActorId != 0L) {
+        size += 2 + pb::CodedOutputStream.ComputeInt64Size(ActorId);
+      }
+      if (UserId != 0L) {
+        size += 1 + pb::CodedOutputStream.ComputeInt64Size(UserId);
+      }
+      if (PayWay != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeInt32Size(PayWay);
+      }
+      return size;
+    }
+
+    public void MergeFrom(pb::CodedInputStream input) {
+      userId_ = 0;
+      payWay_ = 0;
+      rpcId_ = 0;
+      actorId_ = 0;
+      uint tag;
+      while ((tag = input.ReadTag()) != 0) {
+        switch(tag) {
+          default:
+            input.SkipLastField();
+            break;
+          case 8: {
+            UserId = input.ReadInt64();
+            break;
+          }
+          case 16: {
+            PayWay = input.ReadInt32();
+            break;
+          }
+          case 720: {
+            RpcId = input.ReadInt32();
+            break;
+          }
+          case 744: {
+            ActorId = input.ReadInt64();
+            break;
+          }
+        }
+      }
+    }
+
+  }
+
+  /// <summary>
+  ///通知玩家付款
+  /// </summary>
+  public partial class Actor_NotifyPlayerPayWay_Ntt : pb::IMessage {
+    private static readonly pb::MessageParser<Actor_NotifyPlayerPayWay_Ntt> _parser = new pb::MessageParser<Actor_NotifyPlayerPayWay_Ntt>(() => (Actor_NotifyPlayerPayWay_Ntt)MessagePool.Instance.Fetch(typeof(Actor_NotifyPlayerPayWay_Ntt)));
+    public static pb::MessageParser<Actor_NotifyPlayerPayWay_Ntt> Parser { get { return _parser; } }
+
+    private int rpcId_;
+    public int RpcId {
+      get { return rpcId_; }
+      set {
+        rpcId_ = value;
+      }
+    }
+
+    private long actorId_;
+    public long ActorId {
+      get { return actorId_; }
+      set {
+        actorId_ = value;
+      }
+    }
+
+    private long userId_;
+    public long UserId {
+      get { return userId_; }
+      set {
+        userId_ = value;
+      }
+    }
+
+    public void WriteTo(pb::CodedOutputStream output) {
+      if (UserId != 0L) {
+        output.WriteRawTag(8);
+        output.WriteInt64(UserId);
+      }
+      if (RpcId != 0) {
+        output.WriteRawTag(208, 5);
+        output.WriteInt32(RpcId);
+      }
+      if (ActorId != 0L) {
+        output.WriteRawTag(232, 5);
+        output.WriteInt64(ActorId);
+      }
+    }
+
+    public int CalculateSize() {
+      int size = 0;
+      if (RpcId != 0) {
+        size += 2 + pb::CodedOutputStream.ComputeInt32Size(RpcId);
+      }
+      if (ActorId != 0L) {
+        size += 2 + pb::CodedOutputStream.ComputeInt64Size(ActorId);
+      }
+      if (UserId != 0L) {
+        size += 1 + pb::CodedOutputStream.ComputeInt64Size(UserId);
+      }
+      return size;
+    }
+
+    public void MergeFrom(pb::CodedInputStream input) {
+      userId_ = 0;
+      rpcId_ = 0;
+      actorId_ = 0;
+      uint tag;
+      while ((tag = input.ReadTag()) != 0) {
+        switch(tag) {
+          default:
+            input.SkipLastField();
+            break;
+          case 8: {
+            UserId = input.ReadInt64();
+            break;
+          }
+          case 720: {
+            RpcId = input.ReadInt32();
+            break;
+          }
+          case 744: {
+            ActorId = input.ReadInt64();
+            break;
+          }
+        }
+      }
+    }
+
+  }
+
+  /// <summary>
+  ///通知玩家出价
+  /// </summary>
+  public partial class Actor_NotifyPlayerBid : pb::IMessage {
+    private static readonly pb::MessageParser<Actor_NotifyPlayerBid> _parser = new pb::MessageParser<Actor_NotifyPlayerBid>(() => (Actor_NotifyPlayerBid)MessagePool.Instance.Fetch(typeof(Actor_NotifyPlayerBid)));
+    public static pb::MessageParser<Actor_NotifyPlayerBid> Parser { get { return _parser; } }
+
+    private int rpcId_;
+    public int RpcId {
+      get { return rpcId_; }
+      set {
+        rpcId_ = value;
+      }
+    }
+
+    private long actorId_;
+    public long ActorId {
+      get { return actorId_; }
+      set {
+        actorId_ = value;
+      }
+    }
+
+    private long userId_;
+    public long UserId {
+      get { return userId_; }
+      set {
+        userId_ = value;
+      }
+    }
+
+    private int lowestPrice_;
+    public int LowestPrice {
+      get { return lowestPrice_; }
+      set {
+        lowestPrice_ = value;
+      }
+    }
+
+    private global::ETModel.TulipCard bidingTulipCard_;
+    public global::ETModel.TulipCard BidingTulipCard {
+      get { return bidingTulipCard_; }
+      set {
+        bidingTulipCard_ = value;
+      }
+    }
+
+    public void WriteTo(pb::CodedOutputStream output) {
+      if (UserId != 0L) {
+        output.WriteRawTag(8);
+        output.WriteInt64(UserId);
+      }
+      if (LowestPrice != 0) {
+        output.WriteRawTag(16);
+        output.WriteInt32(LowestPrice);
+      }
+      if (bidingTulipCard_ != null) {
+        output.WriteRawTag(26);
+        output.WriteMessage(BidingTulipCard);
+      }
+      if (RpcId != 0) {
+        output.WriteRawTag(208, 5);
+        output.WriteInt32(RpcId);
+      }
+      if (ActorId != 0L) {
+        output.WriteRawTag(232, 5);
+        output.WriteInt64(ActorId);
+      }
+    }
+
+    public int CalculateSize() {
+      int size = 0;
+      if (RpcId != 0) {
+        size += 2 + pb::CodedOutputStream.ComputeInt32Size(RpcId);
+      }
+      if (ActorId != 0L) {
+        size += 2 + pb::CodedOutputStream.ComputeInt64Size(ActorId);
+      }
+      if (UserId != 0L) {
+        size += 1 + pb::CodedOutputStream.ComputeInt64Size(UserId);
+      }
+      if (LowestPrice != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeInt32Size(LowestPrice);
+      }
+      if (bidingTulipCard_ != null) {
+        size += 1 + pb::CodedOutputStream.ComputeMessageSize(BidingTulipCard);
+      }
+      return size;
+    }
+
+    public void MergeFrom(pb::CodedInputStream input) {
+      userId_ = 0;
+      lowestPrice_ = 0;
+      if (bidingTulipCard_ != null) MessagePool.Instance.Recycle(bidingTulipCard_); bidingTulipCard_ = null;
+      rpcId_ = 0;
+      actorId_ = 0;
+      uint tag;
+      while ((tag = input.ReadTag()) != 0) {
+        switch(tag) {
+          default:
+            input.SkipLastField();
+            break;
+          case 8: {
+            UserId = input.ReadInt64();
+            break;
+          }
+          case 16: {
+            LowestPrice = input.ReadInt32();
+            break;
+          }
+          case 26: {
+            if (bidingTulipCard_ == null) {
+              bidingTulipCard_ = new global::ETModel.TulipCard();
+            }
+            input.ReadMessage(bidingTulipCard_);
+            break;
+          }
+          case 720: {
+            RpcId = input.ReadInt32();
+            break;
+          }
+          case 744: {
+            ActorId = input.ReadInt64();
+            break;
+          }
+        }
+      }
+    }
+
+  }
+
+  /// <summary>
+  ///返回给房间金钱
+  /// </summary>
+  public partial class Actor_NotifyRoomBid : pb::IMessage {
+    private static readonly pb::MessageParser<Actor_NotifyRoomBid> _parser = new pb::MessageParser<Actor_NotifyRoomBid>(() => (Actor_NotifyRoomBid)MessagePool.Instance.Fetch(typeof(Actor_NotifyRoomBid)));
+    public static pb::MessageParser<Actor_NotifyRoomBid> Parser { get { return _parser; } }
+
+    private int rpcId_;
+    public int RpcId {
+      get { return rpcId_; }
+      set {
+        rpcId_ = value;
+      }
+    }
+
+    private long actorId_;
+    public long ActorId {
+      get { return actorId_; }
+      set {
+        actorId_ = value;
+      }
+    }
+
+    private int price_;
+    public int Price {
+      get { return price_; }
+      set {
+        price_ = value;
+      }
+    }
+
+    public void WriteTo(pb::CodedOutputStream output) {
+      if (Price != 0) {
+        output.WriteRawTag(8);
+        output.WriteInt32(Price);
+      }
+      if (RpcId != 0) {
+        output.WriteRawTag(208, 5);
+        output.WriteInt32(RpcId);
+      }
+      if (ActorId != 0L) {
+        output.WriteRawTag(232, 5);
+        output.WriteInt64(ActorId);
+      }
+    }
+
+    public int CalculateSize() {
+      int size = 0;
+      if (RpcId != 0) {
+        size += 2 + pb::CodedOutputStream.ComputeInt32Size(RpcId);
+      }
+      if (ActorId != 0L) {
+        size += 2 + pb::CodedOutputStream.ComputeInt64Size(ActorId);
+      }
+      if (Price != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeInt32Size(Price);
+      }
+      return size;
+    }
+
+    public void MergeFrom(pb::CodedInputStream input) {
+      price_ = 0;
+      rpcId_ = 0;
+      actorId_ = 0;
+      uint tag;
+      while ((tag = input.ReadTag()) != 0) {
+        switch(tag) {
+          default:
+            input.SkipLastField();
+            break;
+          case 8: {
+            Price = input.ReadInt32();
+            break;
+          }
+          case 720: {
+            RpcId = input.ReadInt32();
+            break;
+          }
+          case 744: {
+            ActorId = input.ReadInt64();
+            break;
+          }
+        }
+      }
+    }
+
+  }
+
+  /// <summary>
+  ///同步金钱
+  /// </summary>
+  public partial class Actor_GetMoney_Ntt : pb::IMessage {
+    private static readonly pb::MessageParser<Actor_GetMoney_Ntt> _parser = new pb::MessageParser<Actor_GetMoney_Ntt>(() => (Actor_GetMoney_Ntt)MessagePool.Instance.Fetch(typeof(Actor_GetMoney_Ntt)));
+    public static pb::MessageParser<Actor_GetMoney_Ntt> Parser { get { return _parser; } }
+
+    private int rpcId_;
+    public int RpcId {
+      get { return rpcId_; }
+      set {
+        rpcId_ = value;
+      }
+    }
+
+    private long actorId_;
+    public long ActorId {
+      get { return actorId_; }
+      set {
+        actorId_ = value;
+      }
+    }
+
+    private int money_;
+    public int Money {
+      get { return money_; }
+      set {
+        money_ = value;
+      }
+    }
+
+    public void WriteTo(pb::CodedOutputStream output) {
+      if (Money != 0) {
+        output.WriteRawTag(8);
+        output.WriteInt32(Money);
+      }
+      if (RpcId != 0) {
+        output.WriteRawTag(208, 5);
+        output.WriteInt32(RpcId);
+      }
+      if (ActorId != 0L) {
+        output.WriteRawTag(232, 5);
+        output.WriteInt64(ActorId);
+      }
+    }
+
+    public int CalculateSize() {
+      int size = 0;
+      if (RpcId != 0) {
+        size += 2 + pb::CodedOutputStream.ComputeInt32Size(RpcId);
+      }
+      if (ActorId != 0L) {
+        size += 2 + pb::CodedOutputStream.ComputeInt64Size(ActorId);
+      }
+      if (Money != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeInt32Size(Money);
+      }
+      return size;
+    }
+
+    public void MergeFrom(pb::CodedInputStream input) {
+      money_ = 0;
+      rpcId_ = 0;
+      actorId_ = 0;
+      uint tag;
+      while ((tag = input.ReadTag()) != 0) {
+        switch(tag) {
+          default:
+            input.SkipLastField();
+            break;
+          case 8: {
+            Money = input.ReadInt32();
+            break;
+          }
+          case 720: {
+            RpcId = input.ReadInt32();
+            break;
+          }
+          case 744: {
+            ActorId = input.ReadInt64();
+            break;
+          }
+        }
+      }
+    }
+
+  }
+
+  /// <summary>
+  ///同步市场郁金香卡牌
+  /// </summary>
+  public partial class Actor_GetTulip_Ntt : pb::IMessage {
+    private static readonly pb::MessageParser<Actor_GetTulip_Ntt> _parser = new pb::MessageParser<Actor_GetTulip_Ntt>(() => (Actor_GetTulip_Ntt)MessagePool.Instance.Fetch(typeof(Actor_GetTulip_Ntt)));
+    public static pb::MessageParser<Actor_GetTulip_Ntt> Parser { get { return _parser; } }
+
+    private int rpcId_;
+    public int RpcId {
+      get { return rpcId_; }
+      set {
+        rpcId_ = value;
+      }
+    }
+
+    private long actorId_;
+    public long ActorId {
+      get { return actorId_; }
+      set {
+        actorId_ = value;
+      }
+    }
+
+    private static readonly pb::FieldCodec<global::ETModel.TulipCard> _repeated_futureTulipCards_codec
+        = pb::FieldCodec.ForMessage(10, global::ETModel.TulipCard.Parser);
+    private pbc::RepeatedField<global::ETModel.TulipCard> futureTulipCards_ = new pbc::RepeatedField<global::ETModel.TulipCard>();
+    public pbc::RepeatedField<global::ETModel.TulipCard> FutureTulipCards {
+      get { return futureTulipCards_; }
+      set { futureTulipCards_ = value; }
+    }
+
+    private static readonly pb::FieldCodec<global::ETModel.TulipCard> _repeated_cashTulipCards_codec
+        = pb::FieldCodec.ForMessage(18, global::ETModel.TulipCard.Parser);
+    private pbc::RepeatedField<global::ETModel.TulipCard> cashTulipCards_ = new pbc::RepeatedField<global::ETModel.TulipCard>();
+    public pbc::RepeatedField<global::ETModel.TulipCard> CashTulipCards {
+      get { return cashTulipCards_; }
+      set { cashTulipCards_ = value; }
+    }
+
+    private static readonly pb::FieldCodec<global::ETModel.TulipCard> _repeated_selledTulipCards_codec
+        = pb::FieldCodec.ForMessage(26, global::ETModel.TulipCard.Parser);
+    private pbc::RepeatedField<global::ETModel.TulipCard> selledTulipCards_ = new pbc::RepeatedField<global::ETModel.TulipCard>();
+    public pbc::RepeatedField<global::ETModel.TulipCard> SelledTulipCards {
+      get { return selledTulipCards_; }
+      set { selledTulipCards_ = value; }
+    }
+
+    public void WriteTo(pb::CodedOutputStream output) {
+      futureTulipCards_.WriteTo(output, _repeated_futureTulipCards_codec);
+      cashTulipCards_.WriteTo(output, _repeated_cashTulipCards_codec);
+      selledTulipCards_.WriteTo(output, _repeated_selledTulipCards_codec);
+      if (RpcId != 0) {
+        output.WriteRawTag(208, 5);
+        output.WriteInt32(RpcId);
+      }
+      if (ActorId != 0L) {
+        output.WriteRawTag(232, 5);
+        output.WriteInt64(ActorId);
+      }
+    }
+
+    public int CalculateSize() {
+      int size = 0;
+      if (RpcId != 0) {
+        size += 2 + pb::CodedOutputStream.ComputeInt32Size(RpcId);
+      }
+      if (ActorId != 0L) {
+        size += 2 + pb::CodedOutputStream.ComputeInt64Size(ActorId);
+      }
+      size += futureTulipCards_.CalculateSize(_repeated_futureTulipCards_codec);
+      size += cashTulipCards_.CalculateSize(_repeated_cashTulipCards_codec);
+      size += selledTulipCards_.CalculateSize(_repeated_selledTulipCards_codec);
+      return size;
+    }
+
+    public void MergeFrom(pb::CodedInputStream input) {
+      for (int i = 0; i < futureTulipCards_.Count; i++) { MessagePool.Instance.Recycle(futureTulipCards_[i]); }
+      futureTulipCards_.Clear();
+      for (int i = 0; i < cashTulipCards_.Count; i++) { MessagePool.Instance.Recycle(cashTulipCards_[i]); }
+      cashTulipCards_.Clear();
+      for (int i = 0; i < selledTulipCards_.Count; i++) { MessagePool.Instance.Recycle(selledTulipCards_[i]); }
+      selledTulipCards_.Clear();
+      rpcId_ = 0;
+      actorId_ = 0;
+      uint tag;
+      while ((tag = input.ReadTag()) != 0) {
+        switch(tag) {
+          default:
+            input.SkipLastField();
+            break;
+          case 10: {
+            futureTulipCards_.AddEntriesFrom(input, _repeated_futureTulipCards_codec);
+            break;
+          }
+          case 18: {
+            cashTulipCards_.AddEntriesFrom(input, _repeated_cashTulipCards_codec);
+            break;
+          }
+          case 26: {
+            selledTulipCards_.AddEntriesFrom(input, _repeated_selledTulipCards_codec);
+            break;
+          }
+          case 720: {
+            RpcId = input.ReadInt32();
+            break;
+          }
+          case 744: {
+            ActorId = input.ReadInt64();
+            break;
+          }
+        }
+      }
+    }
+
+  }
+
+  /// <summary>
+  ///同步客户端的用户预定郁金香的情况
+  /// </summary>
+  public partial class Actor_GetTulipReserve_Ntt : pb::IMessage {
+    private static readonly pb::MessageParser<Actor_GetTulipReserve_Ntt> _parser = new pb::MessageParser<Actor_GetTulipReserve_Ntt>(() => (Actor_GetTulipReserve_Ntt)MessagePool.Instance.Fetch(typeof(Actor_GetTulipReserve_Ntt)));
+    public static pb::MessageParser<Actor_GetTulipReserve_Ntt> Parser { get { return _parser; } }
+
+    private int rpcId_;
+    public int RpcId {
+      get { return rpcId_; }
+      set {
+        rpcId_ = value;
+      }
+    }
+
+    private long actorId_;
+    public long ActorId {
+      get { return actorId_; }
+      set {
+        actorId_ = value;
+      }
+    }
+
+    private static readonly pb::FieldCodec<global::ETModel.GamerReserveTulip> _repeated_reserveTulipCards_codec
+        = pb::FieldCodec.ForMessage(754, global::ETModel.GamerReserveTulip.Parser);
+    private pbc::RepeatedField<global::ETModel.GamerReserveTulip> reserveTulipCards_ = new pbc::RepeatedField<global::ETModel.GamerReserveTulip>();
+    public pbc::RepeatedField<global::ETModel.GamerReserveTulip> ReserveTulipCards {
+      get { return reserveTulipCards_; }
+      set { reserveTulipCards_ = value; }
+    }
+
+    public void WriteTo(pb::CodedOutputStream output) {
+      if (RpcId != 0) {
+        output.WriteRawTag(208, 5);
+        output.WriteInt32(RpcId);
+      }
+      if (ActorId != 0L) {
+        output.WriteRawTag(232, 5);
+        output.WriteInt64(ActorId);
+      }
+      reserveTulipCards_.WriteTo(output, _repeated_reserveTulipCards_codec);
+    }
+
+    public int CalculateSize() {
+      int size = 0;
+      if (RpcId != 0) {
+        size += 2 + pb::CodedOutputStream.ComputeInt32Size(RpcId);
+      }
+      if (ActorId != 0L) {
+        size += 2 + pb::CodedOutputStream.ComputeInt64Size(ActorId);
+      }
+      size += reserveTulipCards_.CalculateSize(_repeated_reserveTulipCards_codec);
+      return size;
+    }
+
+    public void MergeFrom(pb::CodedInputStream input) {
+      rpcId_ = 0;
+      actorId_ = 0;
+      for (int i = 0; i < reserveTulipCards_.Count; i++) { MessagePool.Instance.Recycle(reserveTulipCards_[i]); }
+      reserveTulipCards_.Clear();
+      uint tag;
+      while ((tag = input.ReadTag()) != 0) {
+        switch(tag) {
+          default:
+            input.SkipLastField();
+            break;
+          case 720: {
+            RpcId = input.ReadInt32();
+            break;
+          }
+          case 744: {
+            ActorId = input.ReadInt64();
+            break;
+          }
+          case 754: {
+            reserveTulipCards_.AddEntriesFrom(input, _repeated_reserveTulipCards_codec);
+            break;
+          }
+        }
+      }
+    }
+
+  }
+
+  public partial class GamerReserveTulip : pb::IMessage {
+    private static readonly pb::MessageParser<GamerReserveTulip> _parser = new pb::MessageParser<GamerReserveTulip>(() => (GamerReserveTulip)MessagePool.Instance.Fetch(typeof(GamerReserveTulip)));
+    public static pb::MessageParser<GamerReserveTulip> Parser { get { return _parser; } }
+
+    private static readonly pb::FieldCodec<long> _repeated_userId_codec
+        = pb::FieldCodec.ForInt64(10);
+    private pbc::RepeatedField<long> userId_ = new pbc::RepeatedField<long>();
+    public pbc::RepeatedField<long> UserId {
+      get { return userId_; }
+      set { userId_ = value; }
+    }
+
+    private global::ETModel.TulipCard reserveTulipCard_;
+    public global::ETModel.TulipCard ReserveTulipCard {
+      get { return reserveTulipCard_; }
+      set {
+        reserveTulipCard_ = value;
+      }
+    }
+
+    public void WriteTo(pb::CodedOutputStream output) {
+      userId_.WriteTo(output, _repeated_userId_codec);
+      if (reserveTulipCard_ != null) {
+        output.WriteRawTag(18);
+        output.WriteMessage(ReserveTulipCard);
+      }
+    }
+
+    public int CalculateSize() {
+      int size = 0;
+      size += userId_.CalculateSize(_repeated_userId_codec);
+      if (reserveTulipCard_ != null) {
+        size += 1 + pb::CodedOutputStream.ComputeMessageSize(ReserveTulipCard);
+      }
+      return size;
+    }
+
+    public void MergeFrom(pb::CodedInputStream input) {
+      userId_.Clear();
+      if (reserveTulipCard_ != null) MessagePool.Instance.Recycle(reserveTulipCard_); reserveTulipCard_ = null;
+      uint tag;
+      while ((tag = input.ReadTag()) != 0) {
+        switch(tag) {
+          default:
+            input.SkipLastField();
+            break;
+          case 10:
+          case 8: {
+            userId_.AddEntriesFrom(input, _repeated_userId_codec);
+            break;
+          }
+          case 18: {
+            if (reserveTulipCard_ == null) {
+              reserveTulipCard_ = new global::ETModel.TulipCard();
+            }
+            input.ReadMessage(reserveTulipCard_);
+            break;
+          }
+        }
+      }
+    }
+
+  }
+
+  /// <summary>
   ///发送给服务器预定的郁金香
   /// </summary>
   public partial class Actor_ReserveTulipCard_Ntt : pb::IMessage {

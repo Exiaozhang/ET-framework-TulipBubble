@@ -9,6 +9,8 @@ namespace ETModel
     {
         public CardBelongType BelongType;
 
+        public GameObject CardObj;
+
         public static TulipCard Create(int color, int level, int weight)
         {
             TulipCard tulipCard = new TulipCard();
@@ -100,7 +102,8 @@ namespace ETModel
         {
             string marketEvent = ((MarketEvent)this.EventType).ToString();
             string tulipColor = ((Color)this.TulipColor).ToString();
-            return marketEvent+tulipColor;
+            Log.Info(marketEvent + tulipColor);
+            return marketEvent + tulipColor;
         }
     }
 }

@@ -76,7 +76,6 @@ namespace ETModel
             UnityEngine.Object.Destroy(orderPlayer);
 
             base.Dispose();
-            Resources.UnloadAsset(spriteColor);
         }
     }
 }

@@ -1,6 +1,24 @@
 syntax = "proto3";
 package ETModel;
 
+//
+message Actor_GetHandCard_Ntt // IActorMessage
+{
+	int32 RpcId = 90;
+	int64 ActorId = 93;
+	repeated TulipCard HandCard = 1;
+	repeated TulipCard LoanCard = 2;
+	repeated int32 CardPrice = 3;
+}
+
+//通知玩家标志物数量
+message Actor_GetSignCount_Ntt // IActorMessage
+{
+	int32 RpcId = 90;
+	int64 ActorId = 93;
+	int32 SignCount = 1;
+}
+
 //通知房间付款方式
 message Actor_NotifyRoomPayWay_Ntt // IActorMessage
 {
@@ -25,6 +43,7 @@ message Actor_NotifyPlayerBid // IActorMessage
 	int64 ActorId = 93;
 	int64 UserId = 1;
 	int32 LowestPrice = 2;
+	TulipCard BidingTulipCard = 3;
 }
 
 //返回给房间金钱

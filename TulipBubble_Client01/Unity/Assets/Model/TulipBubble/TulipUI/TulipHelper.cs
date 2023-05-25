@@ -1,4 +1,7 @@
-﻿namespace ETModel
+﻿using System.Collections.Generic;
+using Google.Protobuf.Collections;
+
+namespace ETModel
 {
     public class TulipHelper
     {
@@ -12,10 +15,10 @@
             Session sessionRealm = Game.Scene.GetComponent<NetOuterComponent>()
                 .Create(GlobalConfigComponent.Instance.GlobalProto.Address);
             A0002_Login_R2C messageRealm = (A0002_Login_R2C)await sessionRealm.Call(new A0002_Login_C2R()
-                { Account = account, Password = password });
+            { Account = account, Password = password });
             sessionRealm.Dispose();
             login.prompt.text = "Logining...";
-            
+
             //判断Realm服务器返回结果
             if (messageRealm.Error == ErrorCode.ERR_AccountOrPasswordError)
             {
@@ -26,7 +29,7 @@
                 return;
             }
             //判断通过则登录Realm成功
-            
+
             //创建网关 seesion
             Session sessionGate = Game.Scene.GetComponent<NetOuterComponent>().Create(messageRealm.GateAddress);
             if (SessionComponent.Instance == null)
@@ -40,8 +43,9 @@
                 SessionComponent.Instance.Session = sessionGate;
             }
 
-            A0003_LoginGate_G2C messageGate = (A0003_LoginGate_G2C)await sessionGate.Call(new A0003_LoginGate_C2G() {GateLoginKey = messageRealm.GateLoginKey});
-            
+            A0003_LoginGate_G2C messageGate = (A0003_LoginGate_G2C)await sessionGate.Call(new A0003_LoginGate_C2G()
+            { GateLoginKey = messageRealm.GateLoginKey });
+
             //判断登录Gate服务器返回结果
             if (messageGate.Error == ErrorCode.ERR_ConnectGateKeyError)
             {
@@ -57,27 +61,30 @@
             login.prompt.text = "";
             User user = ComponentFactory.Create<User, long>(messageGate.UserID);
             GamerComponent.Instance.MyUser = user;
-            
+
             Log.Debug($"{messageGate.UserID}|{user.UserID}");
-            
+
             Log.Debug("Login Success");
-            
+
             //加载透明界面 退出当前界面
             Game.EventSystem.Run(UIEventType.TulipLoginFinish);
-            
+
             //加载大厅界面
             Game.EventSystem.Run(UIEventType.TulipInitLobby);
         }
 
-        public static async ETVoid Register(string account,string password)
+        public static async ETVoid Register(string account, string password)
         {
-            Session session = Game.Scene.GetComponent<NetOuterComponent>().Create(GlobalConfigComponent.Instance.GlobalProto.Address);
+            Session session = Game.Scene.GetComponent<NetOuterComponent>()
+                .Create(GlobalConfigComponent.Instance.GlobalProto.Address);
             A0001_Register_R2C message = (A0001_Register_R2C)await session.Call(new A0001_Register_C2R()
             {
-                Account = account,Password = password
+                Account = account,
+                Password = password
             });
             session.Dispose();
-            TulipLoginComponent login = Game.Scene.GetComponent<UIComponent>().Get(TulipUIType.TulipLogin).GetComponent<TulipLoginComponent>();
+            TulipLoginComponent login = Game.Scene.GetComponent<UIComponent>().Get(TulipUIType.TulipLogin)
+                .GetComponent<TulipLoginComponent>();
             login.isRegistering = false;
 
             if (message.Error == ErrorCode.ERR_AccountAlreadyRegisted)
@@ -97,6 +104,16 @@
             }
 
             login.prompt.text = "注册成功";
+        }
+
+        public static List<T> RepeatedFieldToList<T>(RepeatedField<T> repeatedField)
+        {
+            List<T> a = new List<T>();
+            foreach (var b in repeatedField)
+            {
+                a.Add(b);
+            }
+            return a;
         }
 
     }

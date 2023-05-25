@@ -85,10 +85,12 @@ namespace ETHotfix
         public static void SetGamerBidTurn(this OrderControllerComponent self, Int64 userId, Int32 price)
         {
             Room room = self.GetParent<Room>();
+
             room.Broadcast(new Actor_NotifyPlayerBid()
             {
                 UserId = userId,
-                LowestPrice = price
+                LowestPrice = price,
+                BidingTulipCard = room.GetComponent<BidControllerComponent>().reserveTulip.ReserveTulipCard
             });
         }
 

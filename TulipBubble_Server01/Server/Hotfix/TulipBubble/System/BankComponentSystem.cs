@@ -1,4 +1,7 @@
+using System;
+using System.Reflection.Metadata;
 using ETHotfix;
+using Google.Protobuf.Collections;
 
 namespace ETModel
 {
@@ -19,10 +22,13 @@ namespace ETModel
         public static void PayMoneyToBank(this BankComponent self, Gamer gamer, int payWay)
         {
             MoneyComponent moneyComponent = gamer.GetComponent<MoneyComponent>();
+            ReserveSignComponent reserveSignComponent = gamer.GetComponent<ReserveSignComponent>();
             Room room = self.GetParent<Room>();
             BidControllerComponent bidControllerComponent = room.GetComponent<BidControllerComponent>();
             HandCardsComponent handCardsComponent = gamer.GetComponent<HandCardsComponent>();
             RoomTulipCardsComponent roomTulipCardsComponent = room.GetComponent<RoomTulipCardsComponent>();
+            ActorMessageSenderComponent actorMessageSenderComponent = Game.Scene.GetComponent<ActorMessageSenderComponent>();
+            ActorMessageSender actorMessageSender = actorMessageSenderComponent.Get(gamer.CActorID);
 
             if ((PayWay)payWay == PayWay.Cash)
             {
@@ -36,6 +42,22 @@ namespace ETModel
                 handCardsComponent.AddCard(bidControllerComponent.reserveTulip.ReserveTulipCard);
                 roomTulipCardsComponent.reservedTulipCards.Remove(bidControllerComponent.reserveTulip);
                 Log.Info($"{gamer.UserID} Left Money {moneyComponent.money}");
+
+                RepeatedField<TulipCard> loanCards = new RepeatedField<TulipCard>();
+                RepeatedField<int> cardsPrice = new RepeatedField<Int32>();
+
+                foreach (var reservedTulipCards in handCardsComponent.loanTulipLibrary)
+                {
+                    loanCards.Add(reservedTulipCards.Key);
+                    cardsPrice.Add(reservedTulipCards.Value);
+                }
+
+                actorMessageSender.Send(new Actor_GetHandCard_Ntt()
+                {
+                    HandCard = MapHelper.To.RepeatedField(handCardsComponent.tulipLibrary),
+                    LoanCard = loanCards,
+                    CardPrice = cardsPrice
+                });
                 bidControllerComponent.StartBid();
                 return;
 
@@ -44,6 +66,22 @@ namespace ETModel
             if ((PayWay)payWay == PayWay.Loans)
             {
                 handCardsComponent.AddLoanCard(bidControllerComponent.reserveTulip.ReserveTulipCard, bidControllerComponent.Price);
+                reserveSignComponent.RemoveOneSign();
+                RepeatedField<TulipCard> loanCards = new RepeatedField<TulipCard>();
+                RepeatedField<int> cardsPrice = new RepeatedField<Int32>();
+
+                foreach (var reservedTulipCards in handCardsComponent.loanTulipLibrary)
+                {
+                    loanCards.Add(reservedTulipCards.Key);
+                    cardsPrice.Add(reservedTulipCards.Value);
+                }
+
+                actorMessageSender.Send(new Actor_GetHandCard_Ntt()
+                {
+                    HandCard = MapHelper.To.RepeatedField(handCardsComponent.tulipLibrary),
+                    LoanCard = loanCards,
+                    CardPrice = cardsPrice
+                });
                 bidControllerComponent.StartBid();
                 return;
             }

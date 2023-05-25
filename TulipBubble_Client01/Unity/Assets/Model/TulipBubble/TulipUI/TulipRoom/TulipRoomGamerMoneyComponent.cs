@@ -1,7 +1,7 @@
 ﻿namespace ETModel
 {
-    public class TulipRoomGamerMoneyComponent
+    public class TulipRoomGamerMoneyComponent : Component
     {
-        
+        public int Money;
     }
 }

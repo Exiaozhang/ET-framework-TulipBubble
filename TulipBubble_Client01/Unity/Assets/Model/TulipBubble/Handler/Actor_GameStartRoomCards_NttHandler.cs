@@ -12,20 +12,23 @@ namespace ETModel
             TulipRoomComponent room = uiRoom.GetComponent<TulipRoomComponent>();
             TulipRoomTulipCardsComponent tulipRoomTulipCardsComponent = uiRoom.GetComponent<TulipRoomTulipCardsComponent>();
 
-            
+
             //取消显示开始按钮
             GameObject startButton = uiRoom.GameObject.Get<GameObject>("StartGame");
             startButton.SetActive(false);
 
+            GameObject matchPrompt = uiRoom.GameObject.Get<GameObject>("MatchPrompt");
+            matchPrompt.SetActive(false);
+
             //添加进货卡牌
-            tulipRoomTulipCardsComponent.AddTulipCards(message.FutureTulipCards.ToArray(),TulipMarkType.future);
+            tulipRoomTulipCardsComponent.AddTulipCards(message.FutureTulipCards.ToArray(), TulipMarkType.future);
             //添加现货卡牌
-            tulipRoomTulipCardsComponent.AddTulipCards(message.CashTulipCards.ToArray(),TulipMarkType.cash);
-            
+            tulipRoomTulipCardsComponent.AddTulipCards(message.CashTulipCards.ToArray(), TulipMarkType.cash);
+
             //玩家面板提示开始游戏
             TulipRoomGamerPanelComponent tulipRoomGamerPanelComponent = TulipRoomComponent.LocalGamer.GetComponent<TulipRoomGamerPanelComponent>();
             tulipRoomGamerPanelComponent.SetGameStart();
-            
+
         }
     }
 }

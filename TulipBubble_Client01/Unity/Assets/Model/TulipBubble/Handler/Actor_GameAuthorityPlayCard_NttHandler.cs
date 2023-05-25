@@ -8,11 +8,11 @@
             UI ui = Game.Scene.GetComponent<UIComponent>().Get(TulipUIType.TulipRoom);
             TulipRoomComponent room = ui.GetComponent<TulipRoomComponent>();
             TulipRoomGamerPanelComponent playerPanel = TulipRoomComponent.LocalGamer.GetComponent<TulipRoomGamerPanelComponent>();
-            
+
             TulipRoomGameComponent roomGame = ui.GetComponent<TulipRoomGameComponent>();
             roomGame.currentTurnUserId = message.UserID;
             roomGame.stage = (GameStage)message.Stage;
-            
+
             if (room.IsLocalGame(message.UserID))
             {
                 playerPanel.SetMyTurn();

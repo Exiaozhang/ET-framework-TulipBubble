@@ -10,6 +10,7 @@ namespace ETModel
         public override void Awake(TulipRoomComponent self)
         {
             self.Awake();
+        
         }
     }
 
@@ -90,6 +91,9 @@ namespace ETModel
 
             LocalGamer = gamer;
             gamer.AddComponent<TulipRoomGamerPanelComponent>().SetPanel(LocalGamerPanel);
+            gamer.AddComponent<TulipRoomGamerMoneyComponent>();
+            gamer.AddComponent<TulipRoomGamerReserveSignObjComponent>();
+            gamer.AddComponent<TulipRoomGamerHandCardComponent>();
         }
 
         public void AddGamer(Gamer gamer, int index)

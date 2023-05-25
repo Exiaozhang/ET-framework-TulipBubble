@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using UnityEngine.UI;
 using UnityEngine;
 
@@ -37,6 +38,7 @@ namespace ETModel
             ResourcesComponent resourcesComponent = Game.Scene.GetComponent<ResourcesComponent>();
             resourcesComponent.LoadBundle($"{CardHelper.TULIPATLAS}.unity3d");
             resourcesComponent.LoadBundle($"{CardHelper.TULIPCARD}.unity3d");
+            resourcesComponent.LoadBundle($"SignObject.unity3d");
         }
 
         public override void Dispose()
@@ -53,9 +55,9 @@ namespace ETModel
 
         public CardBelongType GetBelongType(TulipCard card)
         {
-            if (futureTulipCards.Exists((tulipCard) => System.Object.ReferenceEquals(tulipCard,card)))
+            if (futureTulipCards.Exists((tulipCard) => System.Object.ReferenceEquals(tulipCard, card)))
                 return CardBelongType.Market;
-            
+
             return CardBelongType.Error;
         }
 
@@ -119,6 +121,26 @@ namespace ETModel
             }
         }
 
+
+        public void ClearTulipCards(TulipMarkType type)
+        {
+            switch (type)
+            {
+                case TulipMarkType.future:
+                    futureTulipCards.ForEach(_ => { UnityEngine.Object.Destroy(_.CardObj); });
+                    futureTulipCards.Clear();
+                    break;
+                case TulipMarkType.cash:
+                    cashTulipCards.ForEach(_ => { UnityEngine.Object.Destroy(_.CardObj); });
+                    cashTulipCards.Clear();
+                    break;
+                case TulipMarkType.selled:
+                    selledTulipCards.ForEach(_ => { UnityEngine.Object.Destroy(_.CardObj); });
+                    selledTulipCards.Clear();
+                    break;
+            }
+        }
+
         /// <summary>
         /// 购买郁金香后更新市场区域
         /// </summary>
@@ -127,6 +149,92 @@ namespace ETModel
         {
         }
 
+        public void ClearSignObj()
+        {
+            cashTulipCards.ForEach(tulip =>
+            {
+                if (tulip.CardObj.transform.Find("SignObject").transform.childCount == 0)
+                    return;
+                foreach (Transform transform in tulip.CardObj.transform.Find("SignObject").transform)
+                {
+                    UnityEngine.Object.Destroy(transform.gameObject);
+                }
+            });
+            selledTulipCards.ForEach(tulip =>
+            {
+                if (tulip.CardObj.transform.Find("SignObject").transform.childCount == 0)
+                    return;
+                foreach (Transform transform in tulip.CardObj.transform.Find("SignObject").transform)
+                {
+                    UnityEngine.Object.Destroy(transform.gameObject);
+                }
+            });
+        }
+
+        public void UpdateSignObj(List<GamerReserveTulip> gamerReserveTulips)
+        {
+            ClearSignObj();
+
+            gamerReserveTulips.ForEach(reserveTulips =>
+            {
+                TulipCard findCardWithId = FindCardWithId(reserveTulips.ReserveTulipCard.Id);
+
+                if (findCardWithId == null)
+                    return;
+
+                foreach (long id in reserveTulips.UserId)
+                {
+                    PutSignObjToTulipCard(id, findCardWithId);
+                }
+            });
+        }
+
+        public void PutSignObjToTulipCard(Int64 userId, TulipCard tulipCard)
+        {
+            TulipRoomGameComponent tulipRoomGameComponent = this.GetParent<UI>().GetComponent<TulipRoomGameComponent>();
+            string userColor = tulipRoomGameComponent.GetUserColor(userId);
+
+            Sprite sprite = Resources.Load<Sprite>($"Player_{userColor}");
+            ResourcesComponent resourcesComponent = Game.Scene.GetComponent<ResourcesComponent>();
+            GameObject preSignObj = (GameObject)resourcesComponent.GetAsset($"SignObject.unity3d", "SignObject");
+            GameObject signObj =
+                UnityEngine.Object.Instantiate(preSignObj, tulipCard.CardObj.transform.Find("SignObject"), false);
+            signObj.transform.localScale = new Vector3(1, 1, 1);
+            signObj.transform.localPosition = Vector3.zero;
+            signObj.GetComponent<Image>().sprite = sprite;
+        }
+
+        private TulipCard FindCardWithId(Int64 Id)
+        {
+            var tulipCard = cashTulipCards.Find(card =>
+            {
+                if (card.Id == Id)
+                    return true;
+                return false;
+            });
+            if (tulipCard != null)
+                return tulipCard;
+
+            tulipCard = selledTulipCards.Find(card =>
+            {
+                if (card.Id == Id)
+                    return true;
+                return false;
+            });
+            if (tulipCard != null)
+                return tulipCard;
+
+            tulipCard = futureTulipCards.Find(card =>
+            {
+                if (card.Id == Id)
+                    return true;
+                return false;
+            });
+            if (tulipCard != null)
+                return tulipCard;
+
+            return null;
+        }
 
         private void AddCard(TulipCard card, TulipMarkType type)
         {
@@ -140,16 +248,22 @@ namespace ETModel
                     MarketCardSprite marketCardSprite = tulipCard.AddComponent<MarketCardSprite>();
                     marketCardSprite.card = card;
                     marketCardSprite.isFurtueCard = true;
+                    card.CardObj = tulipCard;
+                    futureTulipCards.Add(card);
                     break;
                 case TulipMarkType.cash:
                     tulipCard = CardHelper.CreateCardObj(CardHelper.TULIPCARD, card.GetName(), _cash.transform,
                         CardType.TulipCard);
                     tulipCard.AddComponent<MarketCardSprite>().card = card;
+                    card.CardObj = tulipCard;
+                    cashTulipCards.Add(card);
                     break;
                 case TulipMarkType.selled:
                     tulipCard = CardHelper.CreateCardObj(CardHelper.TULIPCARD, card.GetName(), _selled.transform,
                         CardType.TulipCard);
                     tulipCard.AddComponent<MarketCardSprite>().card = card;
+                    card.CardObj = tulipCard;
+                    selledTulipCards.Add(card);
                     break;
             }
         }

@@ -52,6 +52,11 @@ namespace ETHotfix
                 {
                     gamer.AddComponent<MoneyComponent>();
                 }
+
+                if (gamer.GetComponent<ReserveSignComponent>() == null)
+                {
+                    gamer.AddComponent<ReserveSignComponent>();
+                }
             }
 
             //洗牌发牌
@@ -108,6 +113,11 @@ namespace ETHotfix
                 actorProxy.Send(new Actor_GetMoney_Ntt()
                 {
                     Money = gamer.GetComponent<MoneyComponent>().money
+                });
+
+                actorProxy.Send(new Actor_GetSignCount_Ntt()
+                {
+                    SignCount = gamer.GetComponent<ReserveSignComponent>().count
                 });
 
                 //移除发出去的牌

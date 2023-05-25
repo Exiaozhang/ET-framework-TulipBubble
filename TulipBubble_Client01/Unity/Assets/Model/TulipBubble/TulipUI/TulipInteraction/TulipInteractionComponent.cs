@@ -32,7 +32,6 @@ namespace ETModel
             //加载AB包
             ResourcesComponent resourcesComponent = Game.Scene.GetComponent<ResourcesComponent>();
             resourcesComponent.LoadBundle($"{CardHelper.CARDDETIALWINDOW}.unity3d");
-            resourcesComponent.LoadBundle($"SignObject.unity3d");
 
             ReferenceCollector referenceCollector = this.GetParent<UI>().GameObject.GetComponent<ReferenceCollector>();
             sell = referenceCollector.Get<GameObject>("Sell");
@@ -64,13 +63,13 @@ namespace ETModel
                 TulipCard card = this.selectedCard as TulipCard;
                 if (card == null || card.BelongType != CardBelongType.Market)
                     return;
-                Sprite sprite = Resources.Load<Sprite>($"Player_{TulipRoomGameComponent.localPlayerColor}");
-                ResourcesComponent resourcesComponent = Game.Scene.GetComponent<ResourcesComponent>();
-                GameObject preSignObj = (GameObject)resourcesComponent.GetAsset($"SignObject.unity3d", "SignObject");
-                GameObject signObj = UnityEngine.Object.Instantiate(preSignObj, selectedCardObj.transform.Find("SignObject"), false);
-                signObj.transform.localScale = new Vector3(1, 1, 1);
-                signObj.transform.position = Vector3.zero;
-                signObj.GetComponent<Image>().sprite = sprite;
+
+                TulipRoomTulipCardsComponent tulipRoomTulipCardsComponent =
+                    Game.Scene.GetComponent<UIComponent>().Get(TulipUIType.TulipRoom)
+                        .GetComponent<TulipRoomTulipCardsComponent>();
+
+                tulipRoomTulipCardsComponent.PutSignObjToTulipCard(TulipRoomComponent.LocalGamer.UserID, card);
+
                 reserve.SetActive(false);
 
                 SessionComponent.Instance.Session.Send(new Actor_ReserveTulipCard_Ntt()

@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 using UnityEngine.UI;
 
 namespace ETModel
@@ -40,6 +41,8 @@ namespace ETModel
                 case CardType.EventCard:
                     atlas = (GameObject)ETModel.Game.Scene.GetComponent<ResourcesComponent>()
                         .GetAsset($"{EVENTATLAS}.unity3d", EVENTATLAS);
+                    if (cardName.Contains("DropSuddenly"))
+                        return atlas.Get<Sprite>("DropSuddenlyWhite");
                     return atlas.Get<Sprite>(cardName);
             }
 
@@ -90,5 +93,7 @@ namespace ETModel
 
             return cardSprite;
         }
+
+   
     }
 }

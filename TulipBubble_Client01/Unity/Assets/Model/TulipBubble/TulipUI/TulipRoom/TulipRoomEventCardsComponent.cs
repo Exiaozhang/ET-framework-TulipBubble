@@ -42,18 +42,18 @@ namespace ETModel
 
             GameObject card = CardHelper.CreateCardObj(CardHelper.COLLECTORCARD, eventCard.GetName(),
                 eventDiscardPile.transform, CardType.EventCard);
-            currentEventCardObj = card;
+            currentEventDiscardObj = card;
         }
 
         public void SetEventCardPile(int count)
         {
-            if (count == 0 && currentEventDiscardObj != null)
+            if (count == 0 && currentEventCardObj != null)
             {
-                UnityEngine.Object.Destroy(currentEventDiscardObj);
+                UnityEngine.Object.Destroy(currentEventCardObj);
                 return;
             }
 
-            if (currentEventDiscardObj != null)
+            if (currentEventCardObj != null)
             {
                 EventCardSprite eventCardSprite = currentEventCardObj.GetComponent<EventCardSprite>();
                 eventCardSprite.deckCount = count;
@@ -67,7 +67,7 @@ namespace ETModel
             eventCard.card = new EventCard();
             eventCard.deckCount = count;
 
-            currentEventDiscardObj = card;
+            currentEventCardObj = card;
         }
     }
 }

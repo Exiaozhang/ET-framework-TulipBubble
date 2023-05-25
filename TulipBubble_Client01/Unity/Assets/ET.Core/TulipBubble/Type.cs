@@ -101,4 +101,13 @@
         DropSuddenly,
         BubbleBurst
     }
+
+    /// <summary>
+    /// 付款方式
+    /// </summary>
+    public enum PayWay
+    {
+        Cash,
+        Loans
+    }
 }
