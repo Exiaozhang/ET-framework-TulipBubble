@@ -1,4 +1,6 @@
-﻿using ETModel;
+﻿using System;
+using System.Collections.Generic;
+using ETModel;
 
 namespace ETHotfix
 {
@@ -94,13 +96,126 @@ namespace ETHotfix
             return null;
         }
 
-
-        public static void ReserveTulipCard(this RoomTulipCardsComponent self, TulipCard tulipCard)
+        public static void ReserveTulipCard(this RoomTulipCardsComponent self, TulipCard tulipCard ,Gamer gamer)
         {
             TulipCard searchRoomTulipCard = self.SearchRoomTulipCard(tulipCard);
             if (searchRoomTulipCard == null)
                 return;
-            self.reservedTulipCards.Add(tulipCard);
+
+            GamerReserveTulip gamerReserveTulip = self.reservedTulipCards.Find(tulip =>
+            {
+                if (tulip.ReserveTulipCard.Id == tulipCard.Id)
+                    return true;
+                return false;
+            });
+
+            if (gamerReserveTulip != null)
+            {
+                gamerReserveTulip.UserId.Add(gamer.UserID);
+                return;
+            }
+
+            self.reservedTulipCards.Add(new GamerReserveTulip()
+            {
+                UserId = MapHelper.To.RepeatedField(new List<long>(){gamer.UserID}),
+                ReserveTulipCard = tulipCard
+            });
+        }
+
+        public static void PutTulipCardToDiscardPile(this RoomTulipCardsComponent self, List<TulipCard> tulipCards)
+        {
+            self.discardTulipCards.AddRange(tulipCards);
+            tulipCards.Clear();
+        }
+
+        public static int FindMostTulipColor(this RoomTulipCardsComponent self)
+        {
+            int redCount = 0;
+            int whiteCount = 0;
+            int yellowCount = 0;
+
+            self.futureTulipCards.ForEach((tulipCard) =>
+            {
+                if (tulipCard.TulipCardColor == (int)TulipColor.Red)
+                    redCount += 1;
+                else if (tulipCard.TulipCardColor == (int)TulipColor.White)
+                    whiteCount += 1;
+                else if (tulipCard.TulipCardColor == (int)TulipColor.Yellow)
+                    yellowCount += 1;
+            });
+
+            self.cashTulipCards.ForEach((tulipCard) =>
+            {
+                if (tulipCard.TulipCardColor == (int)TulipColor.Red)
+                    redCount += 1;
+                else if (tulipCard.TulipCardColor == (int)TulipColor.White)
+                    whiteCount += 1;
+                else if (tulipCard.TulipCardColor == (int)TulipColor.Yellow)
+                    yellowCount += 1;
+            });
+
+            self.selledTulipCards.ForEach((tulipCard) =>
+            {
+                if (tulipCard.TulipCardColor == (int)TulipColor.Red)
+                    redCount += 1;
+                else if (tulipCard.TulipCardColor == (int)TulipColor.White)
+                    whiteCount += 1;
+                else if (tulipCard.TulipCardColor == (int)TulipColor.Yellow)
+                    yellowCount += 1;
+            });
+
+            if (redCount >= whiteCount || redCount >= yellowCount)
+                return (int)TulipColor.Red;
+
+            if (whiteCount >= redCount || whiteCount >= yellowCount)
+                return (int)TulipColor.White;
+
+            return (int)TulipColor.Yellow;
+        }
+
+        public static int FindLeastTulipColor(this RoomTulipCardsComponent self)
+        {
+            int redCount = 0;
+            int whiteCount = 0;
+            int yellowCount = 0;
+
+            self.futureTulipCards.ForEach((tulipCard) =>
+            {
+                if (tulipCard.TulipCardColor == (int)TulipColor.Red)
+                    redCount += 1;
+                else if (tulipCard.TulipCardColor == (int)TulipColor.White)
+                    whiteCount += 1;
+                else if (tulipCard.TulipCardColor == (int)TulipColor.Yellow)
+                    yellowCount += 1;
+            });
+
+            self.cashTulipCards.ForEach((tulipCard) =>
+            {
+                if (tulipCard.TulipCardColor == (int)TulipColor.Red)
+                    redCount += 1;
+                else if (tulipCard.TulipCardColor == (int)TulipColor.White)
+                    whiteCount += 1;
+                else if (tulipCard.TulipCardColor == (int)TulipColor.Yellow)
+                    yellowCount += 1;
+            });
+
+            self.selledTulipCards.ForEach((tulipCard) =>
+            {
+                if (tulipCard.TulipCardColor == (int)TulipColor.Red)
+                    redCount += 1;
+                else if (tulipCard.TulipCardColor == (int)TulipColor.White)
+                    whiteCount += 1;
+                else if (tulipCard.TulipCardColor == (int)TulipColor.Yellow)
+                    yellowCount += 1;
+            });
+
+            if (redCount <= whiteCount || redCount <= yellowCount)
+                return (int)TulipColor.Red;
+
+            if (whiteCount <= redCount || whiteCount <= yellowCount)
+                return (int)TulipColor.White;
+
+            return (int)TulipColor.Yellow;
         }
     }
 }

@@ -53,6 +53,10 @@ namespace ETHotfix
             //添加开始郁金香泡沫需要的组件
             //牌库组件
             self.AddComponent<DeckComponent>();
+            //银行组件
+            self.AddComponent<BankComponent>();
+            //竞价组件
+            self.AddComponent<BidControllerComponent>();
             //房间郁金香牌组件
             self.AddComponent<RoomTulipCardsComponent>();
             //房间事件牌组件

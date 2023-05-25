@@ -22,7 +22,6 @@ namespace ETHotfix
             self.CreateCollectorDeck();
         }
 
-
         /// <summary>
         /// 郁金香牌库洗牌
         /// </summary>
@@ -121,6 +120,7 @@ namespace ETHotfix
         /// <returns></returns>
         public static TulipCard DealTulipCard(this DeckComponent self)
         {
+            Log.Info($"{self.TulipCardsCount - 1}");
             TulipCard tulipCard = self.tulipLibray[self.TulipCardsCount - 1];
             self.tulipLibray.Remove(tulipCard);
             //Log.Info(tulipCard.GetName());
@@ -201,6 +201,7 @@ namespace ETHotfix
         /// </summary>
         private static void CreateTulipDeck(this DeckComponent self)
         {
+            int cardNumber = 0;
             //创建普通郁金香
             for (int color = 0; color < 3; color++) //创建每种郁金香花色的牌
             {
@@ -210,7 +211,8 @@ namespace ETHotfix
                     {
                         for (int i = 0; i < 3; i++) //创建3个相同的郁金香牌
                         {
-                            TulipCard tulipCard = TulipCard.Create(color, level, weight);
+                            TulipCard tulipCard = TulipCard.Create(color, level, weight,cardNumber);
+                            cardNumber += 1;
                             self.tulipLibray.Add(tulipCard);
                         }
                     }
@@ -372,7 +374,7 @@ namespace ETHotfix
                     {
                         TulipCardLevel = (int)Level.X,
                         TulipCardWeight = (int)Weight.Y
-                    }, 10,"Scholar")
+                    }, 10, "Scholar")
             );
         }
     }

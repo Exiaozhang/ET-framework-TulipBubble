@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
 namespace ETModel
 {
@@ -9,7 +10,10 @@ namespace ETModel
     {
         //所有手牌
         public readonly List<TulipCard> tulipLibrary = new List<TulipCard>();
-        
+
+        //贷款购买的手牌
+        public readonly Dictionary<TulipCard, Int32> loanTulipLibrary = new Dictionary<TulipCard, int>();
+
         //手牌数
         public int tulipCardsCount => tulipLibrary.Count;
 

@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿
+using System.Collections.Generic;
 using ETModel;
 
 namespace ETHotfix
@@ -12,6 +13,7 @@ namespace ETHotfix
             Room room;
             if (Game.Scene.GetComponent<TulipMatchComponent>().Playing.TryGetValue(gamer.UserID, out room))
             {
+            
                 gamer.isOffline = true;
                 //玩家断开添加自动出牌组件
                 //...

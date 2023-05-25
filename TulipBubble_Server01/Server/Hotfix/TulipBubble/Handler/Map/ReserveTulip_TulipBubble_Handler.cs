@@ -11,11 +11,17 @@ namespace ETHotfix
             Room room = tulipMatchComponent.GetGamingRoom(gamer);
             OrderControllerComponent orderControllerComponent = room.GetComponent<OrderControllerComponent>();
             RoomTulipCardsComponent roomTulipCardsComponent = room.GetComponent<RoomTulipCardsComponent>();
-            
+
             if (gamer.UserID != orderControllerComponent.currentAuthority.UserID)
                 return;
 
-            roomTulipCardsComponent.ReserveTulipCard(message.ReserveTulipCard);
+            roomTulipCardsComponent.ReserveTulipCard(message.ReserveTulipCard, gamer);
+            
+            room.Broadcast(new Actor_GetTulipReserve_Ntt()
+            {
+                ReserveTulipCards = MapHelper.To.RepeatedField(roomTulipCardsComponent.reservedTulipCards)
+            });
+
             orderControllerComponent.NextGamerTurn();
         }
     }

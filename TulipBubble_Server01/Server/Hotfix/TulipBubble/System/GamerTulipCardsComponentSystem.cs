@@ -1,4 +1,5 @@
-﻿using ETModel;
+﻿using System;
+using ETModel;
 
 namespace ETHotfix
 {
@@ -22,8 +23,14 @@ namespace ETHotfix
         public static void AddCard(this HandCardsComponent self, TulipCard tulipCard)
         {
             self.tulipLibrary.Add(tulipCard);
+            Log.Info($"Add tulip card to {self.GetParent<Gamer>().UserID}");
         }
 
+        public static void AddLoanCard(this HandCardsComponent self, TulipCard tulipCard, Int32 price)
+        {
+            self.loanTulipLibrary.Add(tulipCard, price);
+            Log.Info($"Add loan tulip card to {self.GetParent<Gamer>().UserID}");
+        }
 
         /// <summary>
         /// 出售后将手牌移除
@@ -34,6 +41,6 @@ namespace ETHotfix
         {
             self.tulipLibrary.Remove(tulipCard);
         }
-        
+
     }
 }

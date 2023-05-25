@@ -20,10 +20,10 @@ namespace ETModel
         public int selledTulipCardsCount => selledTulipCards.Count;
         
         //预定的郁金香
-        public readonly List<TulipCard> reservedTulipCards = new List<TulipCard>();
+        public readonly List<GamerReserveTulip> reservedTulipCards = new List<GamerReserveTulip>();
 
-
-
+        //弃牌堆
+        public readonly List<TulipCard> discardTulipCards = new List<TulipCard>();
         public override void Dispose()
         {
             if (IsDisposed)

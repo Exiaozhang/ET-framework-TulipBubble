@@ -1,4 +1,5 @@
-﻿namespace ETModel
+﻿using System.Xml.Linq;
+namespace ETModel
 {
     /// <summary>
     /// 房间等级
@@ -53,7 +54,7 @@
     /// <summary>
     /// 郁金香花色
     /// </summary>
-    public enum Color
+    public enum TulipColor
     {
       White,
       Yellow,
@@ -90,6 +91,15 @@
         EventStage,
         SellStage,
         AuctionStage,
-        FinishStage
+        FinishStage,
+    }
+
+    /// <summary>
+    /// 付费方式
+    /// </summary>
+    public enum PayWay
+    {
+        Cash,
+        Loans
     }
 }

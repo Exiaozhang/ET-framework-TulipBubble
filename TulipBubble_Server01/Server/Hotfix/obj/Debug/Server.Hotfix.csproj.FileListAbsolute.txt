@@ -1,0 +1,13 @@
+D:\Backup\CsProject\ET-framwork-TulipBubble\TulipBubble_Server01\Bin\libkcp.dylib
+D:\Backup\CsProject\ET-framwork-TulipBubble\TulipBubble_Server01\Bin\libkcp.so
+D:\Backup\CsProject\ET-framwork-TulipBubble\TulipBubble_Server01\Bin\Hotfix.deps.json
+D:\Backup\CsProject\ET-framwork-TulipBubble\TulipBubble_Server01\Bin\Hotfix.dll
+D:\Backup\CsProject\ET-framwork-TulipBubble\TulipBubble_Server01\Bin\Hotfix.pdb
+D:\Backup\CsProject\ET-framwork-TulipBubble\TulipBubble_Server01\Server\Hotfix\obj\Debug\Server.Hotfix.csproj.AssemblyReference.cache
+D:\Backup\CsProject\ET-framwork-TulipBubble\TulipBubble_Server01\Server\Hotfix\obj\Debug\Server.Hotfix.GeneratedMSBuildEditorConfig.editorconfig
+D:\Backup\CsProject\ET-framwork-TulipBubble\TulipBubble_Server01\Server\Hotfix\obj\Debug\Server.Hotfix.AssemblyInfoInputs.cache
+D:\Backup\CsProject\ET-framwork-TulipBubble\TulipBubble_Server01\Server\Hotfix\obj\Debug\Server.Hotfix.AssemblyInfo.cs
+D:\Backup\CsProject\ET-framwork-TulipBubble\TulipBubble_Server01\Server\Hotfix\obj\Debug\Server.Hotfix.csproj.CoreCompileInputs.cache
+D:\Backup\CsProject\ET-framwork-TulipBubble\TulipBubble_Server01\Server\Hotfix\obj\Debug\Server.Hotfix.csproj.CopyComplete
+D:\Backup\CsProject\ET-framwork-TulipBubble\TulipBubble_Server01\Server\Hotfix\obj\Debug\Hotfix.dll
+D:\Backup\CsProject\ET-framwork-TulipBubble\TulipBubble_Server01\Server\Hotfix\obj\Debug\Hotfix.pdb

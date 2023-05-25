@@ -32,10 +32,6 @@ D:\Users\taikr008\Desktop\Landlords_Server01\Server\ThirdParty\MongoDBDriver\Mon
 D:\Users\taikr008\Desktop\Landlords_Server01\Server\ThirdParty\MongoDBDriver\MongoDB.Driver\obj\Debug\netcoreapp2.2\MongoDB.Driver.xml
 D:\Users\taikr008\Desktop\Landlords_Server01\Server\ThirdParty\MongoDBDriver\MongoDB.Driver\obj\Debug\netcoreapp2.2\MongoDB.Driver.pdb
 D:\Users\taikr008\Desktop\Landlords_Server01\Server\ThirdParty\MongoDBDriver\MongoDB.Driver\obj\Debug\netcoreapp2.2\MongoDB.Driver.csproj.CoreCompileInputs.cache
-D:\Backup\CsProject\ET-framwork-TulipBubble\TulipBubble_Server01\Bin\netcoreapp2.2\MongoDB.Driver.deps.json
-D:\Backup\CsProject\ET-framwork-TulipBubble\TulipBubble_Server01\Bin\netcoreapp2.2\MongoDB.Driver.dll
-D:\Backup\CsProject\ET-framwork-TulipBubble\TulipBubble_Server01\Bin\netcoreapp2.2\MongoDB.Driver.pdb
-D:\Backup\CsProject\ET-framwork-TulipBubble\TulipBubble_Server01\Bin\netcoreapp2.2\MongoDB.Driver.xml
 D:\Backup\CsProject\ET-framwork-TulipBubble\TulipBubble_Server01\Server\ThirdParty\MongoDBDriver\MongoDB.Driver\obj\Debug\netcoreapp2.2\MongoDB.Driver.csproj.AssemblyReference.cache
 D:\Backup\CsProject\ET-framwork-TulipBubble\TulipBubble_Server01\Server\ThirdParty\MongoDBDriver\MongoDB.Driver\obj\Debug\netcoreapp2.2\MongoDB.Driver.GeneratedMSBuildEditorConfig.editorconfig
 D:\Backup\CsProject\ET-framwork-TulipBubble\TulipBubble_Server01\Server\ThirdParty\MongoDBDriver\MongoDB.Driver\obj\Debug\netcoreapp2.2\MongoDB.Driver.AssemblyInfoInputs.cache
@@ -45,3 +41,7 @@ D:\Backup\CsProject\ET-framwork-TulipBubble\TulipBubble_Server01\Server\ThirdPar
 D:\Backup\CsProject\ET-framwork-TulipBubble\TulipBubble_Server01\Server\ThirdParty\MongoDBDriver\MongoDB.Driver\obj\Debug\netcoreapp2.2\MongoDB.Driver.dll
 D:\Backup\CsProject\ET-framwork-TulipBubble\TulipBubble_Server01\Server\ThirdParty\MongoDBDriver\MongoDB.Driver\obj\Debug\netcoreapp2.2\MongoDB.Driver.xml
 D:\Backup\CsProject\ET-framwork-TulipBubble\TulipBubble_Server01\Server\ThirdParty\MongoDBDriver\MongoDB.Driver\obj\Debug\netcoreapp2.2\MongoDB.Driver.pdb
+D:\Backup\CsProject\ET-framwork-TulipBubble\TulipBubble_Server01\Bin\MongoDB.Driver.deps.json
+D:\Backup\CsProject\ET-framwork-TulipBubble\TulipBubble_Server01\Bin\MongoDB.Driver.dll
+D:\Backup\CsProject\ET-framwork-TulipBubble\TulipBubble_Server01\Bin\MongoDB.Driver.pdb
+D:\Backup\CsProject\ET-framwork-TulipBubble\TulipBubble_Server01\Bin\MongoDB.Driver.xml

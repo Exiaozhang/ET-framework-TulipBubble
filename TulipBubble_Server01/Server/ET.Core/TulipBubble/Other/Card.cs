@@ -8,13 +8,13 @@ namespace ETModel
     /// </summary>
     public partial class TulipCard
     {
-        public static TulipCard Create(int color, int level, int weight)
+        public static TulipCard Create(int color, int level, int weight,int Id)
         {
             TulipCard tulipCard = new TulipCard();
             tulipCard.TulipCardColor = color;
             tulipCard.TulipCardLevel = level;
             tulipCard.TulipCardWeight = weight;
-            tulipCard.Id =  DateTime.Now.Ticks;
+            tulipCard.Id =  Id;
             return tulipCard;
         }
 
@@ -31,9 +31,9 @@ namespace ETModel
         /// <returns></returns>
         public string GetName()
         {
-            return this.TulipCardColor == (int)Color.Black
-                ? $"{((Color)this.TulipCardColor).ToString()}"
-                : $"{((Color)this.TulipCardColor).ToString()}{((Level)this.TulipCardLevel).ToString()}{((Weight)this.TulipCardWeight).ToString()}";
+            return this.TulipCardColor == (int)TulipColor.Black
+                ? $"{((TulipColor)this.TulipCardColor).ToString()}"
+                : $"{((TulipColor)this.TulipCardColor).ToString()}{((Level)this.TulipCardLevel).ToString()}{((Weight)this.TulipCardWeight).ToString()}";
         }
     }
 

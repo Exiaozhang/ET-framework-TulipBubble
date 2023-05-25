@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using ETModel;
+using Google.Protobuf.Collections;
 
 namespace ETHotfix
 {
@@ -46,6 +47,11 @@ namespace ETHotfix
                 {
                     gamer.AddComponent<HandCardsComponent>();
                 }
+
+                if (gamer.GetComponent<MoneyComponent>() == null)
+                {
+                    gamer.AddComponent<MoneyComponent>();
+                }
             }
 
             //洗牌发牌
@@ -56,7 +62,8 @@ namespace ETHotfix
             RoomCollectorCardsComponent roomCollectorCardsComponent = room.GetComponent<RoomCollectorCardsComponent>();
             RoomEventCardsComponent roomEventCardsComponent = room.GetComponent<RoomEventCardsComponent>();
             OrderControllerComponent orderControllerComponent = room.GetComponent<OrderControllerComponent>();
-            
+
+
             foreach (Gamer gamer in gamers)
             {
                 if (gamer == null)
@@ -64,7 +71,7 @@ namespace ETHotfix
 
                 ActorMessageSenderComponent actorProxyComponent =
                     Game.Scene.GetComponent<ActorMessageSenderComponent>();
-                Log.Info($"{gamer.CActorID == null}");
+
                 ActorMessageSender actorProxy = actorProxyComponent.Get(gamer.CActorID);
 
                 actorProxy.Send(new Actor_GameStartRoomCards_Ntt()
@@ -98,6 +105,11 @@ namespace ETHotfix
                     RemindEventCount = roomEventCardsComponent.remainderEventCardCount
                 });
 
+                actorProxy.Send(new Actor_GetMoney_Ntt()
+                {
+                    Money = gamer.GetComponent<MoneyComponent>().money
+                });
+
                 //移除发出去的牌
                 //actorProxy.Send();
             }
@@ -105,7 +117,11 @@ namespace ETHotfix
             //随机先手玩家
             Int64 userId = self.RandomFirstAuthority();
             self.CurrentGamerUserId = userId;
+
+            //设置阶段、轮数、回合
             orderControllerComponent.stage = GameStage.AuctionStage;
+            orderControllerComponent.currentRound = 1;
+            orderControllerComponent.currentBigRound = 1;
 
             room.Broadcast(new Actor_AuthorityPlayCard_Ntt()
             {
@@ -178,6 +194,99 @@ namespace ETHotfix
             roomCollectorCardsComponent.lowPriceCollectorCount = deck.LowPriceCollectorCount;
         }
 
+        public static void EnterEventStage(this GameControllerComponent self)
+        {
+            Room room = self.GetParent<Room>();
+            RoomEventCardsComponent roomEventCardsComponent = room.GetComponent<RoomEventCardsComponent>();
+            OrderControllerComponent orderControllerComponent = room.GetComponent<OrderControllerComponent>();
+            DeckComponent deckComponent = room.GetComponent<DeckComponent>();
+
+            EventCard dealEventCard = deckComponent.DealEventCard();
+            roomEventCardsComponent.SetCurrentEvent(dealEventCard);
+            room.Broadcast(new Actor_AuthorityPlayCard_Ntt()
+            {
+                Stage = (int)orderControllerComponent.stage
+            });
+        }
+
+        public static void EnterSellStage(this GameControllerComponent self)
+        {
+            Room room = self.GetParent<Room>();
+            OrderControllerComponent orderControllerComponent = room.GetComponent<OrderControllerComponent>();
+
+            room.Broadcast(new Actor_AuthorityPlayCard_Ntt()
+            {
+                Stage = (int)orderControllerComponent.stage
+            });
+        }
+
+        public static void EnterAuctionStage(this GameControllerComponent self)
+        {
+        }
+
+        public static void EnterFishPhase(this GameControllerComponent self)
+        {
+            Room room = self.GetParent<Room>();
+            RoomTulipCardsComponent roomTulipCardsComponent = room.GetComponent<RoomTulipCardsComponent>();
+            TulipMarketEconomicsComponent tulipMarketEconomicsComponent =
+                room.GetComponent<TulipMarketEconomicsComponent>();
+            DeckComponent deckComponent = room.GetComponent<DeckComponent>();
+            OrderControllerComponent orderControllerComponent = room.GetComponent<OrderControllerComponent>();
+
+            int leastTulipColor = roomTulipCardsComponent.FindLeastTulipColor();
+            int mostTulipColor = roomTulipCardsComponent.FindMostTulipColor();
+
+            tulipMarketEconomicsComponent.DropTulipPriceLevel(mostTulipColor);
+            tulipMarketEconomicsComponent.RiseTulipPriceLevel(leastTulipColor);
+
+            roomTulipCardsComponent.PutTulipCardToDiscardPile(roomTulipCardsComponent.selledTulipCards);
+            roomTulipCardsComponent.selledTulipCards.AddRange(roomTulipCardsComponent.cashTulipCards);
+            roomTulipCardsComponent.cashTulipCards.Clear();
+            roomTulipCardsComponent.cashTulipCards.AddRange(roomTulipCardsComponent.futureTulipCards);
+            roomTulipCardsComponent.futureTulipCards.Clear();
+
+            for (int i = 0; i < self.TulipMount; i++)
+            {
+                TulipCard card = deckComponent.DealTulipCard();
+                roomTulipCardsComponent.AddFutureCard(card);
+            }
+
+            room.Broadcast(new Actor_AuthorityPlayCard_Ntt()
+            {
+                Stage = (int)orderControllerComponent.stage
+            });
+
+            room.Broadcast(new Actor_GetTulipPriceLevel_Ntt()
+            {
+                RedPriceLevel = tulipMarketEconomicsComponent.redPrieceLevel,
+                WhitePriceLevel = tulipMarketEconomicsComponent.whitePrieceLevel,
+                YellowPriceLevel = tulipMarketEconomicsComponent.yellowPrieceLevel
+            });
+
+            room.Broadcast(new Actor_GetTulip_Ntt()
+            {
+                FutureTulipCards = MapHelper.To.RepeatedField(roomTulipCardsComponent.futureTulipCards),
+                CashTulipCards = MapHelper.To.RepeatedField(roomTulipCardsComponent.cashTulipCards),
+                SelledTulipCards = MapHelper.To.RepeatedField(roomTulipCardsComponent.selledTulipCards)
+            });
+        }
+
+        public static void FishAuctionStage(this GameControllerComponent self)
+        {
+            Room room = self.GetParent<Room>();
+            BidControllerComponent bidControllerComponent = room.GetComponent<BidControllerComponent>();
+            OrderControllerComponent orderControllerComponent = room.GetComponent<OrderControllerComponent>();
+
+            room.Broadcast(new Actor_AuthorityPlayCard_Ntt()
+            {
+                UserID = 0,
+                Stage = (int)orderControllerComponent.stage
+            });
+
+            bidControllerComponent.StartBid();
+        }
+
+
         /// <summary>
         /// 进行游戏时给房间补充郁金香牌
         /// </summary>
@@ -237,7 +346,6 @@ namespace ETHotfix
             Random random = new Random();
             Int32 startIndex = random.Next(0, 5);
             Int32 index = startIndex;
-            Log.Info(index.ToString());
 
             while (room.gamers[index] == null)
             {
