@@ -24,18 +24,18 @@ namespace ETModel
     {
         None
     }
-    
+
     /// <summary>
     /// 郁金香等级
     /// </summary>
     public enum Level
     {
-      A,
-      B,
-      C,
-      None,
-      Anyone,
-      X
+        A,
+        B,
+        C,
+        None,
+        Anyone,
+        X
     }
 
     /// <summary>
@@ -50,16 +50,16 @@ namespace ETModel
         Anyone,
         Y
     }
-    
+
     /// <summary>
     /// 郁金香花色
     /// </summary>
     public enum TulipColor
     {
-      White,
-      Yellow,
-      Red,
-      Black
+        White,
+        Yellow,
+        Red,
+        Black
     }
 
     /// <summary>
@@ -82,7 +82,7 @@ namespace ETModel
         PureColor,
         DiverseColor
     }
-    
+
     /// <summary>
     /// 游戏进行的阶段
     /// </summary>
@@ -101,5 +101,15 @@ namespace ETModel
     {
         Cash,
         Loans
+    }
+
+    /// <summary>
+    /// 收藏家价格等级
+    /// </summary>
+    public enum CollectorPriceLevel
+    {
+        low,
+        middle,
+        high
     }
 }

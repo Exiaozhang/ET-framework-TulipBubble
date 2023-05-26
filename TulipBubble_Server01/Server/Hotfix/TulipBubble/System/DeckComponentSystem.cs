@@ -146,6 +146,11 @@ namespace ETHotfix
         /// <returns></returns>
         public static CollectorCard DealHighPriceCollectorCard(this DeckComponent self)
         {
+            if (self.collectorLibrayHighPrice.Count == 0)
+            {
+                return null;
+            }
+            
             CollectorCard collectorCard = self.collectorLibrayHighPrice[self.HighPriceCollectorCount - 1];
             self.collectorLibrayHighPrice.Remove(collectorCard);
             return collectorCard;
@@ -158,6 +163,10 @@ namespace ETHotfix
         /// <returns></returns>
         public static CollectorCard DealMiddlePriceCollectorCard(this DeckComponent self)
         {
+            if (self.collectorLibrayMiddlePrice.Count == 0)
+            {
+                return null;
+            }
             CollectorCard collectorCard = self.collectorLibrayMiddlePrice[self.MiddlePriceCollectorCount - 1];
             self.collectorLibrayMiddlePrice.Remove(collectorCard);
             return collectorCard;
@@ -170,6 +179,11 @@ namespace ETHotfix
         /// <returns></returns>
         public static CollectorCard DealLowPriceCollectorCard(this DeckComponent self)
         {
+            if (self.collectorLibrayLowPrice.Count == 0)
+            {
+                return null;
+            }
+
             CollectorCard collectorCard = self.collectorLibrayLowPrice[self.LowPriceCollectorCount - 1];
             self.collectorLibrayLowPrice.Remove(collectorCard);
             return collectorCard;
@@ -211,7 +225,7 @@ namespace ETHotfix
                     {
                         for (int i = 0; i < 3; i++) //创建3个相同的郁金香牌
                         {
-                            TulipCard tulipCard = TulipCard.Create(color, level, weight,cardNumber);
+                            TulipCard tulipCard = TulipCard.Create(color, level, weight, cardNumber);
                             cardNumber += 1;
                             self.tulipLibray.Add(tulipCard);
                         }

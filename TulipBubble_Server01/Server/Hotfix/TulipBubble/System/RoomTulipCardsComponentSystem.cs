@@ -56,6 +56,13 @@ namespace ETHotfix
             self.selledTulipCards.Remove(tulipCard);
         }
 
+
+        public static void PopCard(this RoomTulipCardsComponent self, TulipCard tulipCard)
+        {
+            if (!self.selledTulipCards.Remove(tulipCard))
+                self.cashTulipCards.Remove(tulipCard);
+        }
+
         /// <summary>
         /// 在房间郁金香牌堆中查找郁金香牌
         /// </summary>
@@ -96,7 +103,7 @@ namespace ETHotfix
             return null;
         }
 
-        public static void ReserveTulipCard(this RoomTulipCardsComponent self, TulipCard tulipCard ,Gamer gamer)
+        public static void ReserveTulipCard(this RoomTulipCardsComponent self, TulipCard tulipCard, Gamer gamer)
         {
             TulipCard searchRoomTulipCard = self.SearchRoomTulipCard(tulipCard);
             if (searchRoomTulipCard == null)
@@ -117,7 +124,7 @@ namespace ETHotfix
 
             self.reservedTulipCards.Add(new GamerReserveTulip()
             {
-                UserId = MapHelper.To.RepeatedField(new List<long>(){gamer.UserID}),
+                UserId = MapHelper.To.RepeatedField(new List<long>() { gamer.UserID }),
                 ReserveTulipCard = tulipCard
             });
         }

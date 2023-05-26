@@ -253,6 +253,7 @@ namespace ETModel
 
             foreach (KeyValuePair<TulipCard, Int32> i in tulipRoomGamerHandCardComponent.loanCardsLibrary)
             {
+                Log.Info("Hello World");
                 i.Key.CardObj = CardHelper.CreateCardObj(CardHelper.TULIPCARD, i.Key.GetName(), handCardsPanel.transform, CardType.TulipCard);
                 i.Key.CardObj.transform.Find("Text").GetComponent<Text>().text = $"欠款{i.Value}";
             }

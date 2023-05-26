@@ -1,7 +1,38 @@
 syntax = "proto3";
 package ETModel;
 
-//
+//跳过出售阶段
+message Actor_PassSell_Ntt // IActorMessage
+{
+	int32 RpcId = 90;
+	int64 ActorId = 93;
+}
+
+//把手牌出售给市场
+message Actor_SellCard_Ntt // IActorMessage
+{
+	int32 RpcId = 90;
+	int64 ActorId = 93;
+	repeated TulipCard SelledTulipCards = 1;
+	repeated LoanCard SelledLoanCards = 2;
+}
+
+//把手牌出售给收藏家
+message Actor_SellCardToCollector_Ntt // IActorMessage
+{
+	int32 RpcId = 90;
+	int64 ActorId = 93;
+	CollectorCard SelledCollector = 1;
+	repeated TulipCard SelledTulipCards = 2;
+}
+
+message LoanCard
+{
+	TulipCard LoanTulipcard = 1;
+	int32 LoanPrice = 2;
+}
+
+//同步玩家手牌
 message Actor_GetHandCard_Ntt // IActorMessage
 {
 	int32 RpcId = 90;

@@ -1,7 +1,22 @@
 using ETModel;
 namespace ETModel
 {
-//
+//跳过出售阶段
+	[Message(OuterOpcode.Actor_PassSell_Ntt)]
+	public partial class Actor_PassSell_Ntt : IActorMessage {}
+
+//把手牌出售给市场
+	[Message(OuterOpcode.Actor_SellCard_Ntt)]
+	public partial class Actor_SellCard_Ntt : IActorMessage {}
+
+//把手牌出售给收藏家
+	[Message(OuterOpcode.Actor_SellCardToCollector_Ntt)]
+	public partial class Actor_SellCardToCollector_Ntt : IActorMessage {}
+
+	[Message(OuterOpcode.LoanCard)]
+	public partial class LoanCard {}
+
+//同步玩家手牌
 	[Message(OuterOpcode.Actor_GetHandCard_Ntt)]
 	public partial class Actor_GetHandCard_Ntt : IActorMessage {}
 
@@ -153,46 +168,50 @@ namespace ETModel
 {
 	public static partial class OuterOpcode
 	{
-		 public const ushort Actor_GetHandCard_Ntt = 101;
-		 public const ushort Actor_GetSignCount_Ntt = 102;
-		 public const ushort Actor_NotifyRoomPayWay_Ntt = 103;
-		 public const ushort Actor_NotifyPlayerPayWay_Ntt = 104;
-		 public const ushort Actor_NotifyPlayerBid = 105;
-		 public const ushort Actor_NotifyRoomBid = 106;
-		 public const ushort Actor_GetMoney_Ntt = 107;
-		 public const ushort Actor_GetTulip_Ntt = 108;
-		 public const ushort Actor_GetTulipReserve_Ntt = 109;
-		 public const ushort GamerReserveTulip = 110;
-		 public const ushort Actor_ReserveTulipCard_Ntt = 111;
-		 public const ushort Actor_SellTulipCard_Ntt = 112;
-		 public const ushort Actor_AuthorityPlayCard_Ntt = 113;
-		 public const ushort Actor_GetCollector_Ntt = 114;
-		 public const ushort Actor_GetEvent_Ntt = 115;
-		 public const ushort Actor_GetTulipPriceLevel_Ntt = 116;
-		 public const ushort EventCard = 117;
-		 public const ushort TulipCard = 118;
-		 public const ushort CollectorTulipCard = 119;
-		 public const ushort CollectorCard = 120;
-		 public const ushort GamerCardNum = 121;
-		 public const ushort Actor_GameStartRoomCards_Ntt = 122;
-		 public const ushort Actor_GameStartMention = 123;
-		 public const ushort C2G_GetUserInfoInRoom_Req = 124;
-		 public const ushort G2C_GetUserInfoInRoom_Back = 125;
-		 public const ushort Actor_Test = 126;
-		 public const ushort C2M_TestRequest = 127;
-		 public const ushort M2C_TestResponse = 128;
-		 public const ushort Actor_TransferRequest = 129;
-		 public const ushort Actor_TransferResponse = 130;
-		 public const ushort C2G_EnterMap = 131;
-		 public const ushort G2C_EnterMap = 132;
-		 public const ushort UnitInfo = 133;
-		 public const ushort M2C_CreateUnits = 134;
-		 public const ushort Frame_ClickMap = 135;
-		 public const ushort M2C_PathfindingResult = 136;
-		 public const ushort C2R_Ping = 137;
-		 public const ushort R2C_Ping = 138;
-		 public const ushort G2C_Test = 139;
-		 public const ushort C2M_Reload = 140;
-		 public const ushort M2C_Reload = 141;
+		 public const ushort Actor_PassSell_Ntt = 101;
+		 public const ushort Actor_SellCard_Ntt = 102;
+		 public const ushort Actor_SellCardToCollector_Ntt = 103;
+		 public const ushort LoanCard = 104;
+		 public const ushort Actor_GetHandCard_Ntt = 105;
+		 public const ushort Actor_GetSignCount_Ntt = 106;
+		 public const ushort Actor_NotifyRoomPayWay_Ntt = 107;
+		 public const ushort Actor_NotifyPlayerPayWay_Ntt = 108;
+		 public const ushort Actor_NotifyPlayerBid = 109;
+		 public const ushort Actor_NotifyRoomBid = 110;
+		 public const ushort Actor_GetMoney_Ntt = 111;
+		 public const ushort Actor_GetTulip_Ntt = 112;
+		 public const ushort Actor_GetTulipReserve_Ntt = 113;
+		 public const ushort GamerReserveTulip = 114;
+		 public const ushort Actor_ReserveTulipCard_Ntt = 115;
+		 public const ushort Actor_SellTulipCard_Ntt = 116;
+		 public const ushort Actor_AuthorityPlayCard_Ntt = 117;
+		 public const ushort Actor_GetCollector_Ntt = 118;
+		 public const ushort Actor_GetEvent_Ntt = 119;
+		 public const ushort Actor_GetTulipPriceLevel_Ntt = 120;
+		 public const ushort EventCard = 121;
+		 public const ushort TulipCard = 122;
+		 public const ushort CollectorTulipCard = 123;
+		 public const ushort CollectorCard = 124;
+		 public const ushort GamerCardNum = 125;
+		 public const ushort Actor_GameStartRoomCards_Ntt = 126;
+		 public const ushort Actor_GameStartMention = 127;
+		 public const ushort C2G_GetUserInfoInRoom_Req = 128;
+		 public const ushort G2C_GetUserInfoInRoom_Back = 129;
+		 public const ushort Actor_Test = 130;
+		 public const ushort C2M_TestRequest = 131;
+		 public const ushort M2C_TestResponse = 132;
+		 public const ushort Actor_TransferRequest = 133;
+		 public const ushort Actor_TransferResponse = 134;
+		 public const ushort C2G_EnterMap = 135;
+		 public const ushort G2C_EnterMap = 136;
+		 public const ushort UnitInfo = 137;
+		 public const ushort M2C_CreateUnits = 138;
+		 public const ushort Frame_ClickMap = 139;
+		 public const ushort M2C_PathfindingResult = 140;
+		 public const ushort C2R_Ping = 141;
+		 public const ushort R2C_Ping = 142;
+		 public const ushort G2C_Test = 143;
+		 public const ushort C2M_Reload = 144;
+		 public const ushort M2C_Reload = 145;
 	}
 }

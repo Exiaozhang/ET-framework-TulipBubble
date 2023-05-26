@@ -296,7 +296,6 @@ namespace ETHotfix
             bidControllerComponent.StartBid();
         }
 
-
         /// <summary>
         /// 进行游戏时给房间补充郁金香牌
         /// </summary>

@@ -42,5 +42,15 @@ namespace ETHotfix
             self.tulipLibrary.Remove(tulipCard);
         }
 
+        public static void PopLoanCard(this HandCardsComponent self, TulipCard tulipCard)
+        {
+            Gamer gamer = self.GetParent<Gamer>();
+            ReserveSignComponent reserveSignComponent = gamer.GetComponent<ReserveSignComponent>();
+
+            reserveSignComponent.AddOneSign();
+            self.loanTulipLibrary.Remove(tulipCard);
+
+        }
+
     }
 }

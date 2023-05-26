@@ -15,8 +15,6 @@ namespace ETHotfix
         }
     }
 
-    
-
     public static class OrderControllerComponentSystem
     {
         public static void Awake(this OrderControllerComponent self)
@@ -78,7 +76,7 @@ namespace ETHotfix
         }
 
         /// <summary>
-        /// 指定玩家进行回合
+        /// 指定玩家进行竞价回合
         /// </summary>
         /// <param name="self"></param>
         /// <param name="userId"></param>
@@ -93,7 +91,7 @@ namespace ETHotfix
                 BidingTulipCard = room.GetComponent<BidControllerComponent>().reserveTulip.ReserveTulipCard
             });
         }
-
+        
         public static void PrepareNextBigRound(this OrderControllerComponent self)
         {
             self.currentBigRound += 1;

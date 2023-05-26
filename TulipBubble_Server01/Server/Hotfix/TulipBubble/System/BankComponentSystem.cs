@@ -39,8 +39,10 @@ namespace ETModel
                 }
 
                 moneyComponent.money -= bidControllerComponent.Price;
+                roomTulipCardsComponent.PopCard(bidControllerComponent.reserveTulip.ReserveTulipCard);
                 handCardsComponent.AddCard(bidControllerComponent.reserveTulip.ReserveTulipCard);
                 roomTulipCardsComponent.reservedTulipCards.Remove(bidControllerComponent.reserveTulip);
+
                 Log.Info($"{gamer.UserID} Left Money {moneyComponent.money}");
 
                 RepeatedField<TulipCard> loanCards = new RepeatedField<TulipCard>();
@@ -58,6 +60,12 @@ namespace ETModel
                     LoanCard = loanCards,
                     CardPrice = cardsPrice
                 });
+
+                actorMessageSender.Send(new Actor_GetMoney_Ntt()
+                {
+                    Money = moneyComponent.money
+                });
+
                 bidControllerComponent.StartBid();
                 return;
 
@@ -65,7 +73,10 @@ namespace ETModel
 
             if ((PayWay)payWay == PayWay.Loans)
             {
+          
+                roomTulipCardsComponent.PopCard(bidControllerComponent.reserveTulip.ReserveTulipCard);
                 handCardsComponent.AddLoanCard(bidControllerComponent.reserveTulip.ReserveTulipCard, bidControllerComponent.Price);
+                roomTulipCardsComponent.reservedTulipCards.Remove(bidControllerComponent.reserveTulip);
                 reserveSignComponent.RemoveOneSign();
                 RepeatedField<TulipCard> loanCards = new RepeatedField<TulipCard>();
                 RepeatedField<int> cardsPrice = new RepeatedField<Int32>();
@@ -82,9 +93,28 @@ namespace ETModel
                     LoanCard = loanCards,
                     CardPrice = cardsPrice
                 });
+
                 bidControllerComponent.StartBid();
                 return;
             }
+
+
+        }
+
+        public static void GiveMoneyToBank(this BankComponent self, Gamer gamer, int money)
+        {
+            Room room = self.GetParent<Room>();
+            MoneyComponent moneyComponent = gamer.GetComponent<MoneyComponent>();
+
+            moneyComponent.money -= money;
+        }
+
+        public static void GetMoneyFormBank(this BankComponent self, Gamer gamer, int money)
+        {
+            Room room = self.GetParent<Room>();
+            MoneyComponent moneyComponent = gamer.GetComponent<MoneyComponent>();
+
+            moneyComponent.money += money;
         }
     }
 }
