@@ -1,0 +1,11 @@
+**.meta
+
+TulipBubble_Client01/Release/**
+
+TulipBubble_Client01/Unity/Temp/**
+
+TulipBubble_Client01/Unity/Library/**
+
+TulipBubble_Server01/Bin/**
+
+TulipBubble_Server01/Logs/**

@@ -1,4 +1,5 @@
 ﻿using System;
+using Google.Protobuf.Collections;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -38,18 +39,59 @@ namespace ETModel
             reserve = referenceCollector.Get<GameObject>("Reserve");
             pass = referenceCollector.Get<GameObject>("Pass");
             InitReserveButton();
+            InitSellButton();
+        }
+
+        private void InitPassButton()
+        {
+            if (pass == null)
+                return;
+            Button button = sell.GetComponent<Button>();
+            //button.onClick.AddListener();
         }
 
         private void InitSellButton()
         {
             if (sell == null)
                 return;
+
             Button button = sell.GetComponent<Button>();
             button.onClick.AddListener(() =>
             {
-                SessionComponent.Instance.Session.Send(new Actor_SellTulipCard_Ntt
+                UI uiRoom = this.GetParent<UI>();
+                TulipRoomGameComponent tulipRoomGameComponent = uiRoom.GetComponent<TulipRoomGameComponent>();
+
+                TulipCard card = this.selectedCard as TulipCard;
+                if (card == null)
+                    return;
+                Log.Info($"{card.BelongType}");
+                if (card.BelongType != CardBelongType.Player)
+                    return;
+
+                if (card.isLoanCard)
                 {
+                    RepeatedField<LoanCard> tulipLoanCards = new RepeatedField<LoanCard>();
+                    tulipLoanCards.Add(new LoanCard()
+                    {
+                        LoanTulipcard = card,
+                        LoanPrice = card.loanMoney
+                    });
+
+                    SessionComponent.Instance.Session.Send(new Actor_SellCard_Ntt()
+                    {
+                        SelledLoanCards = tulipLoanCards
+                    });
+                    return;
+                }
+
+                RepeatedField<TulipCard> tulipCards = new RepeatedField<TulipCard>();
+                tulipCards.Add(card);
+                SessionComponent.Instance.Session.Send(new Actor_SellCard_Ntt()
+                {
+                    SelledTulipCards = tulipCards
                 });
+                return;
+
             });
         }
 
@@ -77,10 +119,6 @@ namespace ETModel
                     ReserveTulipCard = card
                 });
             });
-        }
-
-        private void InitPassButton()
-        {
         }
 
         /// <summary>

@@ -249,13 +249,19 @@ namespace ETModel
             foreach (TulipCard i in tulipRoomGamerHandCardComponent.tulipCardsLibrary)
             {
                 i.CardObj = CardHelper.CreateCardObj(CardHelper.TULIPCARD, i.GetName(), handCardsPanel.transform, CardType.TulipCard);
+                i.BelongType = CardBelongType.Player;
+                i.CardObj.AddComponent<HandCardSprite>().card = i;
             }
 
             foreach (KeyValuePair<TulipCard, Int32> i in tulipRoomGamerHandCardComponent.loanCardsLibrary)
             {
                 Log.Info("Hello World");
                 i.Key.CardObj = CardHelper.CreateCardObj(CardHelper.TULIPCARD, i.Key.GetName(), handCardsPanel.transform, CardType.TulipCard);
+                i.Key.BelongType = CardBelongType.Player;
                 i.Key.CardObj.transform.Find("Text").GetComponent<Text>().text = $"欠款{i.Value}";
+                i.Key.CardObj.AddComponent<HandCardSprite>().card = i.Key;
+                i.Key.isLoanCard = true;
+                i.Key.loanMoney = i.Value;
             }
         }
 

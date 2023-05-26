@@ -21,7 +21,7 @@ namespace ETModel
             //清空现货卡牌
             tulipRoomTulipCardsComponent.ClearTulipCards(TulipMarkType.selled);
             //添加现货卡牌
-            tulipRoomTulipCardsComponent.AddTulipCards(message.CashTulipCards.ToArray(),TulipMarkType.selled);
+            tulipRoomTulipCardsComponent.AddTulipCards(message.SelledTulipCards.ToArray(),TulipMarkType.selled);
         }
     }
 }

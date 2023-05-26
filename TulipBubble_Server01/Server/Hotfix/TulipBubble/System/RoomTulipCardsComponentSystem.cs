@@ -59,8 +59,28 @@ namespace ETHotfix
 
         public static void PopCard(this RoomTulipCardsComponent self, TulipCard tulipCard)
         {
-            if (!self.selledTulipCards.Remove(tulipCard))
-                self.cashTulipCards.Remove(tulipCard);
+            Console.WriteLine($"{tulipCard.GetName()} will be remove , Card Id is {tulipCard.Id}");
+
+            self.selledTulipCards.RemoveAll(_ =>
+            {
+                if (_.Id == tulipCard.Id)
+                {
+                    Console.WriteLine("Card is be removed");
+                    return true;
+                }
+                return false;
+            });
+
+            self.cashTulipCards.RemoveAll(_ =>
+            {
+                if (_.Id == tulipCard.Id)
+                {
+                    Console.WriteLine("Card is be removed");
+                    return true;
+                }
+                return false;
+            });
+
         }
 
         /// <summary>

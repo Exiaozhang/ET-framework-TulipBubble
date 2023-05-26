@@ -1,0 +1,52 @@
+ManifestFileVersion: 0
+CRC: 383513807
+AssetBundleManifest:
+  AssetBundleInfos:
+    Info_0:
+      Name: landlogin.unity3d
+      Dependencies: {}
+    Info_1:
+      Name: config.unity3d
+      Dependencies: {}
+    Info_2:
+      Name: tuliplogin.unity3d
+      Dependencies: {}
+    Info_3:
+      Name: tuliplobby.unity3d
+      Dependencies: {}
+    Info_4:
+      Name: tuliproom.unity3d
+      Dependencies: {}
+    Info_5:
+      Name: orderplayer.unity3d
+      Dependencies: {}
+    Info_6:
+      Name: tulipatlas.unity3d
+      Dependencies: {}
+    Info_7:
+      Name: tulipcard.unity3d
+      Dependencies: {}
+    Info_8:
+      Name: tulipinteraction.unity3d
+      Dependencies: {}
+    Info_9:
+      Name: tulipmarketeconomics.unity3d
+      Dependencies: {}
+    Info_10:
+      Name: collectorcard.unity3d
+      Dependencies: {}
+    Info_11:
+      Name: collectoratlas.unity3d
+      Dependencies: {}
+    Info_12:
+      Name: carddetialwindow.unity3d
+      Dependencies: {}
+    Info_13:
+      Name: eventatlas.unity3d
+      Dependencies: {}
+    Info_14:
+      Name: eventcard.unity3d
+      Dependencies: {}
+    Info_15:
+      Name: signobject.unity3d
+      Dependencies: {}

@@ -128,7 +128,7 @@ namespace ETHotfix
 
         public static void PrepareNextPhase(this OrderControllerComponent self)
         {
-            Log.Info("Hello World");
+       
             Room room = self.GetParent<Room>();
             GameControllerComponent gameControllerComponent = room.GetComponent<GameControllerComponent>();
 

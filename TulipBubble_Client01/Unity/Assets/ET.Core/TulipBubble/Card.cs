@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 namespace ETModel
 {
@@ -10,6 +11,10 @@ namespace ETModel
         public CardBelongType BelongType;
 
         public GameObject CardObj;
+
+        public bool isLoanCard;
+
+        public Int32 loanMoney; 
 
         public static TulipCard Create(int color, int level, int weight)
         {

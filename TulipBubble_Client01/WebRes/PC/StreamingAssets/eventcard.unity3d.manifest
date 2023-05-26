@@ -1,0 +1,25 @@
+ManifestFileVersion: 0
+CRC: 2440238740
+Hashes:
+  AssetFileHash:
+    serializedVersion: 2
+    Hash: df28d046c83915a8f49fdf2ad0d2e5d9
+  TypeTreeHash:
+    serializedVersion: 2
+    Hash: a30fdafe4418bb595201c62275f371b9
+HashAppended: 0
+ClassTypes:
+- Class: 1
+  Script: {instanceID: 0}
+- Class: 114
+  Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+- Class: 115
+  Script: {instanceID: 0}
+- Class: 222
+  Script: {instanceID: 0}
+- Class: 224
+  Script: {instanceID: 0}
+SerializeReferenceClassIdentifiers: []
+Assets:
+- Assets/Bundles/TulipBubble/EventCard.prefab
+Dependencies: []

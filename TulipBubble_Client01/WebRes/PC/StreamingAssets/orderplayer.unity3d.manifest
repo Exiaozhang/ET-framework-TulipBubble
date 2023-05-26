@@ -1,0 +1,33 @@
+ManifestFileVersion: 0
+CRC: 2255041269
+Hashes:
+  AssetFileHash:
+    serializedVersion: 2
+    Hash: d0775812bbad55c215454e3479fe219c
+  TypeTreeHash:
+    serializedVersion: 2
+    Hash: 6a0a63a4e6754b131b3313e8edfe9696
+HashAppended: 0
+ClassTypes:
+- Class: 1
+  Script: {instanceID: 0}
+- Class: 28
+  Script: {instanceID: 0}
+- Class: 114
+  Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 9a351d4db0ead7d48b3ffd70f2118e64, type: 3}
+- Class: 115
+  Script: {instanceID: 0}
+- Class: 213
+  Script: {instanceID: 0}
+- Class: 222
+  Script: {instanceID: 0}
+- Class: 224
+  Script: {instanceID: 0}
+SerializeReferenceClassIdentifiers: []
+Assets:
+- Assets/Bundles/TulipBubble/OrderPlayer.prefab
+Dependencies: []

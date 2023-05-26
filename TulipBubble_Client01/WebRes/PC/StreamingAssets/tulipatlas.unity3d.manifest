@@ -1,0 +1,27 @@
+ManifestFileVersion: 0
+CRC: 535598217
+Hashes:
+  AssetFileHash:
+    serializedVersion: 2
+    Hash: 7fa1039c8a54b17a0968321f825ba9d4
+  TypeTreeHash:
+    serializedVersion: 2
+    Hash: ee530e1e14bdc4e0a09fc51ee43c37bb
+HashAppended: 0
+ClassTypes:
+- Class: 1
+  Script: {instanceID: 0}
+- Class: 28
+  Script: {instanceID: 0}
+- Class: 114
+  Script: {fileID: 11500000, guid: 9a351d4db0ead7d48b3ffd70f2118e64, type: 3}
+- Class: 115
+  Script: {instanceID: 0}
+- Class: 213
+  Script: {instanceID: 0}
+- Class: 224
+  Script: {instanceID: 0}
+SerializeReferenceClassIdentifiers: []
+Assets:
+- Assets/Bundles/TulipBubble/TulipAtlas.prefab
+Dependencies: []
