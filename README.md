@@ -8,8 +8,11 @@ TulipBubble Create By ET-farmwork
 The project is currently incomplete
 
 **ET-farmwork version 5.0**
+
 **Unity version 2019.4**
+
 **Required .NetCore2.2**
+
 **Required MongoDb**
 
 
