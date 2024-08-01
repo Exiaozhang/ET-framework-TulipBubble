@@ -34,6 +34,8 @@ namespace ETModel
 		
 		public TChannel(IPEndPoint ipEndPoint, TService service): base(service, ChannelType.Connect)
 		{
+
+
 			int packetSize = service.PacketSizeLength;
 			this.packetSizeCache = new byte[packetSize];
 			this.memoryStream = service.MemoryStreamManager.GetStream("message", ushort.MaxValue);
@@ -323,6 +325,7 @@ namespace ETModel
 		{
 			try
 			{
+				
 				this.outArgs.SetBuffer(buffer, offset, count);
 			}
 			catch (Exception e)

@@ -9,3 +9,5 @@ TulipBubble_Client01/Unity/Library/**
 TulipBubble_Server01/Bin/**
 
 TulipBubble_Server01/Logs/**
+
+TulipBubble_Server01/Server/ThirdParty/**/Debug/**

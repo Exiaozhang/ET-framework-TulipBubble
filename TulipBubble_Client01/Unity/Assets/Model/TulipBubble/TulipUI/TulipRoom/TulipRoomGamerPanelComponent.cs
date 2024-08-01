@@ -186,7 +186,7 @@ namespace ETModel
         /// <summary>
         /// 重置提示
         /// </summary>
-        private void ResetPrompt()
+        public void ResetPrompt()
         {
             prompt.text = "";
         }

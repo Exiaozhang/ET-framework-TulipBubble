@@ -100,3 +100,4 @@ D:\Backup\CsProject\ET-framwork-TulipBubble\TulipBubble_Server01\Server\ThirdPar
 D:\Backup\CsProject\ET-framwork-TulipBubble\TulipBubble_Server01\Server\ThirdParty\Google.Protobuf\obj\Debug\Google.Protobuf.csproj.CopyComplete
 D:\Backup\CsProject\ET-framwork-TulipBubble\TulipBubble_Server01\Server\ThirdParty\Google.Protobuf\obj\Debug\Google.Protobuf.dll
 D:\Backup\CsProject\ET-framwork-TulipBubble\TulipBubble_Server01\Server\ThirdParty\Google.Protobuf\obj\Debug\Google.Protobuf.pdb
+D:\Backup\CsProject\ET-framwork-TulipBubble\TulipBubble_Server01\Server\ThirdParty\Google.Protobuf\obj\Debug\Google.Protobuf.sourcelink.json

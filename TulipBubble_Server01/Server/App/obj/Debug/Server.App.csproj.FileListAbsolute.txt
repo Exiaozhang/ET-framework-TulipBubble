@@ -16,3 +16,4 @@ D:\Backup\CsProject\ET-framwork-TulipBubble\TulipBubble_Server01\Server\App\obj\
 D:\Backup\CsProject\ET-framwork-TulipBubble\TulipBubble_Server01\Server\App\obj\Debug\App.dll
 D:\Backup\CsProject\ET-framwork-TulipBubble\TulipBubble_Server01\Server\App\obj\Debug\App.pdb
 D:\Backup\CsProject\ET-framwork-TulipBubble\TulipBubble_Server01\Server\App\obj\Debug\Server.App.genruntimeconfig.cache
+D:\Backup\CsProject\ET-framwork-TulipBubble\TulipBubble_Server01\Server\App\obj\Debug\Server.App.sourcelink.json

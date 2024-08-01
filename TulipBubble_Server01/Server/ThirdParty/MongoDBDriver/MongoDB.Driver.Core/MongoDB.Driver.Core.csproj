@@ -6,6 +6,8 @@
     <WarningsAsErrors />
     <CodeAnalysisRuleSet>../MongoDB.ruleset</CodeAnalysisRuleSet>
     <TargetFramework>netcoreapp2.2</TargetFramework>
+    <NuGetAudit>false</NuGetAudit>
+    <CheckEolTargetFramework>false</CheckEolTargetFramework>
   </PropertyGroup>
 
   <PropertyGroup>

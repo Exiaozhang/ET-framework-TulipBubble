@@ -1,4 +1,5 @@
-﻿using ETModel;
+﻿using System;
+using ETModel;
 
 namespace ETHotfix
 {
@@ -67,12 +68,13 @@ namespace ETHotfix
             self.AddComponent<RoomCollectorCardsComponent>();
             //房间市场经济组件
             self.AddComponent<TulipMarketEconomicsComponent>();
-;
-   
+            ;
+
             //游戏控制组件
             GameControllerComponent gameControllerComponent =
                 self.AddComponent<GameControllerComponent, RoomConfig>(
                     GateHelper.GetTulipBubbleRoomConfig(RoomLevel.Lv100));
+            //设置郁金香的数量
             gameControllerComponent.TulipMount = self.GamerCount + 2;
             //开始游戏
             gameControllerComponent.StartGame();
@@ -194,6 +196,11 @@ namespace ETHotfix
             return -1;
         }
 
+        /// <summary>
+        /// 向房间内的所有玩家广播消息
+        /// </summary>
+        /// <param name="self"></param>
+        /// <param name="message"></param>
         public static void Broadcast(this Room self, IActorMessage message)
         {
             foreach (Gamer gamer in self.gamers)
@@ -209,5 +216,6 @@ namespace ETHotfix
                 actorProxy.Send(message);
             }
         }
+
     }
 }

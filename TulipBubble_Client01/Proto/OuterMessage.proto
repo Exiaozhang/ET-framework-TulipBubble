@@ -1,7 +1,13 @@
 syntax = "proto3";
 package ETModel;
 
-
+//玩家取消准备
+message Actor_GamerCancelReady_TulipBubble // IActorMessage
+{
+	int32 RpcId = 90;
+	int64 ActorId = 93;
+	int64 UserID = 1;
+}
 
 //跳过出售阶段
 message Actor_PassSell_Ntt // IActorMessage
@@ -136,7 +142,15 @@ message Actor_SellTulipCard_Ntt // IActorMessage
 	CollectorCard SellCollectorCard = 2;
 }
 
-//发送给客户端起始玩家
+//发送给客户端当前轮起始玩家
+message Actor_SyncFirstPlayer_Ntt // IActorMessage
+{
+	int32 RpcId = 90;
+	int64 ActorId = 93;
+	int64 UserID = 1;
+}
+
+//发送给客户端当前回合玩家行动
 message Actor_AuthorityPlayCard_Ntt // IActorMessage
 {
 	int32 RpcId = 90;
@@ -221,8 +235,20 @@ message Actor_GameStartRoomCards_Ntt // IActorMessage
 	repeated TulipCard FutureTulipCards = 1;
 	repeated TulipCard CashTulipCards = 2;
 }
-
+//通知房主可以开始游戏
 message Actor_GameStartMention // IActorMessage
+{
+	int32 RpcId = 90;
+	int64 ActorId = 9;
+}
+//通知玩家当前游戏已开始
+message Actor_GameStart // IActorMessage
+{
+	int32 RpcId = 90;
+	int64 ActorId = 9;
+}
+//通知房主不可以开始游戏
+message Actor_GameUnableStartMention // IActorMessage
 {
 	int32 RpcId = 90;
 	int64 ActorId = 9;

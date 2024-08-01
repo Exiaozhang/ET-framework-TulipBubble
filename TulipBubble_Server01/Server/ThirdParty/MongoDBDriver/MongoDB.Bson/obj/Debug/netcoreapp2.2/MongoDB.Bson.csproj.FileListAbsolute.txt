@@ -40,3 +40,4 @@ D:\Backup\CsProject\ET-framwork-TulipBubble\TulipBubble_Server01\Bin\MongoDB.Bso
 D:\Backup\CsProject\ET-framwork-TulipBubble\TulipBubble_Server01\Bin\MongoDB.Bson.dll
 D:\Backup\CsProject\ET-framwork-TulipBubble\TulipBubble_Server01\Bin\MongoDB.Bson.pdb
 D:\Backup\CsProject\ET-framwork-TulipBubble\TulipBubble_Server01\Bin\MongoDB.Bson.xml
+D:\Backup\CsProject\ET-framwork-TulipBubble\TulipBubble_Server01\Server\ThirdParty\MongoDBDriver\MongoDB.Bson\obj\Debug\netcoreapp2.2\MongoDB.Bson.sourcelink.json

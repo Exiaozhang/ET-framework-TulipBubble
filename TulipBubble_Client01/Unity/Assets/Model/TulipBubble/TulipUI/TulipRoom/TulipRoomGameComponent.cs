@@ -19,6 +19,9 @@ namespace ETModel
 
         public GameStage stage;
 
+        //当前轮次的起始玩家的Id
+        public Int64 currentRoundFirstUserId;
+
         public static String localPlayerColor;
 
         private Dictionary<Int64, string> playerColor = new Dictionary<long, string>();

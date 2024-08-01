@@ -43,16 +43,19 @@ namespace ETHotfix
                     continue;
                 }
 
+                // 添加手牌组件
                 if (gamer.GetComponent<HandCardsComponent>() == null)
                 {
                     gamer.AddComponent<HandCardsComponent>();
                 }
 
+                // 添加经济组件
                 if (gamer.GetComponent<MoneyComponent>() == null)
                 {
                     gamer.AddComponent<MoneyComponent>();
                 }
 
+                // 添加竞价标志物组件
                 if (gamer.GetComponent<ReserveSignComponent>() == null)
                 {
                     gamer.AddComponent<ReserveSignComponent>();
@@ -68,7 +71,7 @@ namespace ETHotfix
             RoomEventCardsComponent roomEventCardsComponent = room.GetComponent<RoomEventCardsComponent>();
             OrderControllerComponent orderControllerComponent = room.GetComponent<OrderControllerComponent>();
 
-
+            //向玩家发送当前回合的卡牌
             foreach (Gamer gamer in gamers)
             {
                 if (gamer == null)
@@ -79,6 +82,7 @@ namespace ETHotfix
 
                 ActorMessageSender actorProxy = actorProxyComponent.Get(gamer.CActorID);
 
+                // 郁金香市场牌
                 actorProxy.Send(new Actor_GameStartRoomCards_Ntt()
                 {
                     FutureTulipCards =
@@ -87,6 +91,7 @@ namespace ETHotfix
                         MapHelper.To.RepeatedField(room.GetComponent<RoomTulipCardsComponent>().cashTulipCards)
                 });
 
+                // 郁金香的嘉禾
                 actorProxy.Send(new Actor_GetTulipPriceLevel_Ntt()
                 {
                     RedPriceLevel = room.GetComponent<TulipMarketEconomicsComponent>().redPrieceLevel,
@@ -94,6 +99,7 @@ namespace ETHotfix
                     YellowPriceLevel = room.GetComponent<TulipMarketEconomicsComponent>().yellowPrieceLevel
                 });
 
+                // 收藏家牌
                 actorProxy.Send(new Actor_GetCollector_Ntt()
                 {
                     HighPriceCollector = roomCollectorCardsComponent.highPriceCollector,
@@ -104,17 +110,20 @@ namespace ETHotfix
                     LowPriceCollectorCount = roomCollectorCardsComponent.lowPriceCollectorCount
                 });
 
+                // 事件卡
                 actorProxy.Send(new Actor_GetEvent_Ntt()
                 {
                     EventCard = roomEventCardsComponent.currentEvent,
                     RemindEventCount = roomEventCardsComponent.remainderEventCardCount
                 });
 
+                // 金币
                 actorProxy.Send(new Actor_GetMoney_Ntt()
                 {
                     Money = gamer.GetComponent<MoneyComponent>().money
                 });
 
+                // 竞价标志物
                 actorProxy.Send(new Actor_GetSignCount_Ntt()
                 {
                     SignCount = gamer.GetComponent<ReserveSignComponent>().count
@@ -133,6 +142,16 @@ namespace ETHotfix
             orderControllerComponent.currentRound = 1;
             orderControllerComponent.currentBigRound = 1;
 
+            //通知玩家游戏游戏已经开始
+            room.Broadcast(new Actor_GameStart { });
+
+            //同步当前回合起始玩家
+            room.Broadcast(new Actor_SyncFirstPlayer_Ntt()
+            {
+                UserID = self.CurrentGamerUserId
+            });
+
+            //同步当前回合玩家行动
             room.Broadcast(new Actor_AuthorityPlayCard_Ntt()
             {
                 UserID = self.CurrentGamerUserId,

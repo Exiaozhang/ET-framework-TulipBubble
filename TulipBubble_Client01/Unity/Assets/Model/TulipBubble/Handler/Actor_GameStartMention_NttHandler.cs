@@ -9,8 +9,8 @@ namespace ETModel
         {
             UI uiRoom = Game.Scene.GetComponent<UIComponent>().Get(TulipUIType.TulipRoom);
             TulipRoomComponent tulipRoomComponent = uiRoom.GetComponent<TulipRoomComponent>();
-         
-            
+
+            tulipRoomComponent.HideReadyButton();
             tulipRoomComponent.ShowStartButton();
         }
     }

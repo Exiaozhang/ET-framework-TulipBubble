@@ -1,3 +1,5 @@
 is_global = true
 build_property.RootNamespace = MongoDB.Bson
 build_property.ProjectDir = D:\Backup\CsProject\ET-framwork-TulipBubble\TulipBubble_Server01\Server\ThirdParty\MongoDBDriver\MongoDB.Bson\
+build_property.EnableComHosting = 
+build_property.EnableGeneratedComInterfaceComImportInterop = 

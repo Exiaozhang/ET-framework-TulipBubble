@@ -45,3 +45,4 @@ D:\Backup\CsProject\ET-framwork-TulipBubble\TulipBubble_Server01\Bin\MongoDB.Dri
 D:\Backup\CsProject\ET-framwork-TulipBubble\TulipBubble_Server01\Bin\MongoDB.Driver.Core.dll
 D:\Backup\CsProject\ET-framwork-TulipBubble\TulipBubble_Server01\Bin\MongoDB.Driver.Core.pdb
 D:\Backup\CsProject\ET-framwork-TulipBubble\TulipBubble_Server01\Bin\MongoDB.Driver.Core.xml
+D:\Backup\CsProject\ET-framwork-TulipBubble\TulipBubble_Server01\Server\ThirdParty\MongoDBDriver\MongoDB.Driver.Core\obj\Debug\netcoreapp2.2\MongoDB.Driver.Core.sourcelink.json

@@ -11,3 +11,4 @@ D:\Backup\CsProject\ET-framwork-TulipBubble\TulipBubble_Server01\Bin\ET.Core.pdb
 D:\Backup\CsProject\ET-framwork-TulipBubble\TulipBubble_Server01\Server\ET.Core\obj\Debug\Server.ET.Core.csproj.CopyComplete
 D:\Backup\CsProject\ET-framwork-TulipBubble\TulipBubble_Server01\Server\ET.Core\obj\Debug\ET.Core.dll
 D:\Backup\CsProject\ET-framwork-TulipBubble\TulipBubble_Server01\Server\ET.Core\obj\Debug\ET.Core.pdb
+D:\Backup\CsProject\ET-framwork-TulipBubble\TulipBubble_Server01\Server\ET.Core\obj\Debug\Server.ET.Core.sourcelink.json

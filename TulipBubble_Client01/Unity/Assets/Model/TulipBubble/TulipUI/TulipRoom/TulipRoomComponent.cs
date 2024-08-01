@@ -1,4 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -10,7 +12,7 @@ namespace ETModel
         public override void Awake(TulipRoomComponent self)
         {
             self.Awake();
-        
+
         }
     }
 
@@ -27,6 +29,8 @@ namespace ETModel
         private GameObject LocalGamerPanel;
         private GameObject AllGamer;
         private GameObject StartButton;
+        private GameObject ReadyButton;
+        private GameObject CancelReadyButton;
 
         private Text promt;
 
@@ -69,7 +73,8 @@ namespace ETModel
             ReferenceCollector referenceCollector = this.GetParent<UI>().GameObject.GetComponent<ReferenceCollector>();
 
             GameObject quitButton = referenceCollector.Get<GameObject>("Quit");
-            GameObject readyButton = referenceCollector.Get<GameObject>("Ready");
+            ReadyButton = referenceCollector.Get<GameObject>("Ready");
+            CancelReadyButton = referenceCollector.Get<GameObject>("CancelReady");
             StartButton = referenceCollector.Get<GameObject>("StartGame");
             StartButton.SetActive(false);
 
@@ -78,13 +83,14 @@ namespace ETModel
             LocalGamerPanel = referenceCollector.Get<GameObject>("LocalGamer");
             AllGamer = referenceCollector.Get<GameObject>("AllGamers");
 
-
             //readyButton.SetActive(false); //默认匹配
             Matching = true; //进入房间后取消匹配状态
 
             //绑定事件
             quitButton.GetComponent<Button>().onClick.Add(OnQuit);
-            readyButton.GetComponent<Button>().onClick.Add(OnReady);
+            ReadyButton.GetComponent<Button>().onClick.Add(OnReady);
+            CancelReadyButton.GetComponent<Button>().onClick.Add(OnCancelReady);
+            StartButton.GetComponent<Button>().onClick.Add(OnStart);
 
             //添加本地玩家
             Gamer gamer = ComponentFactory.Create<Gamer, long>(GamerComponent.Instance.MyUser.UserID);
@@ -113,15 +119,57 @@ namespace ETModel
             promt.text = $"One player join room,total {seats.Count} players";
         }
 
+        /// <summary>
+        /// ui界面显示开始游戏按钮
+        /// </summary>
         public void ShowStartButton()
         {
             StartButton.SetActive(true);
-            StartButton.GetComponent<Button>().onClick.AddListener(() =>
-            {
-                SessionComponent.Instance.Session.Send(new Actor_GameStartMention() { });
-            });
+        }
+        /// <summary>
+        /// ui界面显示开始游戏按钮
+        /// </summary>
+        public void HideStartButton()
+        {
+            StartButton.SetActive(false);
         }
 
+        /// <summary>
+        /// ui界面显示准备按钮
+        /// </summary>
+        public void ShowReadyButton()
+        {
+            ReadyButton.SetActive(true);
+        }
+
+        /// <summary>
+        /// ui界面隐藏准备按钮
+        /// </summary>
+        public void HideReadyButton()
+        {
+            ReadyButton.SetActive(false);
+        }
+
+        /// <summary>
+        /// ui界面显示取消准备按钮
+        /// </summary>
+        public void ShowCancelReadyButton()
+        {
+            CancelReadyButton.SetActive(true);
+        }
+
+        /// <summary>
+        /// ui界面隐藏取消准备按钮
+        /// </summary>
+        public void HideCancelButton()
+        {
+            CancelReadyButton.SetActive(false);
+        }
+
+        /// <summary>
+        /// 将一个指定Id的玩家移除房间
+        /// </summary>
+        /// <param name="id"></param>
         public void RemoveGamer(long id)
         {
             int seatIndex = GetGamerSeat(id);
@@ -147,6 +195,7 @@ namespace ETModel
             return false;
         }
 
+        //得到指定Id的玩家
         public Gamer GetGamer(long id)
         {
             int seatIndex = GetGamerSeat(id);
@@ -156,6 +205,15 @@ namespace ETModel
             }
 
             return null;
+        }
+
+        /// <summary>
+        /// 得到当先房间所有位置的玩家
+        /// </summary>
+        /// <returns>空位的玩家返回null</returns>
+        public List<Gamer> GetAllGamers()
+        {
+            return gamers.ToList<Gamer>();
         }
 
         private int GetGamerSeat(long id)
@@ -168,11 +226,21 @@ namespace ETModel
             return -1;
         }
 
+        private void OnStart()
+        {
+            SessionComponent.Instance.Session.Send(new Actor_GameStartMention() { });
+        }
+
         private void OnReady()
         {
             //发送准备游戏的Actor_GamerReady_Landlords消息
             //由客户端与网关的连接session发送，再转到Map服务
-            SessionComponent.Instance.Session.Send(new Actor_GamerReady_TulipBubble());
+            SessionComponent.Instance.Session.Send(new Actor_GamerReady_TulipBubble() { });
+        }
+
+        private void OnCancelReady()
+        {
+            SessionComponent.Instance.Session.Send(new Actor_GamerCancelReady_TulipBubble() { });
         }
 
         private void OnQuit()
@@ -203,5 +271,7 @@ namespace ETModel
                 }
             }
         }
+
+
     }
 }

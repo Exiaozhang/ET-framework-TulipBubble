@@ -3,7 +3,7 @@
 namespace ETHotfix
 {
     [ActorMessageHandler(AppType.Map)]
-    public class GamerReady_TulipBubble_Handler : AMActorHandler<Gamer,Actor_GamerReady_TulipBubble>
+    public class GamerReady_TulipBubble_Handler : AMActorHandler<Gamer, Actor_GamerReady_TulipBubble>
     {
         protected override async ETTask Run(Gamer gamer, Actor_GamerReady_TulipBubble message)
         {
@@ -20,18 +20,18 @@ namespace ETHotfix
                     //由等待状态设置为准备状态
                     room.isReadys[seatIndex] = true;
                     //广播通知全房间玩家此gamer已经准备好
-                    room.Broadcast(new Actor_GamerReady_TulipBubble(){UserID = gamer.UserID});
+                    room.Broadcast(new Actor_GamerReady_TulipBubble() { UserID = gamer.UserID });
 
                     if (room.GetReadyGamerCount() >= 3)
                     {
                         ActorMessageSenderComponent actorProxyComponent = Game.Scene.GetComponent<ActorMessageSenderComponent>();
                         ActorMessageSender actorProxy = actorProxyComponent.Get(room.hoster.CActorID);
-                        actorProxy.Send(new Actor_GameStartMention(){});
+                        actorProxy.Send(new Actor_GameStartMention() { });
                     }
                 }
                 else
                 {
-                    Log.Error("玩家不在正确的座位上");
+                    Log.Error("Player not in correct seat");
                 }
             }
 

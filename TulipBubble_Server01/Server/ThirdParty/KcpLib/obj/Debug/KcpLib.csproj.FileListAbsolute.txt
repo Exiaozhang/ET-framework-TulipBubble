@@ -21,3 +21,4 @@ D:\Backup\CsProject\ET-framwork-TulipBubble\TulipBubble_Server01\Server\ThirdPar
 D:\Backup\CsProject\ET-framwork-TulipBubble\TulipBubble_Server01\Server\ThirdParty\KcpLib\obj\Debug\KcpLib.csproj.CoreCompileInputs.cache
 D:\Backup\CsProject\ET-framwork-TulipBubble\TulipBubble_Server01\Server\ThirdParty\KcpLib\obj\Debug\KcpLib.dll
 D:\Backup\CsProject\ET-framwork-TulipBubble\TulipBubble_Server01\Server\ThirdParty\KcpLib\obj\Debug\KcpLib.pdb
+D:\Backup\CsProject\ET-framwork-TulipBubble\TulipBubble_Server01\Server\ThirdParty\KcpLib\obj\Debug\KcpLib.sourcelink.json

@@ -8,13 +8,13 @@ namespace ETModel
     /// </summary>
     public partial class TulipCard
     {
-        public static TulipCard Create(int color, int level, int weight,int Id)
+        public static TulipCard Create(int color, int level, int weight, int Id)
         {
             TulipCard tulipCard = new TulipCard();
             tulipCard.TulipCardColor = color;
             tulipCard.TulipCardLevel = level;
             tulipCard.TulipCardWeight = weight;
-            tulipCard.Id =  Id;
+            tulipCard.Id = Id;
             return tulipCard;
         }
 

@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
@@ -21,9 +22,19 @@ namespace ETModel
         private Sprite spriteColor;
         public static string[] userColor = new[] { "blue", "green", "purple", "red", "yellow" };
         private GameObject orderPlayer;
+        /// <summary>
+        /// 图标 准备 
+        /// </summary>
         private GameObject ready;
+        /// <summary>
+        /// 图标 房主
+        /// </summary>
         private GameObject hoster;
-        
+        /// <summary>
+        /// 图标 首位
+        /// </summary>
+        private GameObject first;
+
 
         public void Awake(GameObject AllGamers, int i)
         {
@@ -53,17 +64,33 @@ namespace ETModel
 
             ready = referenceCollector.Get<GameObject>("Ready");
             hoster = referenceCollector.Get<GameObject>("Hoster");
+            first = referenceCollector.Get<GameObject>("First");
+
             //Game.Scene.GetComponent<ResourcesComponent>().UnloadBundle("OrderPlayer.unity3d");
         }
-
+        /// <summary>
+        /// 显示准备
+        /// </summary>
         public void SetGamerReady()
         {
             ready.SetActive(true);
+        }
+        /// <summary>
+        /// 取消显示准备
+        /// </summary>
+        public void CancelGamerReady()
+        {
+            ready.SetActive(false);
         }
 
         public void SetGamerHoster()
         {
             hoster.SetActive(true);
+        }
+
+        public void SetGamerFirst(Boolean status = true)
+        {
+            first.SetActive(status);
         }
 
         public override void Dispose()

@@ -10,6 +10,94 @@ namespace ETModel {
 
   #region Messages
   /// <summary>
+  ///玩家取消准备
+  /// </summary>
+  public partial class Actor_GamerCancelReady_TulipBubble : pb::IMessage {
+    private static readonly pb::MessageParser<Actor_GamerCancelReady_TulipBubble> _parser = new pb::MessageParser<Actor_GamerCancelReady_TulipBubble>(() => (Actor_GamerCancelReady_TulipBubble)MessagePool.Instance.Fetch(typeof(Actor_GamerCancelReady_TulipBubble)));
+    public static pb::MessageParser<Actor_GamerCancelReady_TulipBubble> Parser { get { return _parser; } }
+
+    private int rpcId_;
+    public int RpcId {
+      get { return rpcId_; }
+      set {
+        rpcId_ = value;
+      }
+    }
+
+    private long actorId_;
+    public long ActorId {
+      get { return actorId_; }
+      set {
+        actorId_ = value;
+      }
+    }
+
+    private long userID_;
+    public long UserID {
+      get { return userID_; }
+      set {
+        userID_ = value;
+      }
+    }
+
+    public void WriteTo(pb::CodedOutputStream output) {
+      if (UserID != 0L) {
+        output.WriteRawTag(8);
+        output.WriteInt64(UserID);
+      }
+      if (RpcId != 0) {
+        output.WriteRawTag(208, 5);
+        output.WriteInt32(RpcId);
+      }
+      if (ActorId != 0L) {
+        output.WriteRawTag(232, 5);
+        output.WriteInt64(ActorId);
+      }
+    }
+
+    public int CalculateSize() {
+      int size = 0;
+      if (RpcId != 0) {
+        size += 2 + pb::CodedOutputStream.ComputeInt32Size(RpcId);
+      }
+      if (ActorId != 0L) {
+        size += 2 + pb::CodedOutputStream.ComputeInt64Size(ActorId);
+      }
+      if (UserID != 0L) {
+        size += 1 + pb::CodedOutputStream.ComputeInt64Size(UserID);
+      }
+      return size;
+    }
+
+    public void MergeFrom(pb::CodedInputStream input) {
+      userID_ = 0;
+      rpcId_ = 0;
+      actorId_ = 0;
+      uint tag;
+      while ((tag = input.ReadTag()) != 0) {
+        switch(tag) {
+          default:
+            input.SkipLastField();
+            break;
+          case 8: {
+            UserID = input.ReadInt64();
+            break;
+          }
+          case 720: {
+            RpcId = input.ReadInt32();
+            break;
+          }
+          case 744: {
+            ActorId = input.ReadInt64();
+            break;
+          }
+        }
+      }
+    }
+
+  }
+
+  /// <summary>
   ///跳过出售阶段
   /// </summary>
   public partial class Actor_PassSell_Ntt : pb::IMessage {
@@ -1522,7 +1610,95 @@ namespace ETModel {
   }
 
   /// <summary>
-  ///发送给客户端起始玩家
+  ///发送给客户端当前轮起始玩家
+  /// </summary>
+  public partial class Actor_SyncFirstPlayer_Ntt : pb::IMessage {
+    private static readonly pb::MessageParser<Actor_SyncFirstPlayer_Ntt> _parser = new pb::MessageParser<Actor_SyncFirstPlayer_Ntt>(() => (Actor_SyncFirstPlayer_Ntt)MessagePool.Instance.Fetch(typeof(Actor_SyncFirstPlayer_Ntt)));
+    public static pb::MessageParser<Actor_SyncFirstPlayer_Ntt> Parser { get { return _parser; } }
+
+    private int rpcId_;
+    public int RpcId {
+      get { return rpcId_; }
+      set {
+        rpcId_ = value;
+      }
+    }
+
+    private long actorId_;
+    public long ActorId {
+      get { return actorId_; }
+      set {
+        actorId_ = value;
+      }
+    }
+
+    private long userID_;
+    public long UserID {
+      get { return userID_; }
+      set {
+        userID_ = value;
+      }
+    }
+
+    public void WriteTo(pb::CodedOutputStream output) {
+      if (UserID != 0L) {
+        output.WriteRawTag(8);
+        output.WriteInt64(UserID);
+      }
+      if (RpcId != 0) {
+        output.WriteRawTag(208, 5);
+        output.WriteInt32(RpcId);
+      }
+      if (ActorId != 0L) {
+        output.WriteRawTag(232, 5);
+        output.WriteInt64(ActorId);
+      }
+    }
+
+    public int CalculateSize() {
+      int size = 0;
+      if (RpcId != 0) {
+        size += 2 + pb::CodedOutputStream.ComputeInt32Size(RpcId);
+      }
+      if (ActorId != 0L) {
+        size += 2 + pb::CodedOutputStream.ComputeInt64Size(ActorId);
+      }
+      if (UserID != 0L) {
+        size += 1 + pb::CodedOutputStream.ComputeInt64Size(UserID);
+      }
+      return size;
+    }
+
+    public void MergeFrom(pb::CodedInputStream input) {
+      userID_ = 0;
+      rpcId_ = 0;
+      actorId_ = 0;
+      uint tag;
+      while ((tag = input.ReadTag()) != 0) {
+        switch(tag) {
+          default:
+            input.SkipLastField();
+            break;
+          case 8: {
+            UserID = input.ReadInt64();
+            break;
+          }
+          case 720: {
+            RpcId = input.ReadInt32();
+            break;
+          }
+          case 744: {
+            ActorId = input.ReadInt64();
+            break;
+          }
+        }
+      }
+    }
+
+  }
+
+  /// <summary>
+  ///发送给客户端当前回合玩家行动
   /// </summary>
   public partial class Actor_AuthorityPlayCard_Ntt : pb::IMessage {
     private static readonly pb::MessageParser<Actor_AuthorityPlayCard_Ntt> _parser = new pb::MessageParser<Actor_AuthorityPlayCard_Ntt>(() => (Actor_AuthorityPlayCard_Ntt)MessagePool.Instance.Fetch(typeof(Actor_AuthorityPlayCard_Ntt)));
@@ -2621,9 +2797,148 @@ namespace ETModel {
 
   }
 
+  /// <summary>
+  ///通知房主可以开始游戏
+  /// </summary>
   public partial class Actor_GameStartMention : pb::IMessage {
     private static readonly pb::MessageParser<Actor_GameStartMention> _parser = new pb::MessageParser<Actor_GameStartMention>(() => (Actor_GameStartMention)MessagePool.Instance.Fetch(typeof(Actor_GameStartMention)));
     public static pb::MessageParser<Actor_GameStartMention> Parser { get { return _parser; } }
+
+    private int rpcId_;
+    public int RpcId {
+      get { return rpcId_; }
+      set {
+        rpcId_ = value;
+      }
+    }
+
+    private long actorId_;
+    public long ActorId {
+      get { return actorId_; }
+      set {
+        actorId_ = value;
+      }
+    }
+
+    public void WriteTo(pb::CodedOutputStream output) {
+      if (ActorId != 0L) {
+        output.WriteRawTag(72);
+        output.WriteInt64(ActorId);
+      }
+      if (RpcId != 0) {
+        output.WriteRawTag(208, 5);
+        output.WriteInt32(RpcId);
+      }
+    }
+
+    public int CalculateSize() {
+      int size = 0;
+      if (RpcId != 0) {
+        size += 2 + pb::CodedOutputStream.ComputeInt32Size(RpcId);
+      }
+      if (ActorId != 0L) {
+        size += 1 + pb::CodedOutputStream.ComputeInt64Size(ActorId);
+      }
+      return size;
+    }
+
+    public void MergeFrom(pb::CodedInputStream input) {
+      actorId_ = 0;
+      rpcId_ = 0;
+      uint tag;
+      while ((tag = input.ReadTag()) != 0) {
+        switch(tag) {
+          default:
+            input.SkipLastField();
+            break;
+          case 72: {
+            ActorId = input.ReadInt64();
+            break;
+          }
+          case 720: {
+            RpcId = input.ReadInt32();
+            break;
+          }
+        }
+      }
+    }
+
+  }
+
+  /// <summary>
+  ///通知玩家当前游戏已开始
+  /// </summary>
+  public partial class Actor_GameStart : pb::IMessage {
+    private static readonly pb::MessageParser<Actor_GameStart> _parser = new pb::MessageParser<Actor_GameStart>(() => (Actor_GameStart)MessagePool.Instance.Fetch(typeof(Actor_GameStart)));
+    public static pb::MessageParser<Actor_GameStart> Parser { get { return _parser; } }
+
+    private int rpcId_;
+    public int RpcId {
+      get { return rpcId_; }
+      set {
+        rpcId_ = value;
+      }
+    }
+
+    private long actorId_;
+    public long ActorId {
+      get { return actorId_; }
+      set {
+        actorId_ = value;
+      }
+    }
+
+    public void WriteTo(pb::CodedOutputStream output) {
+      if (ActorId != 0L) {
+        output.WriteRawTag(72);
+        output.WriteInt64(ActorId);
+      }
+      if (RpcId != 0) {
+        output.WriteRawTag(208, 5);
+        output.WriteInt32(RpcId);
+      }
+    }
+
+    public int CalculateSize() {
+      int size = 0;
+      if (RpcId != 0) {
+        size += 2 + pb::CodedOutputStream.ComputeInt32Size(RpcId);
+      }
+      if (ActorId != 0L) {
+        size += 1 + pb::CodedOutputStream.ComputeInt64Size(ActorId);
+      }
+      return size;
+    }
+
+    public void MergeFrom(pb::CodedInputStream input) {
+      actorId_ = 0;
+      rpcId_ = 0;
+      uint tag;
+      while ((tag = input.ReadTag()) != 0) {
+        switch(tag) {
+          default:
+            input.SkipLastField();
+            break;
+          case 72: {
+            ActorId = input.ReadInt64();
+            break;
+          }
+          case 720: {
+            RpcId = input.ReadInt32();
+            break;
+          }
+        }
+      }
+    }
+
+  }
+
+  /// <summary>
+  ///通知房主不可以开始游戏
+  /// </summary>
+  public partial class Actor_GameUnableStartMention : pb::IMessage {
+    private static readonly pb::MessageParser<Actor_GameUnableStartMention> _parser = new pb::MessageParser<Actor_GameUnableStartMention>(() => (Actor_GameUnableStartMention)MessagePool.Instance.Fetch(typeof(Actor_GameUnableStartMention)));
+    public static pb::MessageParser<Actor_GameUnableStartMention> Parser { get { return _parser; } }
 
     private int rpcId_;
     public int RpcId {

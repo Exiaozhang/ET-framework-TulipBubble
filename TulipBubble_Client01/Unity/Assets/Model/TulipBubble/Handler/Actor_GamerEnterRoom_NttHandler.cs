@@ -19,6 +19,9 @@ namespace ETModel
                 uiRoom.GameObject.Get<GameObject>("Ready").SetActive(true);
             }
 
+            //当前房间的玩家数量
+            Int32 playerCount = 0;
+
             //添加进入房间的玩家，判定座位位置
             //添加未显示的玩家
             for (int i = 0; i < message.Gamers.Count; i++)
@@ -27,11 +30,11 @@ namespace ETModel
                 GamerInfo gamerInfo = message.Gamers[i];
                 if (gamerInfo.UserID == 0)
                     continue;
+                playerCount += 1;
                 //如果这个ID的玩家不在桌上
                 if (tulipRoomComponent.GetGamer(gamerInfo.UserID) == null)
                 {
                     Gamer gamer = ComponentFactory.Create<Gamer, long>(gamerInfo.UserID);
-                    Log.Info($"第{i}个玩家加入房间");
                     tulipRoomComponent.AddGamer(gamer, i);
 
                     if (Convert.ToBoolean(gamerInfo.IsHoster))
@@ -39,9 +42,9 @@ namespace ETModel
                         gamer.GetComponent<TulipRoomGamerOrderPanelComponent>().SetGamerHoster();
                     }
                 }
-
-             
             }
+
+            Log.Info($"第{playerCount}个玩家加入房间");
 
             await ETTask.CompletedTask;
         }

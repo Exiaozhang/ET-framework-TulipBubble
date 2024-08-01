@@ -1,10 +1,11 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using Microsoft.CodeAnalysis;
 
 namespace ETModel
 {
-    
+
     /// <summary>
     /// 房间配置
     /// </summary>
@@ -39,6 +40,9 @@ namespace ETModel
         /// 当前房间的所有所有玩家 空位为null
         /// </summary>
         public readonly Gamer[] gamers = new Gamer[5];
+        /// <summary>
+        /// 当前房间的5个座位的玩家是否准备
+        /// </summary>
         public readonly bool[] isReadys = new bool[5];
 
         public Gamer hoster;
@@ -46,7 +50,24 @@ namespace ETModel
         /// <summary>
         /// 房间中玩家的数量
         /// </summary>
-        public int GamerCount => seats.Values.Count;
+        public Int32 GamerCount => seats.Values.Count;
+
+        public Int32 ReadyCount
+        {
+            get
+            {
+                Int32 count = 0;
+
+                for (int i = 0; i < this.isReadys.Length; i++)
+                {
+                    if (this.isReadys[i] == true)
+                        count++;
+                }
+                return count;
+                return count;
+            }
+
+        }
 
         public override void Dispose()
         {
@@ -55,7 +76,7 @@ namespace ETModel
                 return;
             }
             base.Dispose();
-            
+
             seats.Clear();
 
             for (int i = 0; i < gamers.Length; i++)
@@ -73,6 +94,6 @@ namespace ETModel
             }
 
         }
-        
+
     }
 }

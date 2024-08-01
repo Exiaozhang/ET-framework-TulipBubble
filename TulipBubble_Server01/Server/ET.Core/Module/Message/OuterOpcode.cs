@@ -1,6 +1,10 @@
 using ETModel;
 namespace ETModel
 {
+//玩家取消准备
+	[Message(OuterOpcode.Actor_GamerCancelReady_TulipBubble)]
+	public partial class Actor_GamerCancelReady_TulipBubble : IActorMessage {}
+
 //跳过出售阶段
 	[Message(OuterOpcode.Actor_PassSell_Ntt)]
 	public partial class Actor_PassSell_Ntt : IActorMessage {}
@@ -63,7 +67,11 @@ namespace ETModel
 	[Message(OuterOpcode.Actor_SellTulipCard_Ntt)]
 	public partial class Actor_SellTulipCard_Ntt : IActorMessage {}
 
-//发送给客户端起始玩家
+//发送给客户端当前轮起始玩家
+	[Message(OuterOpcode.Actor_SyncFirstPlayer_Ntt)]
+	public partial class Actor_SyncFirstPlayer_Ntt : IActorMessage {}
+
+//发送给客户端当前回合玩家行动
 	[Message(OuterOpcode.Actor_AuthorityPlayCard_Ntt)]
 	public partial class Actor_AuthorityPlayCard_Ntt : IActorMessage {}
 
@@ -103,8 +111,17 @@ namespace ETModel
 	[Message(OuterOpcode.Actor_GameStartRoomCards_Ntt)]
 	public partial class Actor_GameStartRoomCards_Ntt : IActorMessage {}
 
+//通知房主可以开始游戏
 	[Message(OuterOpcode.Actor_GameStartMention)]
 	public partial class Actor_GameStartMention : IActorMessage {}
+
+//通知玩家当前游戏已开始
+	[Message(OuterOpcode.Actor_GameStart)]
+	public partial class Actor_GameStart : IActorMessage {}
+
+//通知房主不可以开始游戏
+	[Message(OuterOpcode.Actor_GameUnableStartMention)]
+	public partial class Actor_GameUnableStartMention : IActorMessage {}
 
 //获取房间内玩家信息请求
 	[Message(OuterOpcode.C2G_GetUserInfoInRoom_Req)]
@@ -168,50 +185,54 @@ namespace ETModel
 {
 	public static partial class OuterOpcode
 	{
-		 public const ushort Actor_PassSell_Ntt = 101;
-		 public const ushort Actor_SellCard_Ntt = 102;
-		 public const ushort Actor_SellCardToCollector_Ntt = 103;
-		 public const ushort LoanCard = 104;
-		 public const ushort Actor_GetHandCard_Ntt = 105;
-		 public const ushort Actor_GetSignCount_Ntt = 106;
-		 public const ushort Actor_NotifyRoomPayWay_Ntt = 107;
-		 public const ushort Actor_NotifyPlayerPayWay_Ntt = 108;
-		 public const ushort Actor_NotifyPlayerBid = 109;
-		 public const ushort Actor_NotifyRoomBid = 110;
-		 public const ushort Actor_GetMoney_Ntt = 111;
-		 public const ushort Actor_GetTulip_Ntt = 112;
-		 public const ushort Actor_GetTulipReserve_Ntt = 113;
-		 public const ushort GamerReserveTulip = 114;
-		 public const ushort Actor_ReserveTulipCard_Ntt = 115;
-		 public const ushort Actor_SellTulipCard_Ntt = 116;
-		 public const ushort Actor_AuthorityPlayCard_Ntt = 117;
-		 public const ushort Actor_GetCollector_Ntt = 118;
-		 public const ushort Actor_GetEvent_Ntt = 119;
-		 public const ushort Actor_GetTulipPriceLevel_Ntt = 120;
-		 public const ushort EventCard = 121;
-		 public const ushort TulipCard = 122;
-		 public const ushort CollectorTulipCard = 123;
-		 public const ushort CollectorCard = 124;
-		 public const ushort GamerCardNum = 125;
-		 public const ushort Actor_GameStartRoomCards_Ntt = 126;
-		 public const ushort Actor_GameStartMention = 127;
-		 public const ushort C2G_GetUserInfoInRoom_Req = 128;
-		 public const ushort G2C_GetUserInfoInRoom_Back = 129;
-		 public const ushort Actor_Test = 130;
-		 public const ushort C2M_TestRequest = 131;
-		 public const ushort M2C_TestResponse = 132;
-		 public const ushort Actor_TransferRequest = 133;
-		 public const ushort Actor_TransferResponse = 134;
-		 public const ushort C2G_EnterMap = 135;
-		 public const ushort G2C_EnterMap = 136;
-		 public const ushort UnitInfo = 137;
-		 public const ushort M2C_CreateUnits = 138;
-		 public const ushort Frame_ClickMap = 139;
-		 public const ushort M2C_PathfindingResult = 140;
-		 public const ushort C2R_Ping = 141;
-		 public const ushort R2C_Ping = 142;
-		 public const ushort G2C_Test = 143;
-		 public const ushort C2M_Reload = 144;
-		 public const ushort M2C_Reload = 145;
+		 public const ushort Actor_GamerCancelReady_TulipBubble = 101;
+		 public const ushort Actor_PassSell_Ntt = 102;
+		 public const ushort Actor_SellCard_Ntt = 103;
+		 public const ushort Actor_SellCardToCollector_Ntt = 104;
+		 public const ushort LoanCard = 105;
+		 public const ushort Actor_GetHandCard_Ntt = 106;
+		 public const ushort Actor_GetSignCount_Ntt = 107;
+		 public const ushort Actor_NotifyRoomPayWay_Ntt = 108;
+		 public const ushort Actor_NotifyPlayerPayWay_Ntt = 109;
+		 public const ushort Actor_NotifyPlayerBid = 110;
+		 public const ushort Actor_NotifyRoomBid = 111;
+		 public const ushort Actor_GetMoney_Ntt = 112;
+		 public const ushort Actor_GetTulip_Ntt = 113;
+		 public const ushort Actor_GetTulipReserve_Ntt = 114;
+		 public const ushort GamerReserveTulip = 115;
+		 public const ushort Actor_ReserveTulipCard_Ntt = 116;
+		 public const ushort Actor_SellTulipCard_Ntt = 117;
+		 public const ushort Actor_SyncFirstPlayer_Ntt = 118;
+		 public const ushort Actor_AuthorityPlayCard_Ntt = 119;
+		 public const ushort Actor_GetCollector_Ntt = 120;
+		 public const ushort Actor_GetEvent_Ntt = 121;
+		 public const ushort Actor_GetTulipPriceLevel_Ntt = 122;
+		 public const ushort EventCard = 123;
+		 public const ushort TulipCard = 124;
+		 public const ushort CollectorTulipCard = 125;
+		 public const ushort CollectorCard = 126;
+		 public const ushort GamerCardNum = 127;
+		 public const ushort Actor_GameStartRoomCards_Ntt = 128;
+		 public const ushort Actor_GameStartMention = 129;
+		 public const ushort Actor_GameStart = 130;
+		 public const ushort Actor_GameUnableStartMention = 131;
+		 public const ushort C2G_GetUserInfoInRoom_Req = 132;
+		 public const ushort G2C_GetUserInfoInRoom_Back = 133;
+		 public const ushort Actor_Test = 134;
+		 public const ushort C2M_TestRequest = 135;
+		 public const ushort M2C_TestResponse = 136;
+		 public const ushort Actor_TransferRequest = 137;
+		 public const ushort Actor_TransferResponse = 138;
+		 public const ushort C2G_EnterMap = 139;
+		 public const ushort G2C_EnterMap = 140;
+		 public const ushort UnitInfo = 141;
+		 public const ushort M2C_CreateUnits = 142;
+		 public const ushort Frame_ClickMap = 143;
+		 public const ushort M2C_PathfindingResult = 144;
+		 public const ushort C2R_Ping = 145;
+		 public const ushort R2C_Ping = 146;
+		 public const ushort G2C_Test = 147;
+		 public const ushort C2M_Reload = 148;
+		 public const ushort M2C_Reload = 149;
 	}
 }

@@ -11,3 +11,4 @@ D:\Backup\CsProject\ET-framwork-TulipBubble\TulipBubble_Server01\Server\Hotfix\o
 D:\Backup\CsProject\ET-framwork-TulipBubble\TulipBubble_Server01\Server\Hotfix\obj\Debug\Server.Hotfix.csproj.CopyComplete
 D:\Backup\CsProject\ET-framwork-TulipBubble\TulipBubble_Server01\Server\Hotfix\obj\Debug\Hotfix.dll
 D:\Backup\CsProject\ET-framwork-TulipBubble\TulipBubble_Server01\Server\Hotfix\obj\Debug\Hotfix.pdb
+D:\Backup\CsProject\ET-framwork-TulipBubble\TulipBubble_Server01\Server\Hotfix\obj\Debug\Server.Hotfix.sourcelink.json
